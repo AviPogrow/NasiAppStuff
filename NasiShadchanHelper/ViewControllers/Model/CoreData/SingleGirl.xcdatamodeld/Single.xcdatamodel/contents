@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="SingleGirl" representedClassName="SingleGirl" syncable="YES">
+        <attribute name="age" attributeType="String"/>
+        <attribute name="briefDescription" attributeType="String"/>
+        <attribute name="category" attributeType="String"/>
+        <attribute name="city" attributeType="String"/>
+        <attribute name="contactCell" attributeType="String"/>
+        <attribute name="contactEmail" attributeType="String"/>
+        <attribute name="contactName" attributeType="String"/>
+        <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="familySituation" attributeType="String"/>
+        <attribute name="firstName" attributeType="String"/>
+        <attribute name="height" optional="YES" attributeType="String"/>
+        <attribute name="imageName" attributeType="String"/>
+        <attribute name="isSaved" attributeType="String"/>
+        <attribute name="koveahIttim" attributeType="String"/>
+        <attribute name="lastName" attributeType="String"/>
+        <attribute name="lookingFor" optional="YES" attributeType="String"/>
+        <attribute name="photoID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="plan" attributeType="String"/>
+        <attribute name="professionalTrack" optional="YES" attributeType="String"/>
+        <attribute name="seminary" attributeType="String"/>
+        <attribute name="yearsOfLearning" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="SingleGirl" positionX="-63" positionY="-18" width="128" height="358"/>
+    </elements>
+</model>

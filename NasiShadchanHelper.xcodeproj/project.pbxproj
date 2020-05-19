@@ -7,14 +7,83 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE1B0D8C245F6260005EDFBA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B0D8B245F6260005EDFBA /* FavoritesViewController.swift */; };
 		CE3AC07424536729006B9FEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC07324536729006B9FEA /* AppDelegate.swift */; };
-		CE3AC07624536729006B9FEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC07524536729006B9FEA /* SceneDelegate.swift */; };
-		CE3AC07824536729006B9FEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC07724536729006B9FEA /* ViewController.swift */; };
+		CE3AC07824536729006B9FEA /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC07724536729006B9FEA /* CategoriesViewController.swift */; };
 		CE3AC07B24536729006B9FEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3AC07924536729006B9FEA /* Main.storyboard */; };
 		CE3AC07D24536765006B9FEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3AC07C24536765006B9FEA /* Assets.xcassets */; };
 		CE3AC08024536765006B9FEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3AC07E24536765006B9FEA /* LaunchScreen.storyboard */; };
 		CE3AC08B24536765006B9FEA /* NasiShadchanHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC08A24536765006B9FEA /* NasiShadchanHelperTests.swift */; };
 		CE3AC09624536765006B9FEA /* NasiShadchanHelperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC09524536765006B9FEA /* NasiShadchanHelperUITests.swift */; };
+		CE3AC0A6245383A0006B9FEA /* FullTimeYeshivaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC0A5245383A0006B9FEA /* FullTimeYeshivaViewController.swift */; };
+		CE3AC0AC2454650F006B9FEA /* SingleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC0AB2454650F006B9FEA /* SingleTableViewCell.swift */; };
+		CE3AC0AE24547ADB006B9FEA /* SingleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC0AD24547ADB006B9FEA /* SingleDetailViewController.swift */; };
+		CE462E6C2457025100ADDB9E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE462E6B2457025100ADDB9E /* CoreDataStack.swift */; };
+		CE462E6E2458630300ADDB9E /* AllSinglesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE462E6D2458630300ADDB9E /* AllSinglesTableViewController.swift */; };
+		CE525A702461B55300CBEC41 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE525A6F2461B55200CBEC41 /* UIImage+Resize.swift */; };
+		CE525A722462015800CBEC41 /* Nasi.json in Resources */ = {isa = PBXBuildFile; fileRef = CE525A712462015800CBEC41 /* Nasi.json */; };
+		CE525A76246366ED00CBEC41 /* HTCollegeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE525A75246366ED00CBEC41 /* HTCollegeTableViewCell.swift */; };
+		CE5D3B242467348100832956 /* RutiOchanaResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B232467348100832956 /* RutiOchanaResume.pdf */; };
+		CE5D3B372467841E00832956 /* AvigayilWiniarzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B292467841A00832956 /* AvigayilWiniarzResume.pdf */; };
+		CE5D3B382467841E00832956 /* ElishevaWiniarzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2A2467841A00832956 /* ElishevaWiniarzResume.pdf */; };
+		CE5D3B392467841E00832956 /* NechieLevitzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2B2467841B00832956 /* NechieLevitzResume.pdf */; };
+		CE5D3B3A2467841E00832956 /* EstiWaidenbaumResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2C2467841B00832956 /* EstiWaidenbaumResume.pdf */; };
+		CE5D3B3B2467841E00832956 /* NechamaZiselKatzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2D2467841C00832956 /* NechamaZiselKatzResume.pdf */; };
+		CE5D3B3C2467841E00832956 /* RenaAbadyResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2E2467841C00832956 /* RenaAbadyResume.pdf */; };
+		CE5D3B3D2467841E00832956 /* ChayaEstherLeviResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2F2467841C00832956 /* ChayaEstherLeviResume.pdf */; };
+		CE5D3B3E2467841E00832956 /* DvoraRogawskiResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B302467841C00832956 /* DvoraRogawskiResume.pdf */; };
+		CE5D3B3F2467841E00832956 /* ChomiLandmanResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B312467841D00832956 /* ChomiLandmanResume.pdf */; };
+		CE5D3B402467841E00832956 /* RivkyAusfresserResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B322467841D00832956 /* RivkyAusfresserResume.pdf */; };
+		CE5D3B422467841E00832956 /* ElishevaBrachResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B342467841D00832956 /* ElishevaBrachResume.pdf */; };
+		CE5D3B432467841E00832956 /* AvigailMirlisResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B352467841D00832956 /* AvigailMirlisResume.pdf */; };
+		CE5D3B442467841E00832956 /* MeiraZeilingoldResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B362467841E00832956 /* MeiraZeilingoldResume.pdf */; };
+		CE5D3B5F2467843F00832956 /* BrynaNimanResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B452467843800832956 /* BrynaNimanResume.pdf */; };
+		CE5D3B602467843F00832956 /* RachelliCohenResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B462467843900832956 /* RachelliCohenResume.pdf */; };
+		CE5D3B612467843F00832956 /* MinyaSchochetResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B472467843900832956 /* MinyaSchochetResume.pdf */; };
+		CE5D3B622467843F00832956 /* Ahuva(Leah)SandlerResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B482467843900832956 /* Ahuva(Leah)SandlerResume.pdf */; };
+		CE5D3B632467843F00832956 /* ShaindyStarrResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B492467843A00832956 /* ShaindyStarrResume.pdf */; };
+		CE5D3B642467843F00832956 /* EidelPearlResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4A2467843A00832956 /* EidelPearlResume.pdf */; };
+		CE5D3B652467843F00832956 /* TovaSchwartzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4B2467843A00832956 /* TovaSchwartzResume.pdf */; };
+		CE5D3B672467843F00832956 /* RochelLeahKonigResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4D2467843B00832956 /* RochelLeahKonigResume.pdf */; };
+		CE5D3B682467843F00832956 /* EstyRosenfeldResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4E2467843B00832956 /* EstyRosenfeldResume.pdf */; };
+		CE5D3B692467843F00832956 /* BailaRochelWeiswasserResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4F2467843B00832956 /* BailaRochelWeiswasserResume.pdf */; };
+		CE5D3B6A2467843F00832956 /* FaigeMittelmanResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B502467843B00832956 /* FaigeMittelmanResume.pdf */; };
+		CE5D3B6B2467843F00832956 /* SoraPressburgerResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B512467843B00832956 /* SoraPressburgerResume.pdf */; };
+		CE5D3B6D2467843F00832956 /* ElishevaAbelResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B532467843C00832956 /* ElishevaAbelResume.pdf */; };
+		CE5D3B6E2467843F00832956 /* AdinaDavisResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B542467843C00832956 /* AdinaDavisResume.pdf */; };
+		CE5D3B6F2467843F00832956 /* AdinaPollockResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B552467843C00832956 /* AdinaPollockResume.pdf */; };
+		CE5D3B702467843F00832956 /* ElishevaKaganoffResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B562467843D00832956 /* ElishevaKaganoffResume.pdf */; };
+		CE5D3B712467843F00832956 /* RutiBlumenthalResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B572467843D00832956 /* RutiBlumenthalResume.pdf */; };
+		CE5D3B722467843F00832956 /* AvigailGoldbergResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B582467843D00832956 /* AvigailGoldbergResume.pdf */; };
+		CE5D3B742467843F00832956 /* AvigayilCarlbachResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5A2467843D00832956 /* AvigayilCarlbachResume.pdf */; };
+		CE5D3B752467843F00832956 /* BrachaSmithResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5B2467843E00832956 /* BrachaSmithResume.pdf */; };
+		CE5D3B762467843F00832956 /* AvigayilLehmannResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5C2467843E00832956 /* AvigayilLehmannResume.pdf */; };
+		CE5D3B772467843F00832956 /* PeninaGoldbergResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5D2467843E00832956 /* PeninaGoldbergResume.pdf */; };
+		CE5D3B782467843F00832956 /* EstherSosowskyResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5E2467843E00832956 /* EstherSosowskyResume.pdf */; };
+		CE5D3B7E2467845A00832956 /* SaraKissResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B792467845900832956 /* SaraKissResume.pdf */; };
+		CE5D3B7F2467845A00832956 /* BrachaFraidelFlaglerResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B7A2467845900832956 /* BrachaFraidelFlaglerResume.pdf */; };
+		CE5D3B802467845A00832956 /* ShainaWeisbrotResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B7B2467845900832956 /* ShainaWeisbrotResume.pdf */; };
+		CE5D3B812467845A00832956 /* ChanaLiebeGoldbergResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B7C2467845900832956 /* ChanaLiebeGoldbergResume.pdf */; };
+		CE5D3B822467845A00832956 /* EsteeGestetnerResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B7D2467845A00832956 /* EsteeGestetnerResume.pdf */; };
+		CE5D3B8C246994BC00832956 /* MiriamGitlin-PetlakResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B8B246994BC00832956 /* MiriamGitlin-PetlakResume.pdf */; };
+		CE5D3B9024699D7400832956 /* AyalaEisResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B8F24699D7400832956 /* AyalaEisResume.pdf */; };
+		CE5D3B92246CD4C800832956 /* Nasi_V2.json in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B91246CD4C700832956 /* Nasi_V2.json */; };
+		CE5D3B94246ED35F00832956 /* NasiHybridData.json in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B93246ED35F00832956 /* NasiHybridData.json */; };
+		CE75EBB3246581170056A1D7 /* wbCola.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE75EBB2246581170056A1D7 /* wbCola.pdf */; };
+		CE75EBB5246581840056A1D7 /* contractTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE75EBB4246581840056A1D7 /* contractTemplate.pdf */; };
+		CE75EBBF2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75EBBE2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift */; };
+		CE75EBC12465CD410056A1D7 /* SavedSingleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE75EBC02465CD410056A1D7 /* SavedSingleCell.xib */; };
+		CEC468DB245A217F0071EC85 /* ResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC468DA245A217F0071EC85 /* ResumeViewController.swift */; };
+		CEC468DE245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC468DD245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift */; };
+		CEC468E0245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC468DF245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift */; };
+		CEC468E2245C8FF90071EC85 /* Shidduch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC468E1245C8FF90071EC85 /* Shidduch.swift */; };
+		CEC468ED245CE81E0071EC85 /* ChayaRothsteinResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CEC468EC245CE81E0071EC85 /* ChayaRothsteinResume.pdf */; };
+		CECE6A492455915200084A28 /* SingleGirl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CECE6A472455915200084A28 /* SingleGirl.xcdatamodeld */; };
+		CECE6A4C245592F900084A28 /* SingleGirl+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE6A4A245592F900084A28 /* SingleGirl+CoreDataClass.swift */; };
+		CECE6A4D245592F900084A28 /* SingleGirl+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE6A4B245592F900084A28 /* SingleGirl+CoreDataProperties.swift */; };
+		CECE6A4F24559EF900084A28 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE6A4E24559EF900084A28 /* Config.swift */; };
+		CEF80D1E245F7014009FE684 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF80D1D245F7014009FE684 /* HudView.swift */; };
+		CEF80D222460BBBC009FE684 /* FTCollegeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF80D212460BBBC009FE684 /* FTCollegeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +104,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE1B0D8B245F6260005EDFBA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		CE3AC07024536729006B9FEA /* NasiShadchanHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NasiShadchanHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3AC07324536729006B9FEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE3AC07524536729006B9FEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE3AC07724536729006B9FEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE3AC07724536729006B9FEA /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		CE3AC07A24536729006B9FEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE3AC07C24536765006B9FEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE3AC07F24536765006B9FEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +118,75 @@
 		CE3AC09124536765006B9FEA /* NasiShadchanHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NasiShadchanHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3AC09524536765006B9FEA /* NasiShadchanHelperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasiShadchanHelperUITests.swift; sourceTree = "<group>"; };
 		CE3AC09724536765006B9FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE3AC0A5245383A0006B9FEA /* FullTimeYeshivaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeYeshivaViewController.swift; sourceTree = "<group>"; };
+		CE3AC0AB2454650F006B9FEA /* SingleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTableViewCell.swift; sourceTree = "<group>"; };
+		CE3AC0AD24547ADB006B9FEA /* SingleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleDetailViewController.swift; sourceTree = "<group>"; };
+		CE462E6B2457025100ADDB9E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CE462E6D2458630300ADDB9E /* AllSinglesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSinglesTableViewController.swift; sourceTree = "<group>"; };
+		CE525A6F2461B55200CBEC41 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		CE525A712462015800CBEC41 /* Nasi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Nasi.json; sourceTree = "<group>"; };
+		CE525A75246366ED00CBEC41 /* HTCollegeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTCollegeTableViewCell.swift; sourceTree = "<group>"; };
+		CE5D3B232467348100832956 /* RutiOchanaResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RutiOchanaResume.pdf; sourceTree = "<group>"; };
+		CE5D3B292467841A00832956 /* AvigayilWiniarzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigayilWiniarzResume.pdf; sourceTree = "<group>"; };
+		CE5D3B2A2467841A00832956 /* ElishevaWiniarzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ElishevaWiniarzResume.pdf; sourceTree = "<group>"; };
+		CE5D3B2B2467841B00832956 /* NechieLevitzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = NechieLevitzResume.pdf; sourceTree = "<group>"; };
+		CE5D3B2C2467841B00832956 /* EstiWaidenbaumResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EstiWaidenbaumResume.pdf; sourceTree = "<group>"; };
+		CE5D3B2D2467841C00832956 /* NechamaZiselKatzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = NechamaZiselKatzResume.pdf; sourceTree = "<group>"; };
+		CE5D3B2E2467841C00832956 /* RenaAbadyResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RenaAbadyResume.pdf; sourceTree = "<group>"; };
+		CE5D3B2F2467841C00832956 /* ChayaEstherLeviResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ChayaEstherLeviResume.pdf; sourceTree = "<group>"; };
+		CE5D3B302467841C00832956 /* DvoraRogawskiResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = DvoraRogawskiResume.pdf; sourceTree = "<group>"; };
+		CE5D3B312467841D00832956 /* ChomiLandmanResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ChomiLandmanResume.pdf; sourceTree = "<group>"; };
+		CE5D3B322467841D00832956 /* RivkyAusfresserResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RivkyAusfresserResume.pdf; sourceTree = "<group>"; };
+		CE5D3B342467841D00832956 /* ElishevaBrachResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ElishevaBrachResume.pdf; sourceTree = "<group>"; };
+		CE5D3B352467841D00832956 /* AvigailMirlisResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigailMirlisResume.pdf; sourceTree = "<group>"; };
+		CE5D3B362467841E00832956 /* MeiraZeilingoldResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MeiraZeilingoldResume.pdf; sourceTree = "<group>"; };
+		CE5D3B452467843800832956 /* BrynaNimanResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BrynaNimanResume.pdf; sourceTree = "<group>"; };
+		CE5D3B462467843900832956 /* RachelliCohenResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RachelliCohenResume.pdf; sourceTree = "<group>"; };
+		CE5D3B472467843900832956 /* MinyaSchochetResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MinyaSchochetResume.pdf; sourceTree = "<group>"; };
+		CE5D3B482467843900832956 /* Ahuva(Leah)SandlerResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Ahuva(Leah)SandlerResume.pdf"; sourceTree = "<group>"; };
+		CE5D3B492467843A00832956 /* ShaindyStarrResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ShaindyStarrResume.pdf; sourceTree = "<group>"; };
+		CE5D3B4A2467843A00832956 /* EidelPearlResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EidelPearlResume.pdf; sourceTree = "<group>"; };
+		CE5D3B4B2467843A00832956 /* TovaSchwartzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TovaSchwartzResume.pdf; sourceTree = "<group>"; };
+		CE5D3B4D2467843B00832956 /* RochelLeahKonigResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RochelLeahKonigResume.pdf; sourceTree = "<group>"; };
+		CE5D3B4E2467843B00832956 /* EstyRosenfeldResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EstyRosenfeldResume.pdf; sourceTree = "<group>"; };
+		CE5D3B4F2467843B00832956 /* BailaRochelWeiswasserResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BailaRochelWeiswasserResume.pdf; sourceTree = "<group>"; };
+		CE5D3B502467843B00832956 /* FaigeMittelmanResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FaigeMittelmanResume.pdf; sourceTree = "<group>"; };
+		CE5D3B512467843B00832956 /* SoraPressburgerResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SoraPressburgerResume.pdf; sourceTree = "<group>"; };
+		CE5D3B532467843C00832956 /* ElishevaAbelResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ElishevaAbelResume.pdf; sourceTree = "<group>"; };
+		CE5D3B542467843C00832956 /* AdinaDavisResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AdinaDavisResume.pdf; sourceTree = "<group>"; };
+		CE5D3B552467843C00832956 /* AdinaPollockResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AdinaPollockResume.pdf; sourceTree = "<group>"; };
+		CE5D3B562467843D00832956 /* ElishevaKaganoffResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ElishevaKaganoffResume.pdf; sourceTree = "<group>"; };
+		CE5D3B572467843D00832956 /* RutiBlumenthalResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RutiBlumenthalResume.pdf; sourceTree = "<group>"; };
+		CE5D3B582467843D00832956 /* AvigailGoldbergResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigailGoldbergResume.pdf; sourceTree = "<group>"; };
+		CE5D3B5A2467843D00832956 /* AvigayilCarlbachResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigayilCarlbachResume.pdf; sourceTree = "<group>"; };
+		CE5D3B5B2467843E00832956 /* BrachaSmithResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BrachaSmithResume.pdf; sourceTree = "<group>"; };
+		CE5D3B5C2467843E00832956 /* AvigayilLehmannResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigayilLehmannResume.pdf; sourceTree = "<group>"; };
+		CE5D3B5D2467843E00832956 /* PeninaGoldbergResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = PeninaGoldbergResume.pdf; sourceTree = "<group>"; };
+		CE5D3B5E2467843E00832956 /* EstherSosowskyResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EstherSosowskyResume.pdf; sourceTree = "<group>"; };
+		CE5D3B792467845900832956 /* SaraKissResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SaraKissResume.pdf; sourceTree = "<group>"; };
+		CE5D3B7A2467845900832956 /* BrachaFraidelFlaglerResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BrachaFraidelFlaglerResume.pdf; sourceTree = "<group>"; };
+		CE5D3B7B2467845900832956 /* ShainaWeisbrotResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ShainaWeisbrotResume.pdf; sourceTree = "<group>"; };
+		CE5D3B7C2467845900832956 /* ChanaLiebeGoldbergResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ChanaLiebeGoldbergResume.pdf; sourceTree = "<group>"; };
+		CE5D3B7D2467845A00832956 /* EsteeGestetnerResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EsteeGestetnerResume.pdf; sourceTree = "<group>"; };
+		CE5D3B8B246994BC00832956 /* MiriamGitlin-PetlakResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MiriamGitlin-PetlakResume.pdf"; sourceTree = "<group>"; };
+		CE5D3B8F24699D7400832956 /* AyalaEisResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = AyalaEisResume.pdf; path = ../../../../../../AyalaEisResume.pdf; sourceTree = "<group>"; };
+		CE5D3B91246CD4C700832956 /* Nasi_V2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Nasi_V2.json; sourceTree = "<group>"; };
+		CE5D3B93246ED35F00832956 /* NasiHybridData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NasiHybridData.json; sourceTree = "<group>"; };
+		CE75EBB2246581170056A1D7 /* wbCola.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = wbCola.pdf; sourceTree = "<group>"; };
+		CE75EBB4246581840056A1D7 /* contractTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = contractTemplate.pdf; sourceTree = "<group>"; };
+		CE75EBBE2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSingleTableViewCell.swift; sourceTree = "<group>"; };
+		CE75EBC02465CD410056A1D7 /* SavedSingleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedSingleCell.xib; sourceTree = "<group>"; };
+		CEC468DA245A217F0071EC85 /* ResumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeViewController.swift; sourceTree = "<group>"; };
+		CEC468DD245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeCollegeWorkingViewController.swift; sourceTree = "<group>"; };
+		CEC468DF245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeshivaAndCollegeWorkingViewController.swift; sourceTree = "<group>"; };
+		CEC468E1245C8FF90071EC85 /* Shidduch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shidduch.swift; sourceTree = "<group>"; };
+		CEC468EC245CE81E0071EC85 /* ChayaRothsteinResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ChayaRothsteinResume.pdf; sourceTree = "<group>"; };
+		CECE6A482455915200084A28 /* Single.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Single.xcdatamodel; sourceTree = "<group>"; };
+		CECE6A4A245592F900084A28 /* SingleGirl+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleGirl+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CECE6A4B245592F900084A28 /* SingleGirl+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleGirl+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CECE6A4E24559EF900084A28 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		CEF80D1D245F7014009FE684 /* HudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
+		CEF80D212460BBBC009FE684 /* FTCollegeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTCollegeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +237,10 @@
 		CE3AC07224536729006B9FEA /* NasiShadchanHelper */ = {
 			isa = PBXGroup;
 			children = (
+				CECE6A4E24559EF900084A28 /* Config.swift */,
 				CE3AC07324536729006B9FEA /* AppDelegate.swift */,
-				CE3AC07524536729006B9FEA /* SceneDelegate.swift */,
-				CE3AC07724536729006B9FEA /* ViewController.swift */,
+				CEF80D202460BB35009FE684 /* Views */,
+				CEC468DC245B1C0E0071EC85 /* ViewControllers */,
 				CE3AC07924536729006B9FEA /* Main.storyboard */,
 				CE3AC07C24536765006B9FEA /* Assets.xcassets */,
 				CE3AC07E24536765006B9FEA /* LaunchScreen.storyboard */,
@@ -126,6 +265,122 @@
 				CE3AC09724536765006B9FEA /* Info.plist */,
 			);
 			path = NasiShadchanHelperUITests;
+			sourceTree = "<group>";
+		};
+		CE462E6A245701EF00ADDB9E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CECE6A472455915200084A28 /* SingleGirl.xcdatamodeld */,
+				CECE6A4B245592F900084A28 /* SingleGirl+CoreDataProperties.swift */,
+				CECE6A4A245592F900084A28 /* SingleGirl+CoreDataClass.swift */,
+				CE462E6B2457025100ADDB9E /* CoreDataStack.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		CE5D3B83246839A700832956 /* Resumes */ = {
+			isa = PBXGroup;
+			children = (
+				CE5D3B542467843C00832956 /* AdinaDavisResume.pdf */,
+				CE5D3B8F24699D7400832956 /* AyalaEisResume.pdf */,
+				CE5D3B552467843C00832956 /* AdinaPollockResume.pdf */,
+				CE5D3B482467843900832956 /* Ahuva(Leah)SandlerResume.pdf */,
+				CE5D3B5A2467843D00832956 /* AvigayilCarlbachResume.pdf */,
+				CE5D3B582467843D00832956 /* AvigailGoldbergResume.pdf */,
+				CE5D3B5C2467843E00832956 /* AvigayilLehmannResume.pdf */,
+				CE5D3B352467841D00832956 /* AvigailMirlisResume.pdf */,
+				CE5D3B292467841A00832956 /* AvigayilWiniarzResume.pdf */,
+				CE5D3B4F2467843B00832956 /* BailaRochelWeiswasserResume.pdf */,
+				CE5D3B7A2467845900832956 /* BrachaFraidelFlaglerResume.pdf */,
+				CE5D3B5B2467843E00832956 /* BrachaSmithResume.pdf */,
+				CE5D3B452467843800832956 /* BrynaNimanResume.pdf */,
+				CE5D3B7C2467845900832956 /* ChanaLiebeGoldbergResume.pdf */,
+				CE5D3B2F2467841C00832956 /* ChayaEstherLeviResume.pdf */,
+				CEC468EC245CE81E0071EC85 /* ChayaRothsteinResume.pdf */,
+				CE5D3B312467841D00832956 /* ChomiLandmanResume.pdf */,
+				CE5D3B302467841C00832956 /* DvoraRogawskiResume.pdf */,
+				CE5D3B4A2467843A00832956 /* EidelPearlResume.pdf */,
+				CE5D3B532467843C00832956 /* ElishevaAbelResume.pdf */,
+				CE5D3B342467841D00832956 /* ElishevaBrachResume.pdf */,
+				CE5D3B562467843D00832956 /* ElishevaKaganoffResume.pdf */,
+				CE5D3B2A2467841A00832956 /* ElishevaWiniarzResume.pdf */,
+				CE5D3B7D2467845A00832956 /* EsteeGestetnerResume.pdf */,
+				CE5D3B5E2467843E00832956 /* EstherSosowskyResume.pdf */,
+				CE5D3B2C2467841B00832956 /* EstiWaidenbaumResume.pdf */,
+				CE5D3B4E2467843B00832956 /* EstyRosenfeldResume.pdf */,
+				CE5D3B502467843B00832956 /* FaigeMittelmanResume.pdf */,
+				CE5D3B362467841E00832956 /* MeiraZeilingoldResume.pdf */,
+				CE5D3B472467843900832956 /* MinyaSchochetResume.pdf */,
+				CE5D3B8B246994BC00832956 /* MiriamGitlin-PetlakResume.pdf */,
+				CE5D3B2D2467841C00832956 /* NechamaZiselKatzResume.pdf */,
+				CE5D3B2B2467841B00832956 /* NechieLevitzResume.pdf */,
+				CE5D3B5D2467843E00832956 /* PeninaGoldbergResume.pdf */,
+				CE5D3B462467843900832956 /* RachelliCohenResume.pdf */,
+				CE5D3B2E2467841C00832956 /* RenaAbadyResume.pdf */,
+				CE5D3B322467841D00832956 /* RivkyAusfresserResume.pdf */,
+				CE5D3B4D2467843B00832956 /* RochelLeahKonigResume.pdf */,
+				CE5D3B572467843D00832956 /* RutiBlumenthalResume.pdf */,
+				CE5D3B232467348100832956 /* RutiOchanaResume.pdf */,
+				CE5D3B792467845900832956 /* SaraKissResume.pdf */,
+				CE5D3B7B2467845900832956 /* ShainaWeisbrotResume.pdf */,
+				CE5D3B492467843A00832956 /* ShaindyStarrResume.pdf */,
+				CE5D3B512467843B00832956 /* SoraPressburgerResume.pdf */,
+				CE5D3B4B2467843A00832956 /* TovaSchwartzResume.pdf */,
+			);
+			path = Resumes;
+			sourceTree = "<group>";
+		};
+		CEC468DC245B1C0E0071EC85 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE3AC07724536729006B9FEA /* CategoriesViewController.swift */,
+				CE3AC0A5245383A0006B9FEA /* FullTimeYeshivaViewController.swift */,
+				CEC468DD245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift */,
+				CEC468DF245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift */,
+				CEC468DA245A217F0071EC85 /* ResumeViewController.swift */,
+				CE462E6D2458630300ADDB9E /* AllSinglesTableViewController.swift */,
+				CE3AC0AD24547ADB006B9FEA /* SingleDetailViewController.swift */,
+				CE1B0D8B245F6260005EDFBA /* FavoritesViewController.swift */,
+				CEC468E3245C90840071EC85 /* Model */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CEC468E3245C90840071EC85 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE5D3B83246839A700832956 /* Resumes */,
+				CEF80D1F2460BACB009FE684 /* RawData */,
+				CE462E6A245701EF00ADDB9E /* CoreData */,
+				CEC468E1245C8FF90071EC85 /* Shidduch.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEF80D1F2460BACB009FE684 /* RawData */ = {
+			isa = PBXGroup;
+			children = (
+				CE5D3B93246ED35F00832956 /* NasiHybridData.json */,
+				CE5D3B91246CD4C700832956 /* Nasi_V2.json */,
+				CE75EBB4246581840056A1D7 /* contractTemplate.pdf */,
+				CE75EBB2246581170056A1D7 /* wbCola.pdf */,
+				CE525A712462015800CBEC41 /* Nasi.json */,
+			);
+			path = RawData;
+			sourceTree = "<group>";
+		};
+		CEF80D202460BB35009FE684 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEF80D1D245F7014009FE684 /* HudView.swift */,
+				CE3AC0AB2454650F006B9FEA /* SingleTableViewCell.swift */,
+				CEF80D212460BBBC009FE684 /* FTCollegeTableViewCell.swift */,
+				CE525A6F2461B55200CBEC41 /* UIImage+Resize.swift */,
+				CE525A75246366ED00CBEC41 /* HTCollegeTableViewCell.swift */,
+				CE75EBBE2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift */,
+				CE75EBC02465CD410056A1D7 /* SavedSingleCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,9 +487,60 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5D3B822467845A00832956 /* EsteeGestetnerResume.pdf in Resources */,
+				CE5D3B7E2467845A00832956 /* SaraKissResume.pdf in Resources */,
+				CE75EBB3246581170056A1D7 /* wbCola.pdf in Resources */,
 				CE3AC08024536765006B9FEA /* LaunchScreen.storyboard in Resources */,
+				CE5D3B3D2467841E00832956 /* ChayaEstherLeviResume.pdf in Resources */,
+				CE5D3B392467841E00832956 /* NechieLevitzResume.pdf in Resources */,
+				CE5D3B6A2467843F00832956 /* FaigeMittelmanResume.pdf in Resources */,
+				CE5D3B5F2467843F00832956 /* BrynaNimanResume.pdf in Resources */,
+				CE525A722462015800CBEC41 /* Nasi.json in Resources */,
+				CE5D3B812467845A00832956 /* ChanaLiebeGoldbergResume.pdf in Resources */,
+				CE5D3B712467843F00832956 /* RutiBlumenthalResume.pdf in Resources */,
+				CE5D3B632467843F00832956 /* ShaindyStarrResume.pdf in Resources */,
+				CE5D3B652467843F00832956 /* TovaSchwartzResume.pdf in Resources */,
+				CE5D3B672467843F00832956 /* RochelLeahKonigResume.pdf in Resources */,
+				CE5D3B612467843F00832956 /* MinyaSchochetResume.pdf in Resources */,
+				CE5D3B7F2467845A00832956 /* BrachaFraidelFlaglerResume.pdf in Resources */,
+				CE5D3B422467841E00832956 /* ElishevaBrachResume.pdf in Resources */,
+				CE5D3B382467841E00832956 /* ElishevaWiniarzResume.pdf in Resources */,
+				CE5D3B242467348100832956 /* RutiOchanaResume.pdf in Resources */,
+				CE5D3B6F2467843F00832956 /* AdinaPollockResume.pdf in Resources */,
+				CE5D3B9024699D7400832956 /* AyalaEisResume.pdf in Resources */,
+				CE5D3B782467843F00832956 /* EstherSosowskyResume.pdf in Resources */,
+				CE5D3B3B2467841E00832956 /* NechamaZiselKatzResume.pdf in Resources */,
+				CE5D3B442467841E00832956 /* MeiraZeilingoldResume.pdf in Resources */,
+				CE5D3B92246CD4C800832956 /* Nasi_V2.json in Resources */,
+				CE5D3B3F2467841E00832956 /* ChomiLandmanResume.pdf in Resources */,
 				CE3AC07D24536765006B9FEA /* Assets.xcassets in Resources */,
+				CE5D3B432467841E00832956 /* AvigailMirlisResume.pdf in Resources */,
+				CE5D3B622467843F00832956 /* Ahuva(Leah)SandlerResume.pdf in Resources */,
+				CE5D3B762467843F00832956 /* AvigayilLehmannResume.pdf in Resources */,
+				CE5D3B6E2467843F00832956 /* AdinaDavisResume.pdf in Resources */,
+				CE5D3B682467843F00832956 /* EstyRosenfeldResume.pdf in Resources */,
+				CE5D3B602467843F00832956 /* RachelliCohenResume.pdf in Resources */,
+				CE5D3B6B2467843F00832956 /* SoraPressburgerResume.pdf in Resources */,
+				CE5D3B752467843F00832956 /* BrachaSmithResume.pdf in Resources */,
+				CE5D3B722467843F00832956 /* AvigailGoldbergResume.pdf in Resources */,
+				CE5D3B702467843F00832956 /* ElishevaKaganoffResume.pdf in Resources */,
+				CE5D3B6D2467843F00832956 /* ElishevaAbelResume.pdf in Resources */,
+				CE75EBC12465CD410056A1D7 /* SavedSingleCell.xib in Resources */,
+				CE5D3B802467845A00832956 /* ShainaWeisbrotResume.pdf in Resources */,
+				CE5D3B692467843F00832956 /* BailaRochelWeiswasserResume.pdf in Resources */,
+				CE75EBB5246581840056A1D7 /* contractTemplate.pdf in Resources */,
+				CE5D3B3E2467841E00832956 /* DvoraRogawskiResume.pdf in Resources */,
+				CE5D3B94246ED35F00832956 /* NasiHybridData.json in Resources */,
+				CE5D3B3A2467841E00832956 /* EstiWaidenbaumResume.pdf in Resources */,
+				CE5D3B3C2467841E00832956 /* RenaAbadyResume.pdf in Resources */,
+				CE5D3B742467843F00832956 /* AvigayilCarlbachResume.pdf in Resources */,
+				CE5D3B372467841E00832956 /* AvigayilWiniarzResume.pdf in Resources */,
+				CE5D3B642467843F00832956 /* EidelPearlResume.pdf in Resources */,
+				CE5D3B772467843F00832956 /* PeninaGoldbergResume.pdf in Resources */,
 				CE3AC07B24536729006B9FEA /* Main.storyboard in Resources */,
+				CE5D3B402467841E00832956 /* RivkyAusfresserResume.pdf in Resources */,
+				CEC468ED245CE81E0071EC85 /* ChayaRothsteinResume.pdf in Resources */,
+				CE5D3B8C246994BC00832956 /* MiriamGitlin-PetlakResume.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +565,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE3AC07824536729006B9FEA /* ViewController.swift in Sources */,
+				CECE6A4D245592F900084A28 /* SingleGirl+CoreDataProperties.swift in Sources */,
+				CEC468DB245A217F0071EC85 /* ResumeViewController.swift in Sources */,
+				CEC468E2245C8FF90071EC85 /* Shidduch.swift in Sources */,
+				CE3AC07824536729006B9FEA /* CategoriesViewController.swift in Sources */,
+				CE462E6C2457025100ADDB9E /* CoreDataStack.swift in Sources */,
 				CE3AC07424536729006B9FEA /* AppDelegate.swift in Sources */,
-				CE3AC07624536729006B9FEA /* SceneDelegate.swift in Sources */,
+				CECE6A4C245592F900084A28 /* SingleGirl+CoreDataClass.swift in Sources */,
+				CEC468DE245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift in Sources */,
+				CECE6A4F24559EF900084A28 /* Config.swift in Sources */,
+				CE1B0D8C245F6260005EDFBA /* FavoritesViewController.swift in Sources */,
+				CECE6A492455915200084A28 /* SingleGirl.xcdatamodeld in Sources */,
+				CEC468E0245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift in Sources */,
+				CE3AC0AC2454650F006B9FEA /* SingleTableViewCell.swift in Sources */,
+				CE525A702461B55300CBEC41 /* UIImage+Resize.swift in Sources */,
+				CE3AC0A6245383A0006B9FEA /* FullTimeYeshivaViewController.swift in Sources */,
+				CE3AC0AE24547ADB006B9FEA /* SingleDetailViewController.swift in Sources */,
+				CE462E6E2458630300ADDB9E /* AllSinglesTableViewController.swift in Sources */,
+				CE525A76246366ED00CBEC41 /* HTCollegeTableViewCell.swift in Sources */,
+				CE75EBBF2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift in Sources */,
+				CEF80D222460BBBC009FE684 /* FTCollegeTableViewCell.swift in Sources */,
+				CEF80D1E245F7014009FE684 /* HudView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,8 +759,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = P77A2352BM;
 				INFOPLIST_FILE = NasiShadchanHelper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -453,8 +779,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = P77A2352BM;
 				INFOPLIST_FILE = NasiShadchanHelper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -590,6 +918,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CECE6A472455915200084A28 /* SingleGirl.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CECE6A482455915200084A28 /* Single.xcdatamodel */,
+			);
+			currentVersion = CECE6A482455915200084A28 /* Single.xcdatamodel */;
+			path = SingleGirl.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CE3AC06824536729006B9FEA /* Project object */;
 }
