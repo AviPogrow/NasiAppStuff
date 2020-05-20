@@ -35,11 +35,11 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
       let isSavedPredicate = NSPredicate(format: "%K == %@", #keyPath(SingleGirl.isSaved), "true")
                  
       // assign the sortDesc and predicates
-      request.sortDescriptors = [ageSortDescriptor]
+      request.sortDescriptors = [categorySortDescriptor,ageSortDescriptor]
       request.predicate = isSavedPredicate
         
  
-      let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreDataStack.mainContext, sectionNameKeyPath: "category", cacheName: nil)
+      let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: self.coreDataStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
       
       fetchedResultsController.delegate = self
       return fetchedResultsController

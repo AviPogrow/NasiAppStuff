@@ -859,7 +859,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P5a-KL-bmd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-728" y="1084"/>
+            <point key="canvasLocation" x="-2387" y="1322"/>
         </scene>
         <!--Saved-->
         <scene sceneID="Yjx-zE-YJJ">
@@ -885,11 +885,11 @@
         <image name="AdinaDavis" width="252" height="335"/>
         <image name="ChomiLandman" width="250" height="288"/>
         <image name="heart" catalog="system" width="64" height="54"/>
-        <image name="heart.fill" catalog="system" width="32" height="32"/>
+        <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="suit.heart.fill" catalog="system" width="64" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="I8J-D4-A2r"/>
+        <segue reference="14m-TW-Gr9"/>
     </inferredMetricsTieBreakers>
 </document>
