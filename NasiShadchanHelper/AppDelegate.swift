@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
        
     let coreDataStack = CoreDataStack(modelName: "SingleGirl")
- 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
+   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         
         //clearCoreData()
@@ -39,6 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let savedViewController = savedNavController.topViewController as! FavoritesViewController
         
         savedViewController.coreDataStack = coreDataStack
+        
+        FirebaseApp.configure()
+        
+        let age = calculateAgeFrom(dobString: "")
+        
         
         return true
     }
@@ -67,8 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
-   
     func importJSONSeedData() {
         let jsonURL = Bundle.main.url(forResource: "NasiHybridData", withExtension: "json")!
         
@@ -108,13 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 age = "N/A"
             }
             
-            print("value of age is:" + age)
-            
-            
-            
-            
-           
-            
+       
             let  lastName = jsonDictionary["Last Name:"] as! String
             let  firstName = jsonDictionary["First Name"] as! String
             
@@ -207,16 +204,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 isSaved = "false"
             }
-            
-            
-            
-            
-            
-            
-            /*
+        /*
             print("*****counter is at: \(counter)\nthe value of names:\n \(firstName)\(lastName)\n Category:\(category)\n yearsOfLearning:\(yearsOfLearning)\nAGE:\(age)\n:Height:\(height)\n koveahIttim: \(koveahIttim): \nPlan: \(plan):\n NameOfImage: \(imageName):\n BriefDesc::\n:lookingFor: \(String(describing: lookingFor))\nthe values for kovaIttim are \(koveahIttim):\(koveahIttimSpaced)\nand PRO Track: \(professionalTrackSpaced)vs \(professionalTrack)")
             */
-            print("yearsOfLearning is \(yearsOfLearning)")
+     
             
             
            
@@ -241,141 +232,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             singleGirl.contactCell = contactCell
             singleGirl.familySituation = familySituation
             coreDataStack.saveContext()
+        }
  
         }
           
     }
     
-}
+
+
+
     
+    
+    
+
+   
     
     
    
     
-    /*
-      func insertSeedData() {
-           
-        let path = Bundle.main.path(forResource: "Nasi(4)", ofType: "tsv")
-                
-        var  rawSinglesString = try! String(contentsOfFile: path!)
-               
-        // each line or row is one single
-        var rowsOfSingles = rawSinglesString.components(separatedBy: "\n")
-                
-
-        rowsOfSingles.dropFirst()
-       
-        var counter = 0
-        // iterate over the rows of singles
-        // where each row has an array of columns
-        for (index, row) in rowsOfSingles.enumerated() {
+    
+      
         
             
-        counter = counter + 1
-         let columns = row.components(separatedBy: "\t")
-     
-        // MARK: - Get the indexes for all the elements we will
-                // want to extract
-                // get the indexes to the elements in the array
-                // we need to pull out
-                let timeStampIndex = columns.startIndex + 1
-                
-                let emailIndex = timeStampIndex.advanced(by: 1)
-                let lastNameIndex = timeStampIndex.advanced(by: 2)
-                let firstNameIndex = timeStampIndex.advanced(by: 3)
+        
                 
                
                 
-                
-                let telephoneIndex = timeStampIndex.advanced(by: 4)
-                let dobIndex = timeStampIndex.advanced(by: 5)
-                let cityIndex = timeStampIndex.advanced(by: 6)
-                let stateIndex = timeStampIndex.advanced(by: 7)
-                let zipIndex = timeStampIndex.advanced(by: 8)
-                let heightFTIndex = timeStampIndex.advanced(by: 9)
-                let heightINCHIndex = timeStampIndex.advanced(by: 10)
-                
-                //"learning does not need a plan"
-                let learningPlanIndex = timeStampIndex.advanced(by: 12)
-                let yearsOfLearningIndex = timeStampIndex.advanced(by: 13)
-                let koveahIttimIndex = timeStampIndex.advanced(by: 15)
-                let seminaryIndex = timeStampIndex.advanced(by: 16)
-                let lookingForIndex = timeStampIndex.advanced(by: 18)
-                let briefDescriptionIndex = timeStampIndex.advanced(by: 19)
-                
-                // "does not need professional track"
-                let professionalTrackIndex = timeStampIndex.advanced(by: 27)
-                let boyCategoryIndex = timeStampIndex.advanced(by: 32)
-                let ageIndex = timeStampIndex.advanced(by: 33)
+              
                 
                 
                
                 
-               // MARK: get each element from the array using indexes
-               let  category = columns[boyCategoryIndex]
-               let  age = columns.last!
-               let  lastName = columns[lastNameIndex]
-               let  firstName = columns[firstNameIndex]
-               let  city = columns[cityIndex]
+          
                 
                        
                 
-                
-               let  briefDescription = columns[briefDescriptionIndex]
-               let  lookingFor = columns[lookingForIndex]
-               let  plan =  columns[learningPlanIndex]
-               let  yearsOfLearning = columns[yearsOfLearningIndex]
-               let  koveahIttim  = columns[koveahIttimIndex]
-               let  professionalTrack = columns[professionalTrackIndex]
-               
-                // combine the height and inches and insert height and
-                // feet indicators ex: 5"3'
-                let  combinedHeight = columns[heightFTIndex] + "\"" +        columns[heightINCHIndex] + "\'"
-                let  height  = combinedHeight
-                
-                // compute the image name by combining first/last name
-                // and removing spaces
-                let imageNameRaw = columns[firstNameIndex] + columns[lastNameIndex]
-                let imageName = imageNameRaw.replacingOccurrences(of: " ", with: "")
            
-               var  isSaved = "false"
+             
     
-         print("category: \(category)firstName: \(firstName)LastName: \(lastName)city: \(city) height: \(height) imageName: \(imageName) ProTrack: \(professionalTrack) KoveahIttim: \(koveahIttim) YearsLearning:\(yearsOfLearning) isSaved: \(isSaved) Plan: \(plan) age: \(age)****stateOfColumnsArray\(columns)")
 
            
-           //MARK: Core Data Init
-        
-          let singleGirl = SingleGirl(context: coreDataStack.mainContext)
-           
-           // set the properties
-           singleGirl.firstName = firstName
-           singleGirl.lastName = lastName
-          singleGirl.age = age
-           singleGirl.category = category
-           singleGirl.height = height
-           singleGirl.lookingFor = lookingFor
-           singleGirl.briefDescription = briefDescription
-           singleGirl.isSaved = isSaved
-           singleGirl.imageName = imageName
-           singleGirl.professionalTrack = professionalTrack
-           singleGirl.yearsOfLearning = yearsOfLearning
-           singleGirl.plan = plan
-           singleGirl.koveahIttim = koveahIttim
-            singleGirl.city = city
-            
-            if counter == 21 {
-                coreDataStack.saveContext()
-                coreDataStack.mainContext.reset()
-            }
-            
-        }
-        
-    coreDataStack.saveContext()
-    coreDataStack.mainContext.reset()
-    print("Imported \(counter) singleGirls.")
-            }
- */
-  //  }
-        
+          
     
 

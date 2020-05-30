@@ -8,6 +8,18 @@
 
 import Foundation
 
+struct Single: Codable {
+       var name: String!
+      
+     var category: String
+    //var dateOfBirth: Date?
+    var age: String!
+    var lastName: String!
+    var firstName: String!
+     var imageName: String!
+      var city: String!
+   }
+
 
 func afterDelay(_ seconds: Double, run: @escaping () -> Void) {
   DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: run)
@@ -24,6 +36,36 @@ func fatalCoreDataError(_ error: Error) {
   print("*** Fatal error: \(error)")
   NotificationCenter.default.post(name: CoreDataSaveFailedNotification, object: nil)
 }
+
+
+func calculateAgeFrom(dobString: String) -> Double {
+         
+        // let isoDate = "1992-06-15T10:44:00+0000"
+  let dateString = "8/10/1997"
+
+         let dateFormatter = DateFormatter()
+         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+    
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+       
+         let date2 = dateFormatter.date(from: dateString)!
+         
+         let today = Date()
+         let calendar = Calendar.current
+         let components = calendar.dateComponents([.year,.month, .day], from: date2, to: today)
+         
+         let ageYears = components.year
+         print("the age  -\(ageYears!) - Years: -  \(components.month!) - months: and - \(components.day!) days")
+         
+         let decimal =  Double(components.month!) / Double(12)
+         print("the decimal is \(decimal)")
+         
+         let compositeNumb = Double(ageYears!) + decimal
+         
+          var  roundedNumb =    Double(compositeNumb).rounded(toPlaces: 1)
+         return roundedNumb
+         
+        }
 
 extension Double {
     /// Rounds the double to decimal places value

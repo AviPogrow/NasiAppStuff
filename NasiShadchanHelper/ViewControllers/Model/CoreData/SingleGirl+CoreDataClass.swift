@@ -19,16 +19,25 @@ public class SingleGirl: NSManagedObject {
       return photoID != nil
     }
     
+    
+    // construct a computed url property
+    // pass in the calculated number
+    // use it to construct a file name and append
+    // it to document directory
     var photoURL: URL {
       assert(photoID != nil, "No photo ID set")
       let filename = "Photo-\(photoID!.intValue).jpg"
       return applicationDocumentsDirectory.appendingPathComponent(filename)
     }
     
+    
+    // pass in the file path to the UIImage init
     var photoImage: UIImage? {
       return UIImage(contentsOfFile: photoURL.path)
     }
     
+    // create new Int value for photoID
+    // and store it in userDefaults
     class func nextPhotoID() -> Int {
        let userDefaults = UserDefaults.standard
        let currentID = userDefaults.integer(forKey: "PhotoID") + 1

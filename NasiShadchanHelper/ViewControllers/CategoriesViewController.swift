@@ -8,11 +8,15 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class CategoriesViewController: UIViewController {
 
     var coreDataStack: CoreDataStack!
     var allSingles: [SingleGirl]!
+    
+    //let ref = Database.database().reference(withPath: "grocery-items")
+
    
     override func viewDidLoad() {
         super.viewDidLoad()

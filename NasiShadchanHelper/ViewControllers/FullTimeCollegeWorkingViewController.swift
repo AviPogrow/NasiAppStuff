@@ -25,30 +25,30 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
     var coreDataStack = CoreDataStack(modelName: "SingleGirl")
     var fetchRequest: NSFetchRequest<SingleGirl>!
     
+    
+    let categoryString0 = "FTC"
+    let categoryString1 = "PTL+FTC"
+    let categoryString2 = "FTL+PTL+FTC"
+    
+    let dontNeedString = "Donotneedkoveahittim"
+    let needString = "Needkoveahittim"
+    let categoryString = "FullTimeCollege/Working"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         
-        let request: NSFetchRequest<SingleGirl> = SingleGirl.fetchRequest()
         
+       
+      let request: NSFetchRequest<SingleGirl> = SingleGirl.fetchRequest()
         let ageSortDescriptor = NSSortDescriptor(key: "age", ascending: true)
-                   
         request.sortDescriptors = [ageSortDescriptor]
-        
-      let dontNeedString = "Donotneedkoveahittim"
-     let needString = "Needkoveahittim"
-     let categoryString = "FullTimeCollege/Working"
         
       
         
-        
-        let categoryString0 = "FTC"
-        let categoryString1 = "PTL+FTC"
-        let categoryString2 = "FTL+PTL+FTC"
-              
-              
-        let compoundPredicateNeedsKovea = NSPredicate(format:  "%K = %@ OR %K = %@ OR %K = %@",argumentArray:
+      
+let compoundPredicateNeedsKovea = NSPredicate(format:  "%K = %@ OR %K = %@ OR %K = %@",argumentArray:
             [#keyPath(SingleGirl.category),categoryString0,
             #keyPath(SingleGirl.category),categoryString1,
             #keyPath(SingleGirl.category),categoryString2

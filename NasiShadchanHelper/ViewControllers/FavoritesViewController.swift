@@ -36,6 +36,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
                  
       // assign the sortDesc and predicates
       request.sortDescriptors = [categorySortDescriptor,ageSortDescriptor]
+      
       request.predicate = isSavedPredicate
         
  
@@ -97,7 +98,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 450
+        return 400
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,7 +145,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if segue.identifier == "ShowDetail" {
-        let detailViewController = segue.destination as! SingleDetailViewController
+        let detailViewController = segue.destination as! ShadchanListDetailViewController
         let indexPath = sender as! IndexPath
          let selectedSingle = fetchedResultsController.object(at: indexPath)
         

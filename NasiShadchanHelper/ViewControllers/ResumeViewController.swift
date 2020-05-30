@@ -34,9 +34,14 @@ class ResumeViewController: UIViewController {
         
         var document: PDFDocument!
         
+        // construct a url from the path to resume string
+        // and set its type to pdf
         var  resumeURL = Bundle.main.url(forResource: resumeString,
         withExtension: "pdf")
         
+        
+        // if resumeUrL is not nill then pass url to PDFDoc
+        // init
         if resumeURL != nil {
             document = PDFDocument(url: resumeURL!)
         } else {
@@ -46,12 +51,17 @@ class ResumeViewController: UIViewController {
             document = PDFDocument(url: url!)
         }
     
+        // take the initialized pdf document and configure the document
+        // before attaching the doc to the PDFView
         if let document = document {
+            
         pdfView.displayMode = .singlePageContinuous
+        
         pdfView.autoScales = false
         
          pdfView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.25)
         
+         // attach PDF doc to PDFView's .document property
          pdfView.document = document
        // let page = pdfView.document?.page(at: 0)
        // let displayBox = pdfView.displayBox
@@ -64,9 +74,7 @@ class ResumeViewController: UIViewController {
         }
  
       }
-    
 
-    
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
     
         let resume = "Resume"

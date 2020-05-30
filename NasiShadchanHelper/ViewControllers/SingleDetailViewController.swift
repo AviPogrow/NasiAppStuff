@@ -137,7 +137,8 @@ class SingleDetailViewController: UITableViewController {
      
         
         try managedObjectContext.save()
-      afterDelay(0.4) {
+      
+        afterDelay(0.4) {
         self.fetchAfterSave()
         hudView.hide()
         self.navigationController?.popViewController(animated: true)
@@ -152,6 +153,8 @@ class SingleDetailViewController: UITableViewController {
            print("Could not save \(error), \(error.userInfo)")
          }
        }
+        
+       
  
 }
     

@@ -27,20 +27,17 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
     
     var selectedCategory = "YeshivaandCollege/Working"
     
-    let categoryString0 = "PTL"
-    let categoryString1 = "FTL+PTL"
-    let categoryString2 = "FTL+PTL+FTC"
-    let categoryString3 = "PTL+FTC"
-
-   let str1 = "Doesnotneedprofessionaltrack"
+    
+    let categoryString0 = "FTL+PTL+FTC"
+     let categoryString1 = "FTL+PTL"
+    let categoryString2 = "PTL+FTC"
+    let categoryString3 = "PTL"
+   
+    let str1 = "Doesnotneedprofessionaltrack"
    let str2 = "N/A"
    let str3 = "Needsprofessionaltrack"
      
-   
-    
-   
-    
-    override func viewDidLoad() {
+   override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
@@ -52,12 +49,10 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
        
         
          
-         
-        
-        let compoundPredicate1 = NSPredicate(format: "%K = %@ OR %K = %@ OR %K = %@",argumentArray:
-            [#keyPath(SingleGirl.category),categoryString1,
-             #keyPath(SingleGirl.category),categoryString2,
-             #keyPath(SingleGirl.category),categoryString3])
+    let compoundPredicate1 = NSPredicate(format: "%K = %@ OR %K = %@ OR %K = %@",argumentArray:
+            [#keyPath(SingleGirl.category),categoryString0,
+             #keyPath(SingleGirl.category),categoryString1,
+             #keyPath(SingleGirl.category),categoryString2])
         
             
         request.predicate = compoundPredicate1
@@ -120,8 +115,6 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         let nameOfImage = "\(currentSingle.imageName)"
         
         let fixedImageName = nameOfImage.replacingOccurrences(of: " ", with: "")
-        
-        print("the nameOfImage is \(nameOfImage)\n and fixedIs: \(fixedImageName)")
         
         let imageForProfile = UIImage(named: fixedImageName)
         if imageForProfile != nil {
