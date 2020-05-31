@@ -19,7 +19,12 @@ class ShadchanListDetailViewController: UITableViewController {
     var image: UIImage?
     var categoryName = "No Category"
     var selectedSingle: SingleGirl!
-  
+    
+    
+    @IBOutlet weak var boysTableView: UITableView!
+    
+    var boyList = ["Avi","Moishe", "Yehuda"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      // Hide keyboard
@@ -27,6 +32,8 @@ class ShadchanListDetailViewController: UITableViewController {
                                      action: #selector(hideKeyboard))
      gestureRecognizer.cancelsTouchesInView = false
      tableView.addGestureRecognizer(gestureRecognizer)
+        
+        
     }
     
     @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
@@ -148,6 +155,7 @@ class ShadchanListDetailViewController: UITableViewController {
       }
     }
   }
+    
     
 }
 extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
