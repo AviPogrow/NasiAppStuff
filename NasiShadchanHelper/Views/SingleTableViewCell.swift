@@ -11,25 +11,12 @@ import UIKit
 class SingleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var ageHeightLabel: UILabel!
-    
     @IBOutlet weak var cityLabel: UILabel!
-    
     @IBOutlet weak var categoryLabel: UILabel!
-    
-  
-      @IBOutlet weak var SeminaryLabel: UILabel!
-    
+    @IBOutlet weak var SeminaryLabel: UILabel!
     @IBOutlet weak var parnassahPlanLabel: UILabel!
-    
-    
     @IBOutlet weak var profileImageView: UIImageView!
-    
-  
-    
-    
-   
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -58,6 +45,4 @@ class SingleTableViewCell: UITableViewCell {
          profileImageView.image = nil
          
      }
-
-
 }

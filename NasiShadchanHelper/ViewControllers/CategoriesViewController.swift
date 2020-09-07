@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import Firebase
+//import Firebase
 
 class CategoriesViewController: UIViewController {
 

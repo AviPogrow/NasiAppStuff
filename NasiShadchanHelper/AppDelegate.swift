@@ -40,9 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         savedViewController.coreDataStack = coreDataStack
         
-        FirebaseApp.configure()
-        
-        let age = calculateAgeFrom(dobString: "")
+      FirebaseApp.configure()
+      
+      let age = calculateAgeFrom(dobString: "")
         
         
         return true
