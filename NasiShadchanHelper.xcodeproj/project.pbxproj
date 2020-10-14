@@ -8,6 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		05E7F1273EBB1D17F275CE05 /* Pods_NasiShadchanHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D387D40A1052AD5A246D2953 /* Pods_NasiShadchanHelper.framework */; };
+		1825F99E252C3FE400448269 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F99D252C3FE400448269 /* LoginVC.swift */; };
+		1825F9A0252C400600448269 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F99F252C400600448269 /* SignUpVC.swift */; };
+		1825F9A7252C5F6B00448269 /* UserAuthentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1825F9A6252C5F6B00448269 /* UserAuthentication.storyboard */; };
+		1825F9AA252C5F9500448269 /* LoginParentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F9A9252C5F9500448269 /* LoginParentVC.swift */; };
+		184F2F50252ADCDA00252C97 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F2F4F252ADCDA00252C97 /* Constant.swift */; };
+		184F2F52252AE02500252C97 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F2F51252AE02500252C97 /* Utility.swift */; };
+		184F2F55252AE16200252C97 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F2F54252AE16100252C97 /* Categories.swift */; };
+		184F9859252C622B00187D72 /* AlignedPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F9858252C622B00187D72 /* AlignedPlaceholderTextField.swift */; };
+		184F985C252C696100187D72 /* AuthNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F985B252C696100187D72 /* AuthNavViewController.swift */; };
+		1851798A2525FAF20099D65E /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185179882525FAF20099D65E /* ProgressIndicator.swift */; };
+		1851798B2525FAF20099D65E /* ProgressIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185179892525FAF20099D65E /* ProgressIndicator.xib */; };
+		185179932525FC3E0099D65E /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 185179922525FC3E0099D65E /* loading.json */; };
+		185AB885252F20190058F41D /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AB884252F20180058F41D /* Variables.swift */; };
+		185AB887252F64580058F41D /* AddNotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AB886252F64580058F41D /* AddNotesVC.swift */; };
+		18A37FA1252F8AAD009C6BEB /* NotesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A37F9F252F8AAD009C6BEB /* NotesTableCell.swift */; };
+		18A37FA2252F8AAD009C6BEB /* NotesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A37FA0252F8AAD009C6BEB /* NotesTableCell.xib */; };
+		18A37FA4252F8C7F009C6BEB /* NotesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A37FA3252F8C7F009C6BEB /* NotesListVC.swift */; };
+		18AB903C252DBACA00D9FCAB /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AB903B252DBACA00D9FCAB /* HomeTabBarController.swift */; };
+		18AB903E252DC21100D9FCAB /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AB903D252DC21100D9FCAB /* UserInfo.swift */; };
+		18E5DD152525CBCE005DD1DE /* NasiGirlsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E5DD142525CBCE005DD1DE /* NasiGirlsList.swift */; };
 		CE1B0D8C245F6260005EDFBA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B0D8B245F6260005EDFBA /* FavoritesViewController.swift */; };
 		CE3AC07424536729006B9FEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC07324536729006B9FEA /* AppDelegate.swift */; };
 		CE3AC07824536729006B9FEA /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC07724536729006B9FEA /* CategoriesViewController.swift */; };
@@ -19,72 +39,17 @@
 		CE3AC0A6245383A0006B9FEA /* FullTimeYeshivaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC0A5245383A0006B9FEA /* FullTimeYeshivaViewController.swift */; };
 		CE3AC0AC2454650F006B9FEA /* SingleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC0AB2454650F006B9FEA /* SingleTableViewCell.swift */; };
 		CE3AC0AE24547ADB006B9FEA /* SingleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC0AD24547ADB006B9FEA /* SingleDetailViewController.swift */; };
-		CE428D50248133A200C34EAB /* AyalaEisResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE428D4F248133A200C34EAB /* AyalaEisResume.pdf */; };
 		CE428D52248134AD00C34EAB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE428D51248134AD00C34EAB /* User.swift */; };
 		CE428D54248142B500C34EAB /* ShadchanListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE428D53248142B500C34EAB /* ShadchanListDetailViewController.swift */; };
 		CE428D562481482B00C34EAB /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE428D552481482B00C34EAB /* CategoryPickerViewController.swift */; };
-		CE462E6C2457025100ADDB9E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE462E6B2457025100ADDB9E /* CoreDataStack.swift */; };
-		CE462E6E2458630300ADDB9E /* AllSinglesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE462E6D2458630300ADDB9E /* AllSinglesTableViewController.swift */; };
 		CE525A702461B55300CBEC41 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE525A6F2461B55200CBEC41 /* UIImage+Resize.swift */; };
-		CE525A722462015800CBEC41 /* Nasi.json in Resources */ = {isa = PBXBuildFile; fileRef = CE525A712462015800CBEC41 /* Nasi.json */; };
 		CE525A76246366ED00CBEC41 /* HTCollegeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE525A75246366ED00CBEC41 /* HTCollegeTableViewCell.swift */; };
-		CE5D3B242467348100832956 /* RutiOchanaResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B232467348100832956 /* RutiOchanaResume.pdf */; };
-		CE5D3B372467841E00832956 /* AvigayilWiniarzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B292467841A00832956 /* AvigayilWiniarzResume.pdf */; };
-		CE5D3B382467841E00832956 /* ElishevaWiniarzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2A2467841A00832956 /* ElishevaWiniarzResume.pdf */; };
-		CE5D3B392467841E00832956 /* NechieLevitzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2B2467841B00832956 /* NechieLevitzResume.pdf */; };
-		CE5D3B3A2467841E00832956 /* EstiWaidenbaumResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2C2467841B00832956 /* EstiWaidenbaumResume.pdf */; };
-		CE5D3B3B2467841E00832956 /* NechamaZiselKatzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2D2467841C00832956 /* NechamaZiselKatzResume.pdf */; };
-		CE5D3B3C2467841E00832956 /* RenaAbadyResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2E2467841C00832956 /* RenaAbadyResume.pdf */; };
-		CE5D3B3D2467841E00832956 /* ChayaEstherLeviResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B2F2467841C00832956 /* ChayaEstherLeviResume.pdf */; };
-		CE5D3B3E2467841E00832956 /* DvoraRogawskiResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B302467841C00832956 /* DvoraRogawskiResume.pdf */; };
-		CE5D3B3F2467841E00832956 /* ChomiLandmanResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B312467841D00832956 /* ChomiLandmanResume.pdf */; };
-		CE5D3B402467841E00832956 /* RivkyAusfresserResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B322467841D00832956 /* RivkyAusfresserResume.pdf */; };
-		CE5D3B422467841E00832956 /* ElishevaBrachResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B342467841D00832956 /* ElishevaBrachResume.pdf */; };
-		CE5D3B432467841E00832956 /* AvigailMirlisResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B352467841D00832956 /* AvigailMirlisResume.pdf */; };
-		CE5D3B442467841E00832956 /* MeiraZeilingoldResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B362467841E00832956 /* MeiraZeilingoldResume.pdf */; };
-		CE5D3B5F2467843F00832956 /* BrynaNimanResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B452467843800832956 /* BrynaNimanResume.pdf */; };
-		CE5D3B602467843F00832956 /* RachelliCohenResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B462467843900832956 /* RachelliCohenResume.pdf */; };
-		CE5D3B612467843F00832956 /* MinyaSchochetResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B472467843900832956 /* MinyaSchochetResume.pdf */; };
-		CE5D3B622467843F00832956 /* Ahuva(Leah)SandlerResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B482467843900832956 /* Ahuva(Leah)SandlerResume.pdf */; };
-		CE5D3B632467843F00832956 /* ShaindyStarrResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B492467843A00832956 /* ShaindyStarrResume.pdf */; };
-		CE5D3B642467843F00832956 /* EidelPearlResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4A2467843A00832956 /* EidelPearlResume.pdf */; };
-		CE5D3B652467843F00832956 /* TovaSchwartzResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4B2467843A00832956 /* TovaSchwartzResume.pdf */; };
-		CE5D3B672467843F00832956 /* RochelLeahKonigResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4D2467843B00832956 /* RochelLeahKonigResume.pdf */; };
-		CE5D3B682467843F00832956 /* EstyRosenfeldResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4E2467843B00832956 /* EstyRosenfeldResume.pdf */; };
-		CE5D3B692467843F00832956 /* BailaRochelWeiswasserResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B4F2467843B00832956 /* BailaRochelWeiswasserResume.pdf */; };
-		CE5D3B6A2467843F00832956 /* FaigeMittelmanResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B502467843B00832956 /* FaigeMittelmanResume.pdf */; };
-		CE5D3B6B2467843F00832956 /* SoraPressburgerResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B512467843B00832956 /* SoraPressburgerResume.pdf */; };
-		CE5D3B6D2467843F00832956 /* ElishevaAbelResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B532467843C00832956 /* ElishevaAbelResume.pdf */; };
-		CE5D3B6E2467843F00832956 /* AdinaDavisResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B542467843C00832956 /* AdinaDavisResume.pdf */; };
-		CE5D3B6F2467843F00832956 /* AdinaPollockResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B552467843C00832956 /* AdinaPollockResume.pdf */; };
-		CE5D3B702467843F00832956 /* ElishevaKaganoffResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B562467843D00832956 /* ElishevaKaganoffResume.pdf */; };
-		CE5D3B712467843F00832956 /* RutiBlumenthalResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B572467843D00832956 /* RutiBlumenthalResume.pdf */; };
-		CE5D3B722467843F00832956 /* AvigailGoldbergResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B582467843D00832956 /* AvigailGoldbergResume.pdf */; };
-		CE5D3B742467843F00832956 /* AvigayilCarlbachResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5A2467843D00832956 /* AvigayilCarlbachResume.pdf */; };
-		CE5D3B752467843F00832956 /* BrachaSmithResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5B2467843E00832956 /* BrachaSmithResume.pdf */; };
-		CE5D3B762467843F00832956 /* AvigayilLehmannResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5C2467843E00832956 /* AvigayilLehmannResume.pdf */; };
-		CE5D3B772467843F00832956 /* PeninaGoldbergResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5D2467843E00832956 /* PeninaGoldbergResume.pdf */; };
-		CE5D3B782467843F00832956 /* EstherSosowskyResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B5E2467843E00832956 /* EstherSosowskyResume.pdf */; };
-		CE5D3B7E2467845A00832956 /* SaraKissResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B792467845900832956 /* SaraKissResume.pdf */; };
-		CE5D3B7F2467845A00832956 /* BrachaFraidelFlaglerResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B7A2467845900832956 /* BrachaFraidelFlaglerResume.pdf */; };
-		CE5D3B802467845A00832956 /* ShainaWeisbrotResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B7B2467845900832956 /* ShainaWeisbrotResume.pdf */; };
-		CE5D3B812467845A00832956 /* ChanaLiebeGoldbergResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B7C2467845900832956 /* ChanaLiebeGoldbergResume.pdf */; };
-		CE5D3B822467845A00832956 /* EsteeGestetnerResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B7D2467845A00832956 /* EsteeGestetnerResume.pdf */; };
-		CE5D3B8C246994BC00832956 /* MiriamGitlin-PetlakResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B8B246994BC00832956 /* MiriamGitlin-PetlakResume.pdf */; };
-		CE5D3B92246CD4C800832956 /* Nasi_V2.json in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B91246CD4C700832956 /* Nasi_V2.json */; };
-		CE5D3B94246ED35F00832956 /* NasiHybridData.json in Resources */ = {isa = PBXBuildFile; fileRef = CE5D3B93246ED35F00832956 /* NasiHybridData.json */; };
 		CE75EBB3246581170056A1D7 /* wbCola.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE75EBB2246581170056A1D7 /* wbCola.pdf */; };
-		CE75EBB5246581840056A1D7 /* contractTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE75EBB4246581840056A1D7 /* contractTemplate.pdf */; };
 		CE75EBBF2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75EBBE2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift */; };
 		CE75EBC12465CD410056A1D7 /* SavedSingleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE75EBC02465CD410056A1D7 /* SavedSingleCell.xib */; };
 		CEC468DB245A217F0071EC85 /* ResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC468DA245A217F0071EC85 /* ResumeViewController.swift */; };
 		CEC468DE245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC468DD245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift */; };
 		CEC468E0245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC468DF245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift */; };
-		CEC468E2245C8FF90071EC85 /* Shidduch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC468E1245C8FF90071EC85 /* Shidduch.swift */; };
-		CEC468ED245CE81E0071EC85 /* ChayaRothsteinResume.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CEC468EC245CE81E0071EC85 /* ChayaRothsteinResume.pdf */; };
-		CECE6A492455915200084A28 /* SingleGirl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CECE6A472455915200084A28 /* SingleGirl.xcdatamodeld */; };
-		CECE6A4C245592F900084A28 /* SingleGirl+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE6A4A245592F900084A28 /* SingleGirl+CoreDataClass.swift */; };
-		CECE6A4D245592F900084A28 /* SingleGirl+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE6A4B245592F900084A28 /* SingleGirl+CoreDataProperties.swift */; };
 		CECE6A4F24559EF900084A28 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE6A4E24559EF900084A28 /* Config.swift */; };
 		CED7BB5D24787199005671F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED7BB5C24787199005671F3 /* GoogleService-Info.plist */; };
 		CEF80D1E245F7014009FE684 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF80D1D245F7014009FE684 /* HudView.swift */; };
@@ -110,6 +75,26 @@
 
 /* Begin PBXFileReference section */
 		120B71D82B9D8096BD2F254A /* Pods-NasiShadchanHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NasiShadchanHelper.release.xcconfig"; path = "Target Support Files/Pods-NasiShadchanHelper/Pods-NasiShadchanHelper.release.xcconfig"; sourceTree = "<group>"; };
+		1825F99D252C3FE400448269 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		1825F99F252C400600448269 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		1825F9A6252C5F6B00448269 /* UserAuthentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserAuthentication.storyboard; sourceTree = "<group>"; };
+		1825F9A9252C5F9500448269 /* LoginParentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginParentVC.swift; sourceTree = "<group>"; };
+		184F2F4F252ADCDA00252C97 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		184F2F51252AE02500252C97 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		184F2F54252AE16100252C97 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
+		184F9858252C622B00187D72 /* AlignedPlaceholderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlignedPlaceholderTextField.swift; sourceTree = "<group>"; };
+		184F985B252C696100187D72 /* AuthNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavViewController.swift; sourceTree = "<group>"; };
+		185179882525FAF20099D65E /* ProgressIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
+		185179892525FAF20099D65E /* ProgressIndicator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressIndicator.xib; sourceTree = "<group>"; };
+		185179922525FC3E0099D65E /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		185AB884252F20180058F41D /* Variables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		185AB886252F64580058F41D /* AddNotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesVC.swift; sourceTree = "<group>"; };
+		18A37F9F252F8AAD009C6BEB /* NotesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableCell.swift; sourceTree = "<group>"; };
+		18A37FA0252F8AAD009C6BEB /* NotesTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesTableCell.xib; sourceTree = "<group>"; };
+		18A37FA3252F8C7F009C6BEB /* NotesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListVC.swift; sourceTree = "<group>"; };
+		18AB903B252DBACA00D9FCAB /* HomeTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		18AB903D252DC21100D9FCAB /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		18E5DD142525CBCE005DD1DE /* NasiGirlsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasiGirlsList.swift; sourceTree = "<group>"; };
 		690419FF2D95D46817B237C4 /* Pods-NasiShadchanHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NasiShadchanHelper.debug.xcconfig"; path = "Target Support Files/Pods-NasiShadchanHelper/Pods-NasiShadchanHelper.debug.xcconfig"; sourceTree = "<group>"; };
 		CE1B0D8B245F6260005EDFBA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		CE3AC07024536729006B9FEA /* NasiShadchanHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NasiShadchanHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,72 +113,17 @@
 		CE3AC0A5245383A0006B9FEA /* FullTimeYeshivaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeYeshivaViewController.swift; sourceTree = "<group>"; };
 		CE3AC0AB2454650F006B9FEA /* SingleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTableViewCell.swift; sourceTree = "<group>"; };
 		CE3AC0AD24547ADB006B9FEA /* SingleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleDetailViewController.swift; sourceTree = "<group>"; };
-		CE428D4F248133A200C34EAB /* AyalaEisResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AyalaEisResume.pdf; sourceTree = "<group>"; };
 		CE428D51248134AD00C34EAB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE428D53248142B500C34EAB /* ShadchanListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadchanListDetailViewController.swift; sourceTree = "<group>"; };
 		CE428D552481482B00C34EAB /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
-		CE462E6B2457025100ADDB9E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		CE462E6D2458630300ADDB9E /* AllSinglesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSinglesTableViewController.swift; sourceTree = "<group>"; };
 		CE525A6F2461B55200CBEC41 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
-		CE525A712462015800CBEC41 /* Nasi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Nasi.json; sourceTree = "<group>"; };
 		CE525A75246366ED00CBEC41 /* HTCollegeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTCollegeTableViewCell.swift; sourceTree = "<group>"; };
-		CE5D3B232467348100832956 /* RutiOchanaResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RutiOchanaResume.pdf; sourceTree = "<group>"; };
-		CE5D3B292467841A00832956 /* AvigayilWiniarzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigayilWiniarzResume.pdf; sourceTree = "<group>"; };
-		CE5D3B2A2467841A00832956 /* ElishevaWiniarzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ElishevaWiniarzResume.pdf; sourceTree = "<group>"; };
-		CE5D3B2B2467841B00832956 /* NechieLevitzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = NechieLevitzResume.pdf; sourceTree = "<group>"; };
-		CE5D3B2C2467841B00832956 /* EstiWaidenbaumResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EstiWaidenbaumResume.pdf; sourceTree = "<group>"; };
-		CE5D3B2D2467841C00832956 /* NechamaZiselKatzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = NechamaZiselKatzResume.pdf; sourceTree = "<group>"; };
-		CE5D3B2E2467841C00832956 /* RenaAbadyResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RenaAbadyResume.pdf; sourceTree = "<group>"; };
-		CE5D3B2F2467841C00832956 /* ChayaEstherLeviResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ChayaEstherLeviResume.pdf; sourceTree = "<group>"; };
-		CE5D3B302467841C00832956 /* DvoraRogawskiResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = DvoraRogawskiResume.pdf; sourceTree = "<group>"; };
-		CE5D3B312467841D00832956 /* ChomiLandmanResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ChomiLandmanResume.pdf; sourceTree = "<group>"; };
-		CE5D3B322467841D00832956 /* RivkyAusfresserResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RivkyAusfresserResume.pdf; sourceTree = "<group>"; };
-		CE5D3B342467841D00832956 /* ElishevaBrachResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ElishevaBrachResume.pdf; sourceTree = "<group>"; };
-		CE5D3B352467841D00832956 /* AvigailMirlisResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigailMirlisResume.pdf; sourceTree = "<group>"; };
-		CE5D3B362467841E00832956 /* MeiraZeilingoldResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MeiraZeilingoldResume.pdf; sourceTree = "<group>"; };
-		CE5D3B452467843800832956 /* BrynaNimanResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BrynaNimanResume.pdf; sourceTree = "<group>"; };
-		CE5D3B462467843900832956 /* RachelliCohenResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RachelliCohenResume.pdf; sourceTree = "<group>"; };
-		CE5D3B472467843900832956 /* MinyaSchochetResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MinyaSchochetResume.pdf; sourceTree = "<group>"; };
-		CE5D3B482467843900832956 /* Ahuva(Leah)SandlerResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Ahuva(Leah)SandlerResume.pdf"; sourceTree = "<group>"; };
-		CE5D3B492467843A00832956 /* ShaindyStarrResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ShaindyStarrResume.pdf; sourceTree = "<group>"; };
-		CE5D3B4A2467843A00832956 /* EidelPearlResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EidelPearlResume.pdf; sourceTree = "<group>"; };
-		CE5D3B4B2467843A00832956 /* TovaSchwartzResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TovaSchwartzResume.pdf; sourceTree = "<group>"; };
-		CE5D3B4D2467843B00832956 /* RochelLeahKonigResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RochelLeahKonigResume.pdf; sourceTree = "<group>"; };
-		CE5D3B4E2467843B00832956 /* EstyRosenfeldResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EstyRosenfeldResume.pdf; sourceTree = "<group>"; };
-		CE5D3B4F2467843B00832956 /* BailaRochelWeiswasserResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BailaRochelWeiswasserResume.pdf; sourceTree = "<group>"; };
-		CE5D3B502467843B00832956 /* FaigeMittelmanResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FaigeMittelmanResume.pdf; sourceTree = "<group>"; };
-		CE5D3B512467843B00832956 /* SoraPressburgerResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SoraPressburgerResume.pdf; sourceTree = "<group>"; };
-		CE5D3B532467843C00832956 /* ElishevaAbelResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ElishevaAbelResume.pdf; sourceTree = "<group>"; };
-		CE5D3B542467843C00832956 /* AdinaDavisResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AdinaDavisResume.pdf; sourceTree = "<group>"; };
-		CE5D3B552467843C00832956 /* AdinaPollockResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AdinaPollockResume.pdf; sourceTree = "<group>"; };
-		CE5D3B562467843D00832956 /* ElishevaKaganoffResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ElishevaKaganoffResume.pdf; sourceTree = "<group>"; };
-		CE5D3B572467843D00832956 /* RutiBlumenthalResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RutiBlumenthalResume.pdf; sourceTree = "<group>"; };
-		CE5D3B582467843D00832956 /* AvigailGoldbergResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigailGoldbergResume.pdf; sourceTree = "<group>"; };
-		CE5D3B5A2467843D00832956 /* AvigayilCarlbachResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigayilCarlbachResume.pdf; sourceTree = "<group>"; };
-		CE5D3B5B2467843E00832956 /* BrachaSmithResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BrachaSmithResume.pdf; sourceTree = "<group>"; };
-		CE5D3B5C2467843E00832956 /* AvigayilLehmannResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AvigayilLehmannResume.pdf; sourceTree = "<group>"; };
-		CE5D3B5D2467843E00832956 /* PeninaGoldbergResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = PeninaGoldbergResume.pdf; sourceTree = "<group>"; };
-		CE5D3B5E2467843E00832956 /* EstherSosowskyResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EstherSosowskyResume.pdf; sourceTree = "<group>"; };
-		CE5D3B792467845900832956 /* SaraKissResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SaraKissResume.pdf; sourceTree = "<group>"; };
-		CE5D3B7A2467845900832956 /* BrachaFraidelFlaglerResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BrachaFraidelFlaglerResume.pdf; sourceTree = "<group>"; };
-		CE5D3B7B2467845900832956 /* ShainaWeisbrotResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ShainaWeisbrotResume.pdf; sourceTree = "<group>"; };
-		CE5D3B7C2467845900832956 /* ChanaLiebeGoldbergResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ChanaLiebeGoldbergResume.pdf; sourceTree = "<group>"; };
-		CE5D3B7D2467845A00832956 /* EsteeGestetnerResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EsteeGestetnerResume.pdf; sourceTree = "<group>"; };
-		CE5D3B8B246994BC00832956 /* MiriamGitlin-PetlakResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "MiriamGitlin-PetlakResume.pdf"; sourceTree = "<group>"; };
-		CE5D3B91246CD4C700832956 /* Nasi_V2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Nasi_V2.json; sourceTree = "<group>"; };
-		CE5D3B93246ED35F00832956 /* NasiHybridData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NasiHybridData.json; sourceTree = "<group>"; };
 		CE75EBB2246581170056A1D7 /* wbCola.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = wbCola.pdf; sourceTree = "<group>"; };
-		CE75EBB4246581840056A1D7 /* contractTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = contractTemplate.pdf; sourceTree = "<group>"; };
 		CE75EBBE2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSingleTableViewCell.swift; sourceTree = "<group>"; };
 		CE75EBC02465CD410056A1D7 /* SavedSingleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedSingleCell.xib; sourceTree = "<group>"; };
 		CEC468DA245A217F0071EC85 /* ResumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeViewController.swift; sourceTree = "<group>"; };
 		CEC468DD245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTimeCollegeWorkingViewController.swift; sourceTree = "<group>"; };
 		CEC468DF245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YeshivaAndCollegeWorkingViewController.swift; sourceTree = "<group>"; };
-		CEC468E1245C8FF90071EC85 /* Shidduch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shidduch.swift; sourceTree = "<group>"; };
-		CEC468EC245CE81E0071EC85 /* ChayaRothsteinResume.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ChayaRothsteinResume.pdf; sourceTree = "<group>"; };
-		CECE6A482455915200084A28 /* Single.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Single.xcdatamodel; sourceTree = "<group>"; };
-		CECE6A4A245592F900084A28 /* SingleGirl+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleGirl+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CECE6A4B245592F900084A28 /* SingleGirl+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleGirl+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CECE6A4E24559EF900084A28 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		CED7BB5C24787199005671F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEF80D1D245F7014009FE684 /* HudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
@@ -227,6 +157,161 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1825F998252C3BA800448269 /* AuthViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1825F9A5252C5F5700448269 /* Screen */,
+				184F985A252C694600187D72 /* AuthNavigationVC */,
+				1825F9A8252C5F7B00448269 /* LoginParentVC */,
+				1825F99A252C3C4200448269 /* Login */,
+				1825F99B252C3C4C00448269 /* SignUp */,
+			);
+			path = AuthViewControllers;
+			sourceTree = "<group>";
+		};
+		1825F99A252C3C4200448269 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1825F99D252C3FE400448269 /* LoginVC.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		1825F99B252C3C4C00448269 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				1825F99F252C400600448269 /* SignUpVC.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		1825F9A5252C5F5700448269 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				1825F9A6252C5F6B00448269 /* UserAuthentication.storyboard */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		1825F9A8252C5F7B00448269 /* LoginParentVC */ = {
+			isa = PBXGroup;
+			children = (
+				1825F9A9252C5F9500448269 /* LoginParentVC.swift */,
+			);
+			path = LoginParentVC;
+			sourceTree = "<group>";
+		};
+		184F2F4E252ADB8900252C97 /* CommonClasses */ = {
+			isa = PBXGroup;
+			children = (
+				184F2F51252AE02500252C97 /* Utility.swift */,
+				185AB884252F20180058F41D /* Variables.swift */,
+				CECE6A4E24559EF900084A28 /* Config.swift */,
+				184F2F4F252ADCDA00252C97 /* Constant.swift */,
+			);
+			path = CommonClasses;
+			sourceTree = "<group>";
+		};
+		184F2F53252AE14400252C97 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				184F2F54252AE16100252C97 /* Categories.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		184F9857252C61F200187D72 /* AlignedPlaceholderTextField */ = {
+			isa = PBXGroup;
+			children = (
+				184F9858252C622B00187D72 /* AlignedPlaceholderTextField.swift */,
+			);
+			path = AlignedPlaceholderTextField;
+			sourceTree = "<group>";
+		};
+		184F985A252C694600187D72 /* AuthNavigationVC */ = {
+			isa = PBXGroup;
+			children = (
+				184F985B252C696100187D72 /* AuthNavViewController.swift */,
+			);
+			path = AuthNavigationVC;
+			sourceTree = "<group>";
+		};
+		1850A12625309733000DBCE0 /* ConcierrCofig */ = {
+			isa = PBXGroup;
+			children = (
+				CE3AC07324536729006B9FEA /* AppDelegate.swift */,
+			);
+			path = ConcierrCofig;
+			sourceTree = "<group>";
+		};
+		185179862525FA190099D65E /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				184F9857252C61F200187D72 /* AlignedPlaceholderTextField */,
+				185179872525FAA20099D65E /* progressIndicator */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		185179872525FAA20099D65E /* progressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				185179882525FAF20099D65E /* ProgressIndicator.swift */,
+				185179892525FAF20099D65E /* ProgressIndicator.xib */,
+			);
+			path = progressIndicator;
+			sourceTree = "<group>";
+		};
+		1851798C2525FB030099D65E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1851798D2525FB1F0099D65E /* nasiLoadingAnimation */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1851798D2525FB1F0099D65E /* nasiLoadingAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				185179922525FC3E0099D65E /* loading.json */,
+			);
+			path = nasiLoadingAnimation;
+			sourceTree = "<group>";
+		};
+		18A37F9E252F8A7E009C6BEB /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				18A37F9F252F8AAD009C6BEB /* NotesTableCell.swift */,
+				18A37FA0252F8AAD009C6BEB /* NotesTableCell.xib */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		18AB903A252DBA8100D9FCAB /* TabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				18AB903B252DBACA00D9FCAB /* HomeTabBarController.swift */,
+			);
+			path = TabBarControllers;
+			sourceTree = "<group>";
+		};
+		18E5DD122525CBAE005DD1DE /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				18E5DD132525CBC2005DD1DE /* Model */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		18E5DD132525CBC2005DD1DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18AB903D252DC21100D9FCAB /* UserInfo.swift */,
+				18E5DD142525CBCE005DD1DE /* NasiGirlsList.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		38A65EC2E3BE9EB8512EFC50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,10 +354,16 @@
 		CE3AC07224536729006B9FEA /* NasiShadchanHelper */ = {
 			isa = PBXGroup;
 			children = (
-				CECE6A4E24559EF900084A28 /* Config.swift */,
-				CE3AC07324536729006B9FEA /* AppDelegate.swift */,
+				1850A12625309733000DBCE0 /* ConcierrCofig */,
+				1825F998252C3BA800448269 /* AuthViewControllers */,
 				CEF80D202460BB35009FE684 /* Views */,
 				CEC468DC245B1C0E0071EC85 /* ViewControllers */,
+				18E5DD122525CBAE005DD1DE /* NetworkLayer */,
+				184F2F4E252ADB8900252C97 /* CommonClasses */,
+				185179862525FA190099D65E /* CustomViews */,
+				184F2F53252AE14400252C97 /* extensions */,
+				1851798C2525FB030099D65E /* Resources */,
+				18AB903A252DBA8100D9FCAB /* TabBarControllers */,
 				CE3AC07924536729006B9FEA /* Main.storyboard */,
 				CE3AC07C24536765006B9FEA /* Assets.xcassets */,
 				CE3AC07E24536765006B9FEA /* LaunchScreen.storyboard */,
@@ -301,82 +392,21 @@
 			path = NasiShadchanHelperUITests;
 			sourceTree = "<group>";
 		};
-		CE462E6A245701EF00ADDB9E /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				CECE6A472455915200084A28 /* SingleGirl.xcdatamodeld */,
-				CECE6A4B245592F900084A28 /* SingleGirl+CoreDataProperties.swift */,
-				CECE6A4A245592F900084A28 /* SingleGirl+CoreDataClass.swift */,
-				CE462E6B2457025100ADDB9E /* CoreDataStack.swift */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
-		CE5D3B83246839A700832956 /* Resumes */ = {
-			isa = PBXGroup;
-			children = (
-				CE5D3B542467843C00832956 /* AdinaDavisResume.pdf */,
-				CE5D3B552467843C00832956 /* AdinaPollockResume.pdf */,
-				CE5D3B482467843900832956 /* Ahuva(Leah)SandlerResume.pdf */,
-				CE5D3B5A2467843D00832956 /* AvigayilCarlbachResume.pdf */,
-				CE5D3B582467843D00832956 /* AvigailGoldbergResume.pdf */,
-				CE5D3B5C2467843E00832956 /* AvigayilLehmannResume.pdf */,
-				CE5D3B352467841D00832956 /* AvigailMirlisResume.pdf */,
-				CE5D3B292467841A00832956 /* AvigayilWiniarzResume.pdf */,
-				CE5D3B4F2467843B00832956 /* BailaRochelWeiswasserResume.pdf */,
-				CE5D3B7A2467845900832956 /* BrachaFraidelFlaglerResume.pdf */,
-				CE428D4F248133A200C34EAB /* AyalaEisResume.pdf */,
-				CE5D3B5B2467843E00832956 /* BrachaSmithResume.pdf */,
-				CE5D3B452467843800832956 /* BrynaNimanResume.pdf */,
-				CE5D3B7C2467845900832956 /* ChanaLiebeGoldbergResume.pdf */,
-				CE5D3B2F2467841C00832956 /* ChayaEstherLeviResume.pdf */,
-				CEC468EC245CE81E0071EC85 /* ChayaRothsteinResume.pdf */,
-				CE5D3B312467841D00832956 /* ChomiLandmanResume.pdf */,
-				CE5D3B302467841C00832956 /* DvoraRogawskiResume.pdf */,
-				CE5D3B4A2467843A00832956 /* EidelPearlResume.pdf */,
-				CE5D3B532467843C00832956 /* ElishevaAbelResume.pdf */,
-				CE5D3B342467841D00832956 /* ElishevaBrachResume.pdf */,
-				CE5D3B562467843D00832956 /* ElishevaKaganoffResume.pdf */,
-				CE5D3B2A2467841A00832956 /* ElishevaWiniarzResume.pdf */,
-				CE5D3B7D2467845A00832956 /* EsteeGestetnerResume.pdf */,
-				CE5D3B5E2467843E00832956 /* EstherSosowskyResume.pdf */,
-				CE5D3B2C2467841B00832956 /* EstiWaidenbaumResume.pdf */,
-				CE5D3B4E2467843B00832956 /* EstyRosenfeldResume.pdf */,
-				CE5D3B502467843B00832956 /* FaigeMittelmanResume.pdf */,
-				CE5D3B362467841E00832956 /* MeiraZeilingoldResume.pdf */,
-				CE5D3B472467843900832956 /* MinyaSchochetResume.pdf */,
-				CE5D3B8B246994BC00832956 /* MiriamGitlin-PetlakResume.pdf */,
-				CE5D3B2D2467841C00832956 /* NechamaZiselKatzResume.pdf */,
-				CE5D3B2B2467841B00832956 /* NechieLevitzResume.pdf */,
-				CE5D3B5D2467843E00832956 /* PeninaGoldbergResume.pdf */,
-				CE5D3B462467843900832956 /* RachelliCohenResume.pdf */,
-				CE5D3B2E2467841C00832956 /* RenaAbadyResume.pdf */,
-				CE5D3B322467841D00832956 /* RivkyAusfresserResume.pdf */,
-				CE5D3B4D2467843B00832956 /* RochelLeahKonigResume.pdf */,
-				CE5D3B572467843D00832956 /* RutiBlumenthalResume.pdf */,
-				CE5D3B232467348100832956 /* RutiOchanaResume.pdf */,
-				CE5D3B792467845900832956 /* SaraKissResume.pdf */,
-				CE5D3B7B2467845900832956 /* ShainaWeisbrotResume.pdf */,
-				CE5D3B492467843A00832956 /* ShaindyStarrResume.pdf */,
-				CE5D3B512467843B00832956 /* SoraPressburgerResume.pdf */,
-				CE5D3B4B2467843A00832956 /* TovaSchwartzResume.pdf */,
-			);
-			path = Resumes;
-			sourceTree = "<group>";
-		};
 		CEC468DC245B1C0E0071EC85 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18A37F9E252F8A7E009C6BEB /* cells */,
 				CE3AC07724536729006B9FEA /* CategoriesViewController.swift */,
 				CE3AC0A5245383A0006B9FEA /* FullTimeYeshivaViewController.swift */,
 				CEC468DD245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift */,
 				CEC468DF245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift */,
 				CEC468DA245A217F0071EC85 /* ResumeViewController.swift */,
-				CE462E6D2458630300ADDB9E /* AllSinglesTableViewController.swift */,
 				CE3AC0AD24547ADB006B9FEA /* SingleDetailViewController.swift */,
 				CE1B0D8B245F6260005EDFBA /* FavoritesViewController.swift */,
 				CE428D53248142B500C34EAB /* ShadchanListDetailViewController.swift */,
 				CE428D552481482B00C34EAB /* CategoryPickerViewController.swift */,
+				185AB886252F64580058F41D /* AddNotesVC.swift */,
+				18A37FA3252F8C7F009C6BEB /* NotesListVC.swift */,
 				CEC468E3245C90840071EC85 /* Model */,
 			);
 			path = ViewControllers;
@@ -385,10 +415,7 @@
 		CEC468E3245C90840071EC85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CE5D3B83246839A700832956 /* Resumes */,
 				CEF80D1F2460BACB009FE684 /* RawData */,
-				CE462E6A245701EF00ADDB9E /* CoreData */,
-				CEC468E1245C8FF90071EC85 /* Shidduch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -396,11 +423,7 @@
 		CEF80D1F2460BACB009FE684 /* RawData */ = {
 			isa = PBXGroup;
 			children = (
-				CE5D3B93246ED35F00832956 /* NasiHybridData.json */,
-				CE5D3B91246CD4C700832956 /* Nasi_V2.json */,
-				CE75EBB4246581840056A1D7 /* contractTemplate.pdf */,
 				CE75EBB2246581170056A1D7 /* wbCola.pdf */,
-				CE525A712462015800CBEC41 /* Nasi.json */,
 			);
 			path = RawData;
 			sourceTree = "<group>";
@@ -431,6 +454,7 @@
 				CE3AC06D24536729006B9FEA /* Frameworks */,
 				CE3AC06E24536729006B9FEA /* Resources */,
 				40F4C25EE19BABD92E813037 /* [CP] Embed Pods Frameworks */,
+				AB9C185867E588C14D35CD7C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -525,61 +549,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5D3B822467845A00832956 /* EsteeGestetnerResume.pdf in Resources */,
-				CE5D3B7E2467845A00832956 /* SaraKissResume.pdf in Resources */,
 				CE75EBB3246581170056A1D7 /* wbCola.pdf in Resources */,
+				1825F9A7252C5F6B00448269 /* UserAuthentication.storyboard in Resources */,
 				CE3AC08024536765006B9FEA /* LaunchScreen.storyboard in Resources */,
-				CE5D3B3D2467841E00832956 /* ChayaEstherLeviResume.pdf in Resources */,
-				CE5D3B392467841E00832956 /* NechieLevitzResume.pdf in Resources */,
-				CE5D3B6A2467843F00832956 /* FaigeMittelmanResume.pdf in Resources */,
-				CE5D3B5F2467843F00832956 /* BrynaNimanResume.pdf in Resources */,
-				CE525A722462015800CBEC41 /* Nasi.json in Resources */,
-				CE5D3B812467845A00832956 /* ChanaLiebeGoldbergResume.pdf in Resources */,
-				CE5D3B712467843F00832956 /* RutiBlumenthalResume.pdf in Resources */,
-				CE5D3B632467843F00832956 /* ShaindyStarrResume.pdf in Resources */,
-				CE5D3B652467843F00832956 /* TovaSchwartzResume.pdf in Resources */,
-				CE5D3B672467843F00832956 /* RochelLeahKonigResume.pdf in Resources */,
-				CE5D3B612467843F00832956 /* MinyaSchochetResume.pdf in Resources */,
-				CE5D3B7F2467845A00832956 /* BrachaFraidelFlaglerResume.pdf in Resources */,
-				CE5D3B422467841E00832956 /* ElishevaBrachResume.pdf in Resources */,
-				CE5D3B382467841E00832956 /* ElishevaWiniarzResume.pdf in Resources */,
-				CE5D3B242467348100832956 /* RutiOchanaResume.pdf in Resources */,
-				CE5D3B6F2467843F00832956 /* AdinaPollockResume.pdf in Resources */,
-				CE5D3B782467843F00832956 /* EstherSosowskyResume.pdf in Resources */,
-				CE5D3B3B2467841E00832956 /* NechamaZiselKatzResume.pdf in Resources */,
-				CE5D3B442467841E00832956 /* MeiraZeilingoldResume.pdf in Resources */,
-				CE5D3B92246CD4C800832956 /* Nasi_V2.json in Resources */,
-				CE5D3B3F2467841E00832956 /* ChomiLandmanResume.pdf in Resources */,
+				185179932525FC3E0099D65E /* loading.json in Resources */,
+				18A37FA2252F8AAD009C6BEB /* NotesTableCell.xib in Resources */,
 				CE3AC07D24536765006B9FEA /* Assets.xcassets in Resources */,
-				CE5D3B432467841E00832956 /* AvigailMirlisResume.pdf in Resources */,
-				CE5D3B622467843F00832956 /* Ahuva(Leah)SandlerResume.pdf in Resources */,
-				CE5D3B762467843F00832956 /* AvigayilLehmannResume.pdf in Resources */,
-				CE428D50248133A200C34EAB /* AyalaEisResume.pdf in Resources */,
-				CE5D3B6E2467843F00832956 /* AdinaDavisResume.pdf in Resources */,
-				CE5D3B682467843F00832956 /* EstyRosenfeldResume.pdf in Resources */,
-				CE5D3B602467843F00832956 /* RachelliCohenResume.pdf in Resources */,
-				CE5D3B6B2467843F00832956 /* SoraPressburgerResume.pdf in Resources */,
-				CE5D3B752467843F00832956 /* BrachaSmithResume.pdf in Resources */,
-				CE5D3B722467843F00832956 /* AvigailGoldbergResume.pdf in Resources */,
-				CE5D3B702467843F00832956 /* ElishevaKaganoffResume.pdf in Resources */,
-				CE5D3B6D2467843F00832956 /* ElishevaAbelResume.pdf in Resources */,
+				1851798B2525FAF20099D65E /* ProgressIndicator.xib in Resources */,
 				CED7BB5D24787199005671F3 /* GoogleService-Info.plist in Resources */,
 				CE75EBC12465CD410056A1D7 /* SavedSingleCell.xib in Resources */,
-				CE5D3B802467845A00832956 /* ShainaWeisbrotResume.pdf in Resources */,
-				CE5D3B692467843F00832956 /* BailaRochelWeiswasserResume.pdf in Resources */,
-				CE75EBB5246581840056A1D7 /* contractTemplate.pdf in Resources */,
-				CE5D3B3E2467841E00832956 /* DvoraRogawskiResume.pdf in Resources */,
-				CE5D3B94246ED35F00832956 /* NasiHybridData.json in Resources */,
-				CE5D3B3A2467841E00832956 /* EstiWaidenbaumResume.pdf in Resources */,
-				CE5D3B3C2467841E00832956 /* RenaAbadyResume.pdf in Resources */,
-				CE5D3B742467843F00832956 /* AvigayilCarlbachResume.pdf in Resources */,
-				CE5D3B372467841E00832956 /* AvigayilWiniarzResume.pdf in Resources */,
-				CE5D3B642467843F00832956 /* EidelPearlResume.pdf in Resources */,
-				CE5D3B772467843F00832956 /* PeninaGoldbergResume.pdf in Resources */,
 				CE3AC07B24536729006B9FEA /* Main.storyboard in Resources */,
-				CE5D3B402467841E00832956 /* RivkyAusfresserResume.pdf in Resources */,
-				CEC468ED245CE81E0071EC85 /* ChayaRothsteinResume.pdf in Resources */,
-				CE5D3B8C246994BC00832956 /* MiriamGitlin-PetlakResume.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,6 +618,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AB9C185867E588C14D35CD7C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NasiShadchanHelper/Pods-NasiShadchanHelper-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NasiShadchanHelper/Pods-NasiShadchanHelper-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NasiShadchanHelper/Pods-NasiShadchanHelper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -646,30 +642,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184F2F52252AE02500252C97 /* Utility.swift in Sources */,
+				18E5DD152525CBCE005DD1DE /* NasiGirlsList.swift in Sources */,
 				CE428D562481482B00C34EAB /* CategoryPickerViewController.swift in Sources */,
-				CECE6A4D245592F900084A28 /* SingleGirl+CoreDataProperties.swift in Sources */,
 				CEC468DB245A217F0071EC85 /* ResumeViewController.swift in Sources */,
-				CEC468E2245C8FF90071EC85 /* Shidduch.swift in Sources */,
 				CE3AC07824536729006B9FEA /* CategoriesViewController.swift in Sources */,
 				CE428D54248142B500C34EAB /* ShadchanListDetailViewController.swift in Sources */,
-				CE462E6C2457025100ADDB9E /* CoreDataStack.swift in Sources */,
+				18AB903C252DBACA00D9FCAB /* HomeTabBarController.swift in Sources */,
+				18A37FA4252F8C7F009C6BEB /* NotesListVC.swift in Sources */,
 				CE3AC07424536729006B9FEA /* AppDelegate.swift in Sources */,
-				CECE6A4C245592F900084A28 /* SingleGirl+CoreDataClass.swift in Sources */,
+				1825F9AA252C5F9500448269 /* LoginParentVC.swift in Sources */,
+				184F9859252C622B00187D72 /* AlignedPlaceholderTextField.swift in Sources */,
+				184F2F55252AE16200252C97 /* Categories.swift in Sources */,
 				CEC468DE245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift in Sources */,
 				CECE6A4F24559EF900084A28 /* Config.swift in Sources */,
+				1825F99E252C3FE400448269 /* LoginVC.swift in Sources */,
 				CE1B0D8C245F6260005EDFBA /* FavoritesViewController.swift in Sources */,
 				CE428D52248134AD00C34EAB /* User.swift in Sources */,
-				CECE6A492455915200084A28 /* SingleGirl.xcdatamodeld in Sources */,
+				184F985C252C696100187D72 /* AuthNavViewController.swift in Sources */,
 				CEC468E0245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift in Sources */,
+				1825F9A0252C400600448269 /* SignUpVC.swift in Sources */,
+				1851798A2525FAF20099D65E /* ProgressIndicator.swift in Sources */,
 				CE3AC0AC2454650F006B9FEA /* SingleTableViewCell.swift in Sources */,
 				CE525A702461B55300CBEC41 /* UIImage+Resize.swift in Sources */,
 				CE3AC0A6245383A0006B9FEA /* FullTimeYeshivaViewController.swift in Sources */,
+				184F2F50252ADCDA00252C97 /* Constant.swift in Sources */,
 				CE3AC0AE24547ADB006B9FEA /* SingleDetailViewController.swift in Sources */,
-				CE462E6E2458630300ADDB9E /* AllSinglesTableViewController.swift in Sources */,
+				185AB887252F64580058F41D /* AddNotesVC.swift in Sources */,
 				CE525A76246366ED00CBEC41 /* HTCollegeTableViewCell.swift in Sources */,
+				18AB903E252DC21100D9FCAB /* UserInfo.swift in Sources */,
 				CE75EBBF2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift in Sources */,
+				185AB885252F20190058F41D /* Variables.swift in Sources */,
 				CEF80D222460BBBC009FE684 /* FTCollegeTableViewCell.swift in Sources */,
 				CEF80D1E245F7014009FE684 /* HudView.swift in Sources */,
+				18A37FA1252F8AAD009C6BEB /* NotesTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,14 +851,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = P77A2352BM;
+				DEVELOPMENT_TEAM = EQABG8TYXD;
 				INFOPLIST_FILE = NasiShadchanHelper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AviPogrow.NasiShadchanHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.avipogrow.NasiAdmin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -866,14 +872,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = P77A2352BM;
+				DEVELOPMENT_TEAM = EQABG8TYXD;
 				INFOPLIST_FILE = NasiShadchanHelper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AviPogrow.NasiShadchanHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.avipogrow.NasiAdmin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1004,19 +1010,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		CECE6A472455915200084A28 /* SingleGirl.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CECE6A482455915200084A28 /* Single.xcdatamodel */,
-			);
-			currentVersion = CECE6A482455915200084A28 /* Single.xcdatamodel */;
-			path = SingleGirl.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = CE3AC06824536729006B9FEA /* Project object */;
 }

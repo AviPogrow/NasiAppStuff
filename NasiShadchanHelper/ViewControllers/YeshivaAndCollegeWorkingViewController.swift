@@ -7,152 +7,125 @@
 //
 
 import UIKit
-import CoreData
 
 class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     @IBOutlet weak var tableView: UITableView!
     
-    var singleGirls =  [SingleGirl]()
-    var proTracKSingleGirls = [SingleGirl]()
-    var noProTrackSingleGirls = [SingleGirl]()
     
     
+    var arrGirlsList = [NasiGirlsList]()
+    var arrProTracKSingleGirls = [NasiGirlsList]()
+    var arrNoProTrackSingleGirls = [NasiGirlsList]()
     
-    var coreDataStack = CoreDataStack(modelName: "SingleGirl")
-    // var coreDataStack: CoreDataStack!
     let cellID = "HTCollegeTableCell"
     
     var selectedCategory = "YeshivaandCollege/Working"
     
-    
-    let categoryString0 = "FTL+PTL+FTC"
-     let categoryString1 = "FTL+PTL"
-    let categoryString2 = "PTL+FTC"
-    let categoryString3 = "PTL"
-   
     let str1 = "Doesnotneedprofessionaltrack"
-   let str2 = "N/A"
-   let str3 = "Needsprofessionaltrack"
-     
-   override func viewDidLoad() {
+    let str2 = "N/A"
+    let str3 = "Needsprofessionaltrack"
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         
-   let request: NSFetchRequest<SingleGirl> = SingleGirl.fetchRequest()
-    let ageSortDescriptor = NSSortDescriptor(key: "age", ascending: true)
-    request.sortDescriptors = [ageSortDescriptor]
+        arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
-       
-        
-         
-    let compoundPredicate1 = NSPredicate(format: "%K = %@ OR %K = %@ OR %K = %@",argumentArray:
-            [#keyPath(SingleGirl.category),categoryString0,
-             #keyPath(SingleGirl.category),categoryString1,
-             #keyPath(SingleGirl.category),categoryString2])
-        
-            
-        request.predicate = compoundPredicate1
-            
-        do {
-        singleGirls =  try coreDataStack.mainContext.fetch(request)
-        
-        noProTrackSingleGirls = singleGirls.filter { singleGirl in
-            singleGirl.professionalTrack == "Doesnotneedprofessionaltrack"
+        self.arrGirlsList = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.category == Constant.CategoryTypeName.kPredicateString2 || singleGirl.category == Constant.CategoryTypeName.kPredicateString3 || singleGirl.category == Constant.CategoryTypeName.kCategoryString1
         }
-      proTracKSingleGirls = singleGirls.filter{ singleGirl in
-        singleGirl.professionalTrack == "Needsprofessionaltrack"
-                
-            }
-        tableView.reloadData()
-
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-            }
         
+        arrNoProTrackSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.professionalTrack == "does not need professional track" || singleGirl.professionalTrack == "Does not need professional track"
+        }
+        arrProTracKSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.professionalTrack == "Needs professional track"
+        }
+        
+        tableView.reloadData()
         
         let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
         let selectedTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         let normalTextAttributes = [NSAttributedString.Key.foregroundColor: segmentColor]
         segmentControl.selectedSegmentTintColor = segmentColor
-    segmentControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
-    segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
-    segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .highlighted)
-
-        
+        segmentControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
+        segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
+        segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .highlighted)
     }
-    
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         
         tableView.reloadData()
-
-      }
-    
-    
-   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-    if segmentControl.selectedSegmentIndex == 0 {
-        return proTracKSingleGirls.count
     }
-        return noProTrackSingleGirls.count
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if segmentControl.selectedSegmentIndex == 0 {
+            return arrProTracKSingleGirls.count
+        }
+        return arrNoProTrackSingleGirls.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as!  HTCollegeTableViewCell
         
-        var currentSingle: SingleGirl!
+        var currentSingle: NasiGirlsList!
         if segmentControl.selectedSegmentIndex == 0 {
-            currentSingle = proTracKSingleGirls[indexPath.row]
+            currentSingle = arrProTracKSingleGirls[indexPath.row]
         } else {
-           currentSingle = noProTrackSingleGirls[indexPath.row]
+            currentSingle = arrNoProTrackSingleGirls[indexPath.row]
         }
         
-        let nameOfImage = "\(currentSingle.imageName)"
         
-        let fixedImageName = nameOfImage.replacingOccurrences(of: " ", with: "")
-        
-        let imageForProfile = UIImage(named: fixedImageName)
-        if imageForProfile != nil {
-            cell.profileImageView.image = imageForProfile
+        if (currentSingle.imageDownloadURLString ?? "").isEmpty {
+            cell.profileImageView.image = UIImage.init(named: "placeholder")
         } else {
-            cell.profileImageView.image = UIImage(named:"face02")
+            cell.profileImageView.loadImageFromUrl(strUrl: String(format: "%@",currentSingle.imageDownloadURLString!), imgPlaceHolder: "placeholder")
         }
-        
         
         // 1st Label - Age
-        cell.nameLabel.text = currentSingle.firstName + " " + currentSingle.lastName
+        cell.nameLabel.text = (currentSingle.firstNameOfGirl ?? "") + " " + (currentSingle.lastNameOfGirl ?? "")
         
         // 2nd Label - Age/Height
-        cell.ageHeightLabel.text = currentSingle.age + " - " + currentSingle.height!
-         
+        let heightInFt = currentSingle.heightInFeet ?? ""
+        let heightInInches = currentSingle.heightInInches ?? ""
+        
+        let height = "\(heightInFt)\'" + "\(heightInInches)\""
+        
+        // currentSingle.dateOfBirth
+        cell.ageHeightLabel.text = "\(currentSingle.dateOfBirth ?? 0.0)" + "-" + height // 2nd Age - Height
         
         // 3rd Label
         cell.cityLabel.textColor = UIColor.black
-        cell.cityLabel.text =  currentSingle.city
+        cell.cityLabel.text =  currentSingle.cityOfResidence
         
         // 4th Label
         cell.categoryLabel.textColor = .lightGray
-        cell.categoryLabel.text = currentSingle.category 
-     
-      // 5th Label is seminary
-        cell.seminaryLabel.text = currentSingle.seminary
+        cell.categoryLabel.text = currentSingle.category ?? ""
         
         
-      // 6th label - Pro Track
-         let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
         
-        if currentSingle.professionalTrack == "Doesnotneedprofessionaltrack" {
+        // 5th Label is seminary
+        cell.seminaryLabel.text = currentSingle.seminaryName ?? ""
+        
+        
+        // 6th label - Pro Track
+        let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
+        
+        if (currentSingle.professionalTrack == "does not need professional track") || (currentSingle.professionalTrack == "Does not need professional track") {
             
-       cell.professionalTrackLabel.textColor = segmentColor
-         cell.professionalTrackLabel.text = "Doesn't Need Pro Track"
+            cell.professionalTrackLabel.textColor = segmentColor
+            cell.professionalTrackLabel.text = "Doesn't Need Pro Track"
         } else {
-        cell.professionalTrackLabel.textColor = segmentColor
-        cell.professionalTrackLabel.text = "Needs Pro Track"
+            cell.professionalTrackLabel.textColor = segmentColor
+            cell.professionalTrackLabel.text = "Needs Pro Track"
         }
         return cell
     }
@@ -160,22 +133,20 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
     
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "ShowDetails" {
-       let controller = segue.destination as! SingleDetailViewController
-        controller.managedObjectContext = coreDataStack.mainContext
         
-        if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+        if segue.identifier == "ShowDetails" {
+            let controller = segue.destination as! SingleDetailViewController
             
-            var currentSingle: SingleGirl!
-            if segmentControl.selectedSegmentIndex == 0 {
-                currentSingle = proTracKSingleGirls[indexPath.row]
-            } else {
-               currentSingle = noProTrackSingleGirls[indexPath.row]
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                
+                var currentSingle: NasiGirlsList!
+                if segmentControl.selectedSegmentIndex == 0 {
+                    currentSingle = arrProTracKSingleGirls[indexPath.row]
+                } else {
+                    currentSingle = arrNoProTrackSingleGirls[indexPath.row]
+                }
+                controller.selectedSingle = currentSingle
             }
-            
-      
-        controller.selectedSingle = currentSingle
-        }
         }
     }
     

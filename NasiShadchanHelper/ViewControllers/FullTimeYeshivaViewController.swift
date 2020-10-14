@@ -7,99 +7,73 @@
 //
 
 import UIKit
-import CoreData 
+import Kingfisher
 
-class FullTimeYeshivaViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-
-
+class FullTimeYeshivaViewController: UITableViewController {
+    
+    
     // MARK: - Properties
     fileprivate let singleCellIdentifier = "SingleCellID"
     
-
-    var coreDataStack = CoreDataStack(modelName: "SingleGirl")
-    var singleGirls = [SingleGirl]()
+    var arrGirlsList = [NasiGirlsList]()
     
-    var onetothreeSingleGirls = [SingleGirl]()
-    var threeToFiveSingleGirls = [SingleGirl]()
-    var fiveYearsSingleGirls = [SingleGirl]()
-    var fiveToSevenSingleGirls = [SingleGirl]()
-    var sevenPlusSingleGirls = [SingleGirl]()
-    
-   let fullTimeYeshivaPredicate = NSPredicate(format: "%K == %@", #keyPath(SingleGirl.category), "FullTimeYeshiva")
-    
+    var arrOnetothreeSingleGirls = [NasiGirlsList]()
+    var arrThreeToFiveSingleGirls = [NasiGirlsList]()
+    var arrFiveYearsSingleGirls = [NasiGirlsList]()
+    var arrFiveToSevenSingleGirls = [NasiGirlsList]()
+    var arrSevenPlusSingleGirls = [NasiGirlsList]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         navigationItem.title = "Full Time Yeshiva"
+        navigationItem.title = "Full Time Yeshiva"
         
-        let fetchRequest: NSFetchRequest<SingleGirl>  = SingleGirl.fetchRequest()
-          
-        let ageSort = NSSortDescriptor(key: #keyPath(SingleGirl.age), ascending: true)
-            
-            
-          fetchRequest.sortDescriptors = [ageSort]
-            
-            let predicateString1 = "FTL"
-            let predicateString2 = "FTL+PTL+FTC"
-            let predicateString3 = "FTL+PTL"
-
-            
-            let hybridPredicate =
-            NSPredicate(format: "%K = %@ OR %K = %@ OR %K = %@",
-                    argumentArray:
-             [#keyPath(SingleGirl.category), predicateString1,
-             #keyPath(SingleGirl.category),predicateString2,
-             #keyPath(SingleGirl.category),predicateString3,
-            ])
-            
-          fetchRequest.predicate = hybridPredicate
-          
-          
-          singleGirls =  try! coreDataStack.mainContext.fetch(fetchRequest)
+        arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
-        onetothreeSingleGirls = singleGirls.filter { singleGirl in
-            singleGirl.yearsOfLearning == "1-3" || singleGirl.yearsOfLearning == "1-3:3-5" ||
-            singleGirl.yearsOfLearning == "1-3:3-5:5"
+        arrGirlsList = self.arrGirlsList.filter { (girlList) -> Bool in
+            return girlList.category == Constant.CategoryTypeName.kPredicateString1  || girlList.category == Constant.CategoryTypeName.kPredicateString2 || girlList.category == Constant.CategoryTypeName.kPredicateString3
         }
         
-        threeToFiveSingleGirls = singleGirls.filter { singleGirl in
-            singleGirl.yearsOfLearning == "3-5" ||
-            singleGirl.yearsOfLearning == "1-3:3-5" ||
-            singleGirl.yearsOfLearning == "1-3:3-5:5" ||
-            singleGirl.yearsOfLearning == "3-5:5" ||
-            singleGirl.yearsOfLearning == "3-5:5:5-7"
+        arrOnetothreeSingleGirls = self.arrGirlsList.filter { (girlList) -> Bool in
+            return girlList.yearsOfLearning == "1-3"  || girlList.yearsOfLearning == "1-3:3-5" || girlList.yearsOfLearning == "1-3:3-5:5"
         }
         
-        fiveYearsSingleGirls = singleGirls.filter { singleGirl in
-            singleGirl.yearsOfLearning == "5" ||
-            singleGirl.yearsOfLearning == "1-3:3-5:5" ||
-            singleGirl.yearsOfLearning == "3-5:5" ||
-            singleGirl.yearsOfLearning == "3-5:5:5-7" ||
-            singleGirl.yearsOfLearning == "5:5-7:7+"
-            
+        arrThreeToFiveSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.yearsOfLearning == "3-5" ||
+                singleGirl.yearsOfLearning == "1-3:3-5" ||
+                singleGirl.yearsOfLearning == "1-3:3-5:5" ||
+                singleGirl.yearsOfLearning == "3-5:5" ||
+                singleGirl.yearsOfLearning == "3-5:5:5-7"
         }
         
-        fiveToSevenSingleGirls = singleGirls.filter { singleGirl in
-            singleGirl.yearsOfLearning == "5-7" ||
-            singleGirl.yearsOfLearning == "3-5:5:5-7" ||
-            singleGirl.yearsOfLearning == "5:5-7" ||
-            singleGirl.yearsOfLearning == "5-7:7+"
+        arrFiveYearsSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.yearsOfLearning == "5" ||
+                singleGirl.yearsOfLearning == "1-3:3-5:5" ||
+                singleGirl.yearsOfLearning == "3-5:5" ||
+                singleGirl.yearsOfLearning == "3-5:5:5-7" ||
+                singleGirl.yearsOfLearning == "5:5-7:7+"
         }
-        sevenPlusSingleGirls = singleGirls.filter { singleGirl in
-            singleGirl.yearsOfLearning == "7+" ||
-            singleGirl.yearsOfLearning == "5:5-7:7+" ||
-            singleGirl.yearsOfLearning == "5-7:7+"
-            
+        
+        arrFiveToSevenSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.yearsOfLearning == "5-7" ||
+                singleGirl.yearsOfLearning == "3-5:5:5-7" ||
+                singleGirl.yearsOfLearning == "5:5-7" ||
+                singleGirl.yearsOfLearning == "5-7:7+"
         }
-      
+        
+        arrSevenPlusSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.yearsOfLearning == "7+" ||
+                singleGirl.yearsOfLearning == "5:5-7:7+" ||
+                singleGirl.yearsOfLearning == "5-7:7+"
+        }
+        
     }
+    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-         
-      return 5
-     }
+        return 5
+    }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
@@ -114,117 +88,99 @@ class FullTimeYeshivaViewController: UITableViewController, NSFetchedResultsCont
             return "7+ Years Of Learning"
         }
     }
-
-   // MARK: - Table View Data Source
+    
+    // MARK: - Table View Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
         if section == 0 {
-            return onetothreeSingleGirls.count
+            return arrOnetothreeSingleGirls.count
         } else if section == 1 {
-            return threeToFiveSingleGirls.count
+            return arrThreeToFiveSingleGirls.count
         } else if section == 2 {
-            return fiveYearsSingleGirls.count
+            return arrFiveYearsSingleGirls.count
         } else if section == 3  {
-            return fiveToSevenSingleGirls.count
-            
+            return arrFiveToSevenSingleGirls.count
         } else {
-            return sevenPlusSingleGirls.count
+            return arrSevenPlusSingleGirls.count
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: singleCellIdentifier, for: indexPath) as! SingleTableViewCell
-
         
-        var currentSingle: SingleGirl!
+        var model: NasiGirlsList!
         if indexPath.section == 0 {
-            currentSingle = onetothreeSingleGirls[indexPath.row]
+            model = arrOnetothreeSingleGirls[indexPath.row]
         } else if indexPath.section == 1 {
-         currentSingle = threeToFiveSingleGirls[indexPath.row]
+            model = arrThreeToFiveSingleGirls[indexPath.row]
         } else if indexPath.section == 2 {
-            currentSingle = fiveYearsSingleGirls[indexPath.row]
+            model = arrFiveYearsSingleGirls[indexPath.row]
         } else if indexPath.section == 3 {
-            currentSingle = fiveToSevenSingleGirls[indexPath.row]
+            model = arrFiveToSevenSingleGirls[indexPath.row]
         } else {
-            currentSingle = sevenPlusSingleGirls[indexPath.row]
+            model = arrSevenPlusSingleGirls[indexPath.row]
         }
         
-        //top 1 name
-        cell.nameLabel?.text =  "\(currentSingle.firstName)" + " "  + "\(currentSingle.lastName)"
+        print("here is dob", model.dateOfBirth ?? "")
         
-        // 2nd Age - Height
-        cell.ageHeightLabel.text = currentSingle.age + "-" + currentSingle.height!
+        cell.nameLabel?.text =  "\(model.firstNameOfGirl ?? "")" + " "  + "\(model.lastNameOfGirl ?? "")" //top 1 name
         
-        // 3rd Label - City
-       
-        cell.cityLabel.text = "\(currentSingle.city)"
+        let heightInFt = model.heightInFeet ?? ""
+        let heightInInches = model.heightInInches ?? ""
         
-        // 4th Label - Categories
+        let height = "\(heightInFt)\'" + "\(heightInInches)\""
+        
+        cell.ageHeightLabel.text = "\(model.dateOfBirth ?? 0.0)" + "-" + height // 2nd Age - Height
+        
+        cell.cityLabel.text = "\(model.cityOfResidence ?? "")"  // 3rd Label - City
         cell.categoryLabel.textColor = .lightGray
-        cell.categoryLabel.text = "\(currentSingle.category) - " + currentSingle.yearsOfLearning
+        cell.categoryLabel.text = "\(model.category ?? "") - " + (model.yearsOfLearning ?? "") // 4th Label - Categories
+        cell.SeminaryLabel.text = model.seminaryName ?? ""  //5th Label - Seminary
+        cell.parnassahPlanLabel.text = "\(model.plan ?? "")"  // 6th Label - Plan
         
-        //5th Label - Seminary
-       cell.SeminaryLabel.text = currentSingle.seminary
-        
-        // 6th Label - Plan
-        cell.parnassahPlanLabel.text = "\(currentSingle.plan)"
-                                  
-        
-        
-        
-        let nameOfImage = "\(currentSingle.imageName)"
-        
-        let fixedImageName = nameOfImage.replacingOccurrences(of: " ", with: "")
-        let currentSingleImage = UIImage(named: fixedImageName)
-        
-         if currentSingleImage != nil {
-           cell.profileImageView.image = currentSingleImage
+        if (model.imageDownloadURLString ?? "").isEmpty {
+            print("this is empty....", model.imageDownloadURLString ?? "")
+            cell.profileImageView?.image = UIImage.init(named: "placeholder")
         } else {
-            cell.profileImageView.image = UIImage(named: "ReenaAbady")
-            
+            cell.profileImageView.loadImageFromUrl(strUrl: String(format: "%@",model.imageDownloadURLString!), imgPlaceHolder: "placeholder")
+            print("this is not empty....", model.imageDownloadURLString ?? "")
         }
+        
         return cell
     }
     
-   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-      return 44
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
     }
     
-     // MARK: - Navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-       if segue.identifier == "ShowSingleDetail" {
-        guard let tableViewCell = sender as? UITableViewCell,
-          let indexPath = tableView.indexPath(for: tableViewCell),
-          let controller = segue.destination as? SingleDetailViewController else {
-            return
-        }
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        controller.managedObjectContext = coreDataStack.mainContext
         
-        var currentSingle: SingleGirl!
-               if indexPath.section == 0 {
-                   currentSingle = onetothreeSingleGirls[indexPath.row]
-               } else if indexPath.section == 1 {
-                currentSingle = threeToFiveSingleGirls[indexPath.row]
-               } else if indexPath.section == 2 {
-                   currentSingle = fiveYearsSingleGirls[indexPath.row]
-               } else if indexPath.section == 3 {
-                   currentSingle = fiveToSevenSingleGirls[indexPath.row]
-               } else {
-                currentSingle = sevenPlusSingleGirls[indexPath.row]
-        }
-
-        controller.selectedSingle = currentSingle
+        if segue.identifier == "ShowSingleDetail" {
+            guard let tableViewCell = sender as? UITableViewCell,
+                let indexPath = tableView.indexPath(for: tableViewCell),
+                let controller = segue.destination as? SingleDetailViewController else {
+                    return
+            }
+            
+            var currentSingle: NasiGirlsList!
+            if indexPath.section == 0 {
+                currentSingle = arrOnetothreeSingleGirls[indexPath.row]
+            } else if indexPath.section == 1 {
+                currentSingle = arrThreeToFiveSingleGirls[indexPath.row]
+            } else if indexPath.section == 2 {
+                currentSingle = arrFiveYearsSingleGirls[indexPath.row]
+            } else if indexPath.section == 3 {
+                currentSingle = arrFiveToSevenSingleGirls[indexPath.row]
+            } else {
+                currentSingle = arrSevenPlusSingleGirls[indexPath.row]
+            }
+            controller.selectedSingle = currentSingle
         }
     }
 }
-
-
-

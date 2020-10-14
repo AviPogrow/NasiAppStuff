@@ -7,28 +7,19 @@
 //
 
 import UIKit
-import CoreData
 
-class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSource,UITableViewDelegate, NSFetchedResultsControllerDelegate {
- 
+class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
+    
     let cellIdentifier = "FullTimeCollegeCell"
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
-    var singleGirls = [SingleGirl]()
-    var needsKoveaSingleGirls = [SingleGirl]()
-    var doesNotNeedKoveaSingleSirls = [SingleGirl]()
-   
-    //var coreDataStack: CoreDataStack!
-    var coreDataStack = CoreDataStack(modelName: "SingleGirl")
-    var fetchRequest: NSFetchRequest<SingleGirl>!
     
-    
-    let categoryString0 = "FTC"
-    let categoryString1 = "PTL+FTC"
-    let categoryString2 = "FTL+PTL+FTC"
+    var arrGirlsList = [NasiGirlsList]()
+    var arrNeedsKoveaSingleGirls = [NasiGirlsList]()
+    var arrDoesNotNeedKoveaSingleSirls = [NasiGirlsList]()
     
     let dontNeedString = "Donotneedkoveahittim"
     let needString = "Needkoveahittim"
@@ -39,225 +30,135 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         tableView.dataSource = self
         tableView.delegate = self
         
+        arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
-       
-      let request: NSFetchRequest<SingleGirl> = SingleGirl.fetchRequest()
-        let ageSortDescriptor = NSSortDescriptor(key: "age", ascending: true)
-        request.sortDescriptors = [ageSortDescriptor]
+        arrGirlsList = self.arrGirlsList.filter { (girlList) -> Bool in
+            return girlList.category == Constant.CategoryTypeName.kCategoryString0  || girlList.category == Constant.CategoryTypeName.kCategoryString1 || girlList.category == Constant.CategoryTypeName.kPredicateString2
+        }
         
-      
+        arrNeedsKoveaSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.koveahIttim == "Need koveah ittim"
+        }
         
-      
-let compoundPredicateNeedsKovea = NSPredicate(format:  "%K = %@ OR %K = %@ OR %K = %@",argumentArray:
-            [#keyPath(SingleGirl.category),categoryString0,
-            #keyPath(SingleGirl.category),categoryString1,
-            #keyPath(SingleGirl.category),categoryString2
-                  
-        ])
-
-        request.predicate =  compoundPredicateNeedsKovea
-                   
-        do {
-         singleGirls =  try coreDataStack.mainContext.fetch(request)
-               
-         
-          doesNotNeedKoveaSingleSirls =  singleGirls.filter { singleGirl in
-                singleGirl.koveahIttim == "Donotneedkoveahittim"
-            }
-            
-            needsKoveaSingleGirls =  singleGirls.filter {
-                singleGirl in
-                singleGirl.koveahIttim == "Needkoveahittim"
-                       }
-        
-        tableView.reloadData()
-
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
+        arrDoesNotNeedKoveaSingleSirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+            return singleGirl.koveahIttim == "do not need koveah ittim"
         }
         
         
+        tableView.reloadData()
+        
         let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
-           let selectedTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-           let normalTextAttributes = [NSAttributedString.Key.foregroundColor: segmentColor]
-           segmentControl.selectedSegmentTintColor = segmentColor
-           segmentControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
-           segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
-           segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .highlighted)
-        
-        
-        
-      }
+        let selectedTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let normalTextAttributes = [NSAttributedString.Key.foregroundColor: segmentColor]
+        segmentControl.selectedSegmentTintColor = segmentColor
+        segmentControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
+        segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
+        segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .highlighted)
+    }
     
- 
+    
     
     @IBAction func segmentControlTapped(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
-        
         print("the selectedIndex is \(selectedIndex) and title is \(String(describing: sender.titleForSegment(at: selectedIndex)))")
-        
-        
-        let request: NSFetchRequest<SingleGirl> = SingleGirl.fetchRequest()
-        
-        let ageSortDescriptor = NSSortDescriptor(key: "age", ascending: true)
-                   
-        request.sortDescriptors = [ageSortDescriptor]
-        
-        
-        let categoryString0 = "FTC"
-        let categoryString1 = "PTL+FTC"
-        let categoryString2 = "FTL+PTL+FTC"
-        
-        
-        
-        let dontNeedString = "Donotneedkoveahittim"
-           let needString = "Needkoveahittim"
-           let categoryString = "FullTimeCollege/Working"
-        
-        
-        let compoundPredicateNeedsKovea = NSPredicate(format: "%K = %@ AND %K = %@ OR %K = %@ OR %K = %@",argumentArray:
-                [ #keyPath(SingleGirl.koveahIttim),needString,
-                    #keyPath(SingleGirl.category),categoryString0,
-                    #keyPath(SingleGirl.category),categoryString1,
-                    #keyPath(SingleGirl.category),categoryString2
-                    ])
-        
-        
-              let compoundPredicateNoNeedKovea = NSPredicate(format: "%K = %@ OR %K = %@ OR %K = %@ AND %K = %@",argumentArray:
-                               [#keyPath(SingleGirl.category),categoryString0,
-                                #keyPath(SingleGirl.category),categoryString1,
-                                #keyPath(SingleGirl.category),categoryString1,
-                                #keyPath(SingleGirl.koveahIttim),dontNeedString
-                     ])
-        
-        
-        
-        
-                   
-        if selectedIndex == 1 {
-             request.predicate = compoundPredicateNeedsKovea
-        } else {
-        request.predicate = compoundPredicateNoNeedKovea
-        }
-                   
-        do {
-         singleGirls =  try coreDataStack.mainContext.fetch(request)
-              
-            print("the state of single girls is \(singleGirls.description)")
-         
-            tableView.reloadData()
-
-        } catch let error as NSError {
-                   print("Could not fetch \(error), \(error.userInfo)")
-                   }
- 
- 
- }
+        tableView.reloadData()
+    }
     
     // MARK: - Table View Delegates
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if segmentControl.selectedSegmentIndex == 0 {
-            return doesNotNeedKoveaSingleSirls.count
+            return arrDoesNotNeedKoveaSingleSirls.count
         } else {
-        return needsKoveaSingleGirls.count
-       }
+            return arrNeedsKoveaSingleGirls.count
+        }
     }
-  
-     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-      let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as!
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as!
         FTCollegeTableViewCell
-     
-       
         
-         let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
         
-         var currentGirl: SingleGirl!
+        
+        let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
+        
+        var currentGirl: NasiGirlsList!
         
         if segmentControl.selectedSegmentIndex == 0 {
-        
-        currentGirl = doesNotNeedKoveaSingleSirls[indexPath.row]
-       } else {
-         currentGirl = needsKoveaSingleGirls[indexPath.row]
-        }
-        
-        let cellImage = UIImage(named: "\(currentGirl.imageName)")
-        
-        if cellImage != nil {
-        cell.profileImageView?.image = cellImage
+            
+            currentGirl = arrDoesNotNeedKoveaSingleSirls[indexPath.row]
         } else {
-            cell.profileImageView.image = UIImage(named: "face02")
+            currentGirl = arrNeedsKoveaSingleGirls[indexPath.row]
         }
         
-       cell.nameLabel.text = currentGirl.firstName + " " + currentGirl.lastName
-                   
-        // 2nd Label - age - height
-         cell.ageHeightLabel.text = currentGirl.age + " - " + currentGirl.height!
-                   
+        
+        cell.nameLabel.text = (currentGirl.firstNameOfGirl ?? "") + " " + (currentGirl.lastNameOfGirl ?? "")
+        
+        let heightInFt = currentGirl.heightInFeet ?? ""
+        let heightInInches = currentGirl.heightInInches ?? ""
+        
+        let height = "\(heightInFt)\'" + "\(heightInInches)\""
+        
+        cell.ageHeightLabel.text = "\(currentGirl.dateOfBirth ?? 0.0)" + "-" + height // 2nd Age - Height
+        
         // 3rd label - city
-         cell.cityLabel.text = currentGirl.city
-                   
+        cell.cityLabel.text = currentGirl.cityOfResidence ?? ""
+        
         // 4th Label is category codes Label
         cell.categoryLabel.text = currentGirl.category 
-                   
+        
         // 5th Label -  seminary
-         cell.seminaryLabel.text = currentGirl.seminary
+        cell.seminaryLabel.text = currentGirl.seminaryName ?? ""
         //cell.proPlanLabel.text = currentGirl.city
-      
+        
         // 6th Label - Pro Track
         
-     
-        // 6th Label Kovea Ittim
-        if currentGirl.koveahIttim == "Donotneedkoveahittim" {
-            
-        cell.koveahIttimLabel.backgroundColor = UIColor.white
-            
-       
-            
-        cell.koveahIttimLabel.textColor = segmentColor
-        cell.koveahIttimLabel.text = "Doesn't need kovea ittim"
-        } else {
         
-        cell.koveahIttimLabel.textColor = segmentColor
-        cell.koveahIttimLabel.backgroundColor = UIColor.white
-        cell.koveahIttimLabel.text = "Must be kovea ittimm"
+        // 6th Label Kovea Ittim
+        if currentGirl.koveahIttim == "do not need koveah ittim" {
+            
+            cell.koveahIttimLabel.backgroundColor = UIColor.white
+            
+            
+            
+            cell.koveahIttimLabel.textColor = segmentColor
+            cell.koveahIttimLabel.text = "Doesn't need kovea ittim"
+        } else {
+            
+            cell.koveahIttimLabel.textColor = segmentColor
+            cell.koveahIttimLabel.backgroundColor = UIColor.white
+            cell.koveahIttimLabel.text = "Must be kovea ittimm"
         }
+        
+        if (currentGirl.imageDownloadURLString ?? "").isEmpty {
+            cell.profileImageView.image = UIImage.init(named: "placeholder")
+        } else {
+            cell.profileImageView.loadImageFromUrl(strUrl: String(format: "%@",currentGirl.imageDownloadURLString!), imgPlaceHolder: "placeholder")
+        }
+        
         
         return cell
     }
     
-   
-        
-           
-       
-    
-   
-    
     // MARK:- Navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       if segue.identifier == "ShowSingleDetails" {
-        
-        let controller = segue.destination as! SingleDetailViewController
-        
-        controller.managedObjectContext = coreDataStack.mainContext
-        
-        if let indexPath = tableView.indexPath(for: sender
-               as! UITableViewCell) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowSingleDetails" {
             
-            var currentGirl: SingleGirl!
-             
-             if segmentControl.selectedSegmentIndex == 0 {
-             
-             currentGirl = doesNotNeedKoveaSingleSirls[indexPath.row]
-            } else {
-              currentGirl = needsKoveaSingleGirls[indexPath.row]
-             }
-    
-        
-        controller.selectedSingle = currentGirl
+            let controller = segue.destination as! SingleDetailViewController
+            if let indexPath = tableView.indexPath(for: sender
+                as! UITableViewCell) {
+                
+                var currentGirl: NasiGirlsList!
+                
+                if segmentControl.selectedSegmentIndex == 0 {
+                    
+                    currentGirl = arrDoesNotNeedKoveaSingleSirls[indexPath.row]
+                } else {
+                    currentGirl = arrNeedsKoveaSingleGirls[indexPath.row]
+                }
+                controller.selectedSingle = currentGirl
+            }
         }
-     }
-}
+    }
 }

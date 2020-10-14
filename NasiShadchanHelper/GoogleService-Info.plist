@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>542194831976-4sm46vvttgn61htokuche51ieh5q7jsc.apps.googleusercontent.com</string>
+	<string>375478813152-s3iei6at6q8asokd2rpiglk4r80m0bi0.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.542194831976-4sm46vvttgn61htokuche51ieh5q7jsc</string>
+	<string>com.googleusercontent.apps.375478813152-s3iei6at6q8asokd2rpiglk4r80m0bi0</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDxTGyK5uPL5UO-c3lKroQ7x2pqZ-q2bxI</string>
+	<string>AIzaSyBxmOrk-Q4GVjTA7zTy6QX9pjO2f_VEzMY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>542194831976</string>
+	<string>375478813152</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.AviPogrow.NasiShadchanHelper</string>
+	<string>com.avipogrow.NasiAdmin</string>
 	<key>PROJECT_ID</key>
-	<string>nasiapp</string>
+	<string>nasidriveadmin</string>
 	<key>STORAGE_BUCKET</key>
-	<string>nasiapp.appspot.com</string>
+	<string>nasidriveadmin.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:542194831976:ios:c466c60d5573f54c70a1dd</string>
+	<string>1:375478813152:ios:17c6497e6ac7439ef4ab85</string>
 	<key>DATABASE_URL</key>
-	<string>https://nasiapp.firebaseio.com</string>
+	<string>https://nasidriveadmin.firebaseio.com</string>
 </dict>
 </plist>

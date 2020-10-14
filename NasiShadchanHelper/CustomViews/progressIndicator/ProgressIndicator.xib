@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProgressIndicator" customModule="cstopfollowthepast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="ZoG-en-LqC" userLabel="Conent">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <subviews>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SWf-q9-5Lf">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
+                        <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="sMQ-62-gB7" customClass="AnimationView" customModule="Lottie">
+                            <rect key="frame" x="137" y="298" width="140" height="140"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="140" id="Ur8-dK-n6b"/>
+                                <constraint firstAttribute="width" constant="140" id="hii-l7-fcN"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="loading"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="SWf-q9-5Lf" firstAttribute="top" secondItem="ZoG-en-LqC" secondAttribute="top" id="20k-hd-AHl"/>
+                        <constraint firstAttribute="trailing" secondItem="SWf-q9-5Lf" secondAttribute="trailing" id="4Yw-Cg-GZb"/>
+                        <constraint firstItem="SWf-q9-5Lf" firstAttribute="leading" secondItem="ZoG-en-LqC" secondAttribute="leading" id="Arw-Cs-kuy"/>
+                        <constraint firstItem="sMQ-62-gB7" firstAttribute="centerX" secondItem="ZoG-en-LqC" secondAttribute="centerX" id="W5D-vS-Rzf"/>
+                        <constraint firstAttribute="bottom" secondItem="SWf-q9-5Lf" secondAttribute="bottom" id="lWj-Bs-u20"/>
+                        <constraint firstItem="sMQ-62-gB7" firstAttribute="centerY" secondItem="ZoG-en-LqC" secondAttribute="centerY" id="vnI-cZ-0yJ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ZoG-en-LqC" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="9ON-3p-1d2"/>
+                <constraint firstItem="ZoG-en-LqC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eTk-sU-MEv"/>
+                <constraint firstItem="ZoG-en-LqC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hef-Sc-WtA"/>
+                <constraint firstAttribute="bottom" secondItem="ZoG-en-LqC" secondAttribute="bottom" id="oUt-ya-q1A"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="imgBackground" destination="SWf-q9-5Lf" id="hA5-hE-3hS"/>
+                <outlet property="vwAnimated" destination="sMQ-62-gB7" id="nzs-zQ-ZTz"/>
+            </connections>
+            <point key="canvasLocation" x="-627.536231884058" y="-95.380434782608702"/>
+        </view>
+    </objects>
+</document>

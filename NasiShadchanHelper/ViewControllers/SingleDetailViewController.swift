@@ -7,111 +7,104 @@
 //
 
 import UIKit
-import CoreData
+import Firebase
 
 class SingleDetailViewController: UITableViewController {
-
-    var selectedSingle: SingleGirl!
+    
+    var selectedSingle: NasiGirlsList!
     @IBOutlet weak var lookingForLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var detailImageView: UIImageView!
-    
-    
     @IBOutlet weak var familySituationLabel: UILabel!
-    
     @IBOutlet weak var contactNameLabel: UILabel!
-    
     @IBOutlet weak var contactCellLabel: UILabel!
-    
-    
     @IBOutlet weak var contactEmailLabel: UILabel!
-    
-    
     @IBOutlet weak var saveButton: UIButton!
-    
+    @IBOutlet weak var addNoteButton: UIButton!
     @IBOutlet weak var saveLabel: UILabel!
     
-    var managedObjectContext: NSManagedObjectContext!
-    
     var lastName: String = ""
+    var ref: DatabaseReference!
+    var favChildArr = [[String : String]]()
+    var arrFavGirlsList = [NasiGirlsList]()
+    
+    var isFavourite : Bool = false
+    var strChildKey : String?
+    
+    @IBOutlet weak var btnVwAllNotes: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-        detailImageView.layer.borderWidth = 4
-        detailImageView.layer.borderColor = UIColor.black.cgColor
-        detailImageView.layer.shadowRadius = 5
-        detailImageView.layer.shadowOpacity = 0.3
-        */
+        btnVwAllNotes.underline()
         
+
+                
+        navigationItem.title = "\(selectedSingle.firstNameOfGirl ?? "")" + " " + "\(selectedSingle.lastNameOfGirl ?? "")"
         
-        
-        if selectedSingle.isSaved == "true" {
-            saveButton.isEnabled = false
-            //saveButton.isHidden = true
-            saveLabel.textColor = UIColor.red
-            saveLabel.text = "Already saved to favorites"
-        }
-        
-      navigationItem.title = "\(selectedSingle.firstName)" + " " + "\(selectedSingle.lastName)"
-        
-       
-        if (selectedSingle!.briefDescription != nil) && selectedSingle.lookingFor != nil {
-        lookingForLabel.text = selectedSingle.lookingFor!
-            descriptionLabel.text = selectedSingle.briefDescription
+        if (selectedSingle!.briefDescriptionOfWhatGirlIsLike != nil) && selectedSingle.briefDescriptionOfWhatGirlIsLookingFor != nil {
+            lookingForLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLookingFor!
+            descriptionLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLike
         } else {
             lookingForLabel.text = "Placeholder for nil"
             descriptionLabel.text = "Placeholder for nil"
         }
-    
-        lastName = selectedSingle.lastName
         
-        let nameOfImage = "\(selectedSingle.imageName)"
+        lastName = selectedSingle.lastNameOfGirl ?? ""
         
-        
-        
-         let fixedImageName = nameOfImage.replacingOccurrences(of: " ", with: "")
-     
-        
-        let currentSingleImage = UIImage(named: fixedImageName)
-        
-        if currentSingleImage != nil {
-           detailImageView.image = currentSingleImage
+        if (selectedSingle.imageDownloadURLString ?? "").isEmpty {
+            detailImageView?.image = UIImage.init(named: "placeholder")
         } else {
-            detailImageView.image = UIImage(named: "face02")
+            detailImageView.loadImageFromUrl(strUrl: String(format: "%@",selectedSingle.imageDownloadURLString!), imgPlaceHolder: "placeholder")
         }
         
-        contactCellLabel.text = selectedSingle.contactCell
-        contactNameLabel.text = selectedSingle.contactName
-        contactEmailLabel.text = selectedSingle.contactEmail
-        familySituationLabel.text = selectedSingle.familySituation
         
+        print("here is", selectedSingle.documentDownloadURLString ?? "")
+        /*
+         contactCellLabel.text = selectedSingle.contactCell
+         contactNameLabel.text = selectedSingle.contactName
+         contactEmailLabel.text = selectedSingle.contactEmail
+         */
+        
+        contactCellLabel.text = selectedSingle.cellNumberOfContactToReddShidduch
+        contactNameLabel.text = selectedSingle.firstNameOfAContactWhoKnowsGirl
+        contactEmailLabel.text = selectedSingle.emailOfContactToReddShidduch
+        familySituationLabel.text = selectedSingle.girlFamilyBackground
+        
+        self.getFav()
     }
     
-    func fetchAfterSave() {
-        
-        let lastNamePredicate = NSPredicate(format: "%K == %@", #keyPath(SingleGirl.lastName), selectedSingle.lastName)
-        
-        
     
-        let request: NSFetchRequest<SingleGirl> = SingleGirl.fetchRequest()
-        
-        let ageSortDescriptor = NSSortDescriptor(key: "age", ascending: true)
-                        
-        request.sortDescriptors = [ageSortDescriptor]
-                        
-        request.predicate = lastNamePredicate
-                        
-        do {
+    
+    func fetchAfterSave() {
+        /*
+         let lastNamePredicate = NSPredicate(format: "%K == %@", #keyPath(SingleGirl.lastName), selectedSingle.lastName)
+         
+         let request: NSFetchRequest<SingleGirl> = SingleGirl.fetchRequest()
+         
+         let ageSortDescriptor = NSSortDescriptor(key: "age", ascending: true)
+         
+         request.sortDescriptors = [ageSortDescriptor]
+         
+         request.predicate = lastNamePredicate
+         
+         do {
          let results =  try managedObjectContext.fetch(request)
-            let firstResult = results.first
-            let isSaved = firstResult?.isSaved
-            print("firstResult is \(firstResult) and isSaved is \(firstResult?.isSaved)")
-        } catch {
-            print("error fetching core data")
-        }
+         let firstResult = results.first
+         let isSaved = firstResult?.isSaved
+         print("firstResult is \(firstResult) and isSaved is \(firstResult?.isSaved)")
+         } catch {
+         print("error fetching core data")
+         }*/
+    }
+    
+    
+    @IBAction func btnViewAllNotesTapped(_ sender: Any) {
+        let vcNotesList = self.storyboard?.instantiateViewController(withIdentifier: "NotesListVC") as! NotesListVC
+        vcNotesList.hidesBottomBarWhenPushed = true
+        vcNotesList.girlId = selectedSingle.currentGirlUID
+        self.navigationController?.pushViewController(vcNotesList, animated: true)
     }
     
     @IBAction func callTapped(_ sender: UIButton) {
@@ -121,55 +114,164 @@ class SingleDetailViewController: UITableViewController {
         }
     }
     
+    @IBAction func addNoteButtonTapped(_ sender: Any) {
+        let vcAddNotesVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNotesVC") as! AddNotesVC
+        vcAddNotesVC.hidesBottomBarWhenPushed = true
+        vcAddNotesVC.girlId = selectedSingle.currentGirlUID
+        vcAddNotesVC.editNote = false
+        self.navigationController?.pushViewController(vcAddNotesVC, animated: true)
+    }
     
     @IBAction func saveTapped(_ sender: Any) {
-    
-     
-        let hudView = HudView.hud(inView: navigationController!.view, animated: true)
-        hudView.text = "\(selectedSingle.firstName)-Saved"
-      
-        
-        
-    
-    do {
-        
-        selectedSingle.isSaved = "true"
-     
-        
-        try managedObjectContext.save()
-      
-        afterDelay(0.4) {
-        self.fetchAfterSave()
-        hudView.hide()
-        self.navigationController?.popViewController(animated: true)
-        }
-        
-    }  catch let error as NSError {
-
-         if error.domain == NSCocoaErrorDomain &&
-           (error.code == NSValidationNumberTooLargeError || error.code == NSValidationNumberTooSmallError) {
-       
-         } else {
-           print("Could not save \(error), \(error.userInfo)")
-         }
-       }
-        
-       
- 
-}
-    
-   
-    // MARK: - Navigation
-       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           
-       if segue.identifier == "ShowResume" {
-        let controller = segue.destination as! ResumeViewController
-           
-        controller.selectedSingle = selectedSingle
+        if isFavourite {
+            if strChildKey != nil {
+                self.removeFav()
+            }
+        } else {
+            self.saveToFav()
         }
     }
+    
+    func authLogin() {
+        let stryBoardAuth : UIStoryboard = UIStoryboard.init(name: "UserAuthentication", bundle: nil)
+        let vcNav : AuthNavViewController = stryBoardAuth.instantiateViewController(withIdentifier: "AuthNavViewController") as! AuthNavViewController
+        vcNav.providesPresentationContextTransitionStyle = true
+        vcNav.definesPresentationContext = true
+        vcNav.modalPresentationStyle = UIModalPresentationStyle.overFullScreen;
+        self.present(vcNav, animated: true, completion: nil)
+        CFRunLoopWakeUp(CFRunLoopGetCurrent());
+    }
+    
+    func saveToFav() {
+        self.view.showLoadingIndicator()
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        
+        let dict = ["userId" : selectedSingle.currentGirlUID ?? "jonny"]
+        ref.child("myFav").child(myId).childByAutoId().setValue(dict) { (error, ref) in
+            self.view.hideLoadingIndicator()
+            if error != nil {
+                //print(error?.localizedDescription ?? “”)
+            } else{
+                //print(ref.key)
+            }
+        }
+    }
+    
+    
+    func removeFav(){
+        self.view.showLoadingIndicator()
+        ref = Database.database().reference()
+        guard
+            let keyPath = strChildKey,
+            let myId = UserInfo.curentUser?.id
+            else {
+                print("invalid myID/keypath")
+                return
+        }
+        ref.child("myFav").child(myId).child(keyPath).removeValue { (error, dbRef) in
+            self.view.hideLoadingIndicator()
+            if error != nil{
+                print(error?.localizedDescription)
+            }else{
+                print(dbRef.key)
+                self.isFavourite = false
+                self.saveLabel.text = "Save to\nFavorites"
+                self.saveLabel.textColor = Constant.AppColor.colorGrey
+                // NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: nil)
+            }
+            //elf.tableView.reloadData()
+        }
+    }
+    
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowResume" {
+            if (selectedSingle.documentDownloadURLString?.isEmpty)! {
+                self.showAlert(title: Constant.ValidationMessages.oopsTitle, msg: Constant.ValidationMessages.msgDocumentUrlEmpty, onDismiss: {
+                })
+            } else {
+                let controller = segue.destination as! ResumeViewController
+                controller.selectedSingle = selectedSingle
+            }
+        }
+    }
+    
+    func getFav() {
+        self.view.showLoadingIndicator()
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        print("here is id", myId)
+        ref.child("myFav").child(myId).observe(.childAdded) { (snapShots) in
+            self.view.hideLoadingIndicator()
+            self.favChildArr.removeAll()
+            let snap = snapShots.value as? [String : Any]
+            print(snap)
+            if (snapShots.value is NSNull ) {
+                print("– – – Data was not found – – –")
+            } else {
+                var snap = snapShots.value as? [String : String]
+                snap?["child_key"] = snapShots.key as? String
+                if let dict = snap {
+                    print(dict)
+                    self.favChildArr.append(dict)
+                    self.filterFavData()
+                } else {
+                    print("not a valid data")
+                }
+            }
+        }
+        
+        if favChildArr.count > 0 {
+        } else {
+            self.view.hideLoadingIndicator()
+        }
+    }
+    
+    func filterFavData() {
+        if favChildArr.count > 0 {
+            print("here is fav child", favChildArr)
+            print("here is fav child count", favChildArr.count)
+            arrFavGirlsList.removeAll()
+            
+            let currentId = selectedSingle.currentGirlUID
+            
+            for (innerIndex,list) in favChildArr.enumerated() {
+                let userId = list["userId"]
+                let childKey = list["child_key"]
+                print("here is user id", userId ?? "")
+                print("here is child key", childKey ?? "")
+                if currentId == userId {
+                    strChildKey = childKey
+                    saveButton.isEnabled = true
+                    saveLabel.textColor = UIColor.red
+                    saveLabel.text = "Already saved\nto favorites"
+                    print("here is favouriteee")
+                    isFavourite = true
+                    break
+                }
+            }
+            
+            if isFavourite == false {
+                isFavourite = false
+                saveLabel.text = "Save to\nFavorites"
+            }
+            print("here is fav",arrFavGirlsList.count)
+        } else {
+            isFavourite = false
+            saveLabel.text = "Save to\nFavorites"
+            print("here is no fav child")
+        }
+    }
+    
+    
 }
-    
-    
-    
+
+
+
 

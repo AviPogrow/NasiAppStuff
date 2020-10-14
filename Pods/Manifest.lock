@@ -1,4 +1,9 @@
 PODS:
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
   - Firebase/Auth (6.31.1):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.9.0)
@@ -32,6 +37,10 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.1)
   - GoogleDataTransport (7.3.0):
     - nanopb (~> 1.30906.0)
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -47,22 +56,43 @@ PODS:
   - "GoogleUtilities/NSData+zlib (6.7.2)"
   - GoogleUtilities/Reachability (6.7.2):
     - GoogleUtilities/Logger
+  - GTMAppAuth (1.0.0):
+    - AppAuth/Core (~> 1.0)
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.4.0):
+    - GTMSessionFetcher/Full (= 1.4.0)
   - GTMSessionFetcher/Core (1.4.0)
+  - GTMSessionFetcher/Full (1.4.0):
+    - GTMSessionFetcher/Core (= 1.4.0)
+  - IQKeyboardManagerSwift (6.5.6)
+  - Kingfisher (5.15.3):
+    - Kingfisher/Core (= 5.15.3)
+  - Kingfisher/Core (5.15.3)
+  - KMPlaceholderTextView (1.4.0)
   - leveldb-library (1.22)
+  - lottie-ios (3.1.8)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - ObjectMapper (4.2.0)
   - PromisesObjC (1.2.10)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
+  - GoogleSignIn
+  - IQKeyboardManagerSwift
+  - Kingfisher
+  - KMPlaceholderTextView
+  - lottie-ios
+  - ObjectMapper
 
 SPEC REPOS:
   trunk:
+    - AppAuth
     - Firebase
     - FirebaseAuth
     - FirebaseCore
@@ -70,13 +100,21 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseStorage
     - GoogleDataTransport
+    - GoogleSignIn
     - GoogleUtilities
+    - GTMAppAuth
     - GTMSessionFetcher
+    - IQKeyboardManagerSwift
+    - Kingfisher
+    - KMPlaceholderTextView
     - leveldb-library
+    - lottie-ios
     - nanopb
+    - ObjectMapper
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Firebase: 658370fa0181826a74b7cfca8d68c5856ca749ae
   FirebaseAuth: 09f086fae98643f1ef235674cf3ae171ce26f5ba
   FirebaseCore: 6fb954e350af0885803d5aa49865d15d9a6b264c
@@ -84,12 +122,19 @@ SPEC CHECKSUMS:
   FirebaseDatabase: d85b47213273708e48c972012b39105f76229588
   FirebaseStorage: 33b92875a9b556824886cc7a65120c7d2cb3a8d8
   GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
+  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  Kingfisher: 2fef2f4d9e809285aff7f6195b5290520904f3fa
+  KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
 
-PODFILE CHECKSUM: 3ebf779160b8ec187b3c1208d4cb529c529f67b1
+PODFILE CHECKSUM: 9063f22472357882b3dff9ef069b00f60589faa9
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.8.4
