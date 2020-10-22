@@ -27,7 +27,7 @@ class FullTimeYeshivaViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.title = "Full Time Yeshiva"
-        
+        setBackBtn()
         arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
         arrGirlsList = self.arrGirlsList.filter { (girlList) -> Bool in
@@ -68,7 +68,10 @@ class FullTimeYeshivaViewController: UITableViewController {
         }
         
     }
-    
+     // MARK: -Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -142,14 +145,24 @@ class FullTimeYeshivaViewController: UITableViewController {
         cell.SeminaryLabel.text = model.seminaryName ?? ""  //5th Label - Seminary
         cell.parnassahPlanLabel.text = "\(model.plan ?? "")"  // 6th Label - Plan
         
+        
         if (model.imageDownloadURLString ?? "").isEmpty {
             print("this is empty....", model.imageDownloadURLString ?? "")
             cell.profileImageView?.image = UIImage.init(named: "placeholder")
         } else {
+            //  img.kf.indicatorType = .activity
             cell.profileImageView.loadImageFromUrl(strUrl: String(format: "%@",model.imageDownloadURLString!), imgPlaceHolder: "placeholder")
             print("this is not empty....", model.imageDownloadURLString ?? "")
         }
         
+        /*
+        if let imgUrl = model.imageDownloadURLString{
+             let url = URL(string: imgUrl)
+             cell.profileImageView.kf.indicatorType = .activity
+             cell.profileImageView.kf.setImage(with: url)
+           }
+        */
+
         return cell
     }
     

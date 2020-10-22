@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+
+
 class NotesListVC: UIViewController {
     
     @IBOutlet weak var tblVwNotes: UITableView!
@@ -26,6 +28,15 @@ class NotesListVC: UIViewController {
     
     func setUpUi() {
         tblVwNotes.register(NotesTableCell.self)
+         self.setBackBtn()
+    }
+    
+    @IBAction func btnAddNotesTapped(_ sender: Any) {
+        let vcAddNotesVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNotesVC") as! AddNotesVC
+        vcAddNotesVC.hidesBottomBarWhenPushed = true
+        vcAddNotesVC.girlId = girlId
+        vcAddNotesVC.editNote = false
+        self.navigationController?.pushViewController(vcAddNotesVC, animated: true)
     }
     
     func getFavUserNotes() {
@@ -73,6 +84,12 @@ class NotesListVC: UIViewController {
             self.vwBgPlaceholder.isHidden = false
         }
     }
+    
+     // MARK: -Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
 }
 
 // MARK:- TableViewDelegates&Datasource
@@ -89,12 +106,12 @@ extension NotesListVC : UITableViewDelegate,UITableViewDataSource {
         let cell = tblVwNotes.deque(NotesTableCell.self, at: indexPath)
         cell.vwBg.addRoundedViewCorners(width: 10, colorBorder: UIColor.clear)
         cell.vwBg.addDropShadow()
-        cell.vwHeaderBg.roundViewTopEdges(radius: 10)
         cell.noteLbl.text = notesArr[indexPath.row]["note"] ?? ""
         cell.deleteBtn.tag = indexPath.row
         cell.editBtn.tag = indexPath.row
         cell.deleteBtn.addTarget(self, action: #selector(deleteNote(_:)), for: .touchUpInside)
         cell.editBtn.addTarget(self, action: #selector(editNote(_:)), for: .touchUpInside)
+        
         return cell
     }
     
@@ -103,7 +120,7 @@ extension NotesListVC : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
+        return UITableView.automaticDimension
     }
     
     @objc func deleteNote(_ sender : UIButton){
@@ -135,3 +152,4 @@ extension NotesListVC : reloadNoteDelegate {
         getFavUserNotes()
     }
 }
+

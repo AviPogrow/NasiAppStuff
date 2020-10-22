@@ -34,7 +34,12 @@ class ResumeViewController: UIViewController {
         }
         
     }
-    
+     
+    // MARK: -Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+     
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
         let url = URL(string: selectedSingle.documentDownloadURLString ?? "")!
         let resumeData = try! Data(contentsOf: url)

@@ -26,6 +26,7 @@ class AddNotesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setBackBtn()
         btnDone?.setCornerRadius(radius: 8, colorBorder: .clear)
         txtVw.layer.cornerRadius = 10.0
         txtVw.layer.borderWidth = 1.0
@@ -40,6 +41,12 @@ class AddNotesVC: UIViewController {
             btnDone.setTitle("Done", for: .normal)
         }
     }
+    
+     // MARK:- Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
 }
 
 //MARK: IBActions

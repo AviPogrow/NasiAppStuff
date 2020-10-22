@@ -15,10 +15,13 @@ class ShadchanListDetailViewController: UITableViewController {
     @IBOutlet weak var addPhotoLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var lookingForLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var familySituationLabel: UILabel!
     
     var image: UIImage?
     var categoryName = "No Category"
-    
+    var selectedSingle: NasiGirlsList!
     
     @IBOutlet weak var boysTableView: UITableView!
     
@@ -26,13 +29,23 @@ class ShadchanListDetailViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setBackBtn()
         // Hide keyboard
         let gestureRecognizer = UITapGestureRecognizer(target: self,
                                                        action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
         
+        if (selectedSingle!.briefDescriptionOfWhatGirlIsLike != nil) && selectedSingle.briefDescriptionOfWhatGirlIsLookingFor != nil {
+            lookingForLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLookingFor!
+            descriptionLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLike
+        } else {
+            lookingForLabel.text = "Placeholder for nil"
+            descriptionLabel.text = "Placeholder for nil"
+        }
         
+        familySituationLabel.text = selectedSingle.girlFamilyBackground
+        //self.setBackBtn()
     }
     
     @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
@@ -48,17 +61,18 @@ class ShadchanListDetailViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) { super.viewWillAppear(animated)
-        /*
-         let imageName = selectedSingle.imageName
-         let profileImage = UIImage(named: imageName)
-         profileImageView.image = profileImage
-         
-         if selectedSingle.hasPhoto {
-         if let theImage = selectedSingle.photoImage {
-         show(image: theImage)
-         }
-         }
-         */
+        
+        if (selectedSingle.imageDownloadURLString ?? "").isEmpty {
+            profileImageView?.image = UIImage.init(named: "placeholder")
+        } else {
+            profileImageView.loadImageFromUrl(strUrl: String(format: "%@",selectedSingle.imageDownloadURLString!), imgPlaceHolder: "placeholder")
+        }
+        
+    }
+    
+     // MARK: -Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
     }
     
     @IBAction func saveTapped(_ sender: Any) {
@@ -98,7 +112,7 @@ class ShadchanListDetailViewController: UITableViewController {
         }
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 3 && indexPath.row == 0 {
             notesTextView.becomeFirstResponder()
             
         } else if indexPath.section == 1 && indexPath.row == 0 {
@@ -106,10 +120,27 @@ class ShadchanListDetailViewController: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: true)
             pickPhoto()
             
-        } else if indexPath.section == 4 && indexPath.row == 0 {
+        } else if indexPath.section == 5 && indexPath.row == 0 {
             
             presentResumeViewController()
+        } else if indexPath.section == 2 {
+            print("add notes")
+            self.openNotesListScreen()
         }
+    }
+    
+    func openNotesListScreen() {
+        let vcNotesList = self.storyboard?.instantiateViewController(withIdentifier: "NotesListVC") as! NotesListVC
+        vcNotesList.hidesBottomBarWhenPushed = true
+        vcNotesList.girlId = selectedSingle.currentGirlUID
+        self.navigationController?.pushViewController(vcNotesList, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 2 {
+            return 60
+        }
+        return 225
     }
     
     @IBAction func sendResumeTapped(_ sender: Any) {
@@ -117,11 +148,15 @@ class ShadchanListDetailViewController: UITableViewController {
     }
     
     func presentResumeViewController() {
-        let controller = storyboard!.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
-        //controller.selectedSingle = selectedSingle
-        navigationController?.pushViewController(controller, animated: true)
+        if (selectedSingle.documentDownloadURLString?.isEmpty)! {
+            self.showAlert(title: Constant.ValidationMessages.oopsTitle, msg: Constant.ValidationMessages.msgDocumentUrlEmpty, onDismiss: {
+            })
+        } else {
+            let controller = storyboard!.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
+            controller.selectedSingle = selectedSingle
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
-    
     
     func show(image: UIImage) {
         imageView.image = image
@@ -205,6 +240,7 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
         present(alert, animated: true, completion: nil)
     }
     
+    
     // MARK:- Image Picker Delegates
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -219,7 +255,6 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
     
 }
 

@@ -15,6 +15,21 @@ extension UIViewController {
         }))
         self.present(alertControler,animated:true, completion:nil)
     }
+    
+    func setBackBtn() {
+        let btn = UIBarButtonItem(image: UIImage.init(named: "imgBack"), style: .plain, target: self, action: #selector(back))
+        /*
+         self.navigationController?.navigationBar.shadowImage = UIImage()
+         self.navigationController?.navigationBar.backgroundColor = .clear
+         */
+        btn.tintColor = .white
+       // self.navigationItem.leftBarButtonItem  = btn
+    }
+    
+    @objc func back() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
 
 //MARK: -CALayer
@@ -159,23 +174,23 @@ extension String {
     var isSingleEmoji: Bool {
         return count == 1 && containsEmoji
     }
-
+    
     var containsEmoji: Bool {
         return contains { $0.isEmoji }
     }
-
+    
     var containsOnlyEmoji: Bool {
         return !isEmpty && !contains { !$0.isEmoji }
     }
-
+    
     var emojiString: String {
         return emojis.map { String($0) }.reduce("", +)
     }
-
+    
     var emojis: [Character] {
         return filter { $0.isEmoji }
     }
-
+    
     var emojiScalars: [UnicodeScalar] {
         return filter{ $0.isEmoji }.flatMap { $0.unicodeScalars }
     }
@@ -199,27 +214,29 @@ extension UIScreen {
 
 extension Date {
     func toString(formaterStyle:String) -> String {
-          let dateFormater = DateFormatter.init()
-          dateFormater.dateFormat = formaterStyle
-          return dateFormater.string(from: self)
-      }
+        let dateFormater = DateFormatter.init()
+        dateFormater.dateFormat = formaterStyle
+        return dateFormater.string(from: self)
+    }
     
     var daysInMonth:Int{
-          let calendar = Calendar.current
-          
-          let dateComponents = DateComponents(year: calendar.component(.year, from: self), month: calendar.component(.month, from: self))
-          let date = calendar.date(from: dateComponents)!
-          
-          let range = calendar.range(of: .day, in: .month, for: date)!
-          let numDays = range.count
-          
-          return numDays
-      }
+        let calendar = Calendar.current
+        
+        let dateComponents = DateComponents(year: calendar.component(.year, from: self), month: calendar.component(.month, from: self))
+        let date = calendar.date(from: dateComponents)!
+        
+        let range = calendar.range(of: .day, in: .month, for: date)!
+        let numDays = range.count
+        
+        return numDays
+    }
 }
 
 //MARK: -UIImageView
 extension UIImageView {
     func loadImageFromUrl(strUrl : String, imgPlaceHolder : String) {
+        self.kf.indicatorType = .activity
+        
         self.kf.setImage(with: URL.init(string: strUrl), options: [.transition(.fade(0.15))]) { result in
             switch result {
             case .success(let _):
@@ -449,9 +466,9 @@ extension String {
         return String(self.filter { !"\n".contains($0) })
     }
     
-//    func toDouble() -> Double? {
-//        return NumberFormatter().number(from: self)?.doubleValue
-//    }
+    //    func toDouble() -> Double? {
+    //        return NumberFormatter().number(from: self)?.doubleValue
+    //    }
     
     public func toDouble() -> Double?{
         if let num = NumberFormatter().number(from: self) {
@@ -460,8 +477,8 @@ extension String {
             return nil
         }
     }
-        
-
+    
+    
     //Config file methods
     func sliceString(strXmlTag: String) -> String? {
         let strFrom = strXmlTag.xmlStartTag()
@@ -503,13 +520,13 @@ extension String {
         
         return self.replacingOccurrences(of: strSlice, with:"")
     }
-
+    
     
     
     func removingWhitespaces() -> String {
         return components(separatedBy: .whitespaces).joined()
     }
-        
+    
     
     func utcDateFromString() -> Date? {
         let dateFormatter = DateFormatter()
@@ -584,7 +601,7 @@ extension UIButton {
         
         self.setAttributedTitle(attributedString, for: .normal)
     }
-
+    
 }
 
 //MARK: UIStoryboard

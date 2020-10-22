@@ -16,4 +16,5 @@ pod 'lottie-ios'
 pod 'GoogleSignIn'
 pod 'IQKeyboardManagerSwift'
 pod 'KMPlaceholderTextView'
+pod 'AAFloatingButton'
 end

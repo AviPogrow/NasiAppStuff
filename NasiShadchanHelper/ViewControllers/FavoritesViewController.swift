@@ -31,7 +31,6 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         navigationItem.title = "My Saved Nasi Singles"
         
         NotificationCenter.default.addObserver(self, selector: #selector(favouriteRemovedByUser(notificationReceived:)), name: Constant.EventNotifications.notifRemoveFromFav, object: nil)
-
         
         var cellNib = UINib(nibName: TableView.CellIdentifiers.savedSingleCell, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.savedSingleCell)
@@ -39,6 +38,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         self.vwNoDataFound.isHidden = true
+        self.updateFav()
         self.getFav()
     }
     
@@ -46,13 +46,13 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewWillAppear(animated)
     }
     
-    //MARK: Selectors
+    // MARK:- Selectors
     @objc func favouriteRemovedByUser(notificationReceived : Notification) {
          self.getFav()
     }
 
-    func getFav() {
-        self.view.showLoadingIndicator()
+  func getFav() {
+       // self.view.showLoadingIndicator()
         ref = Database.database().reference()
         guard let myId = UserInfo.curentUser?.id else {
             return
@@ -79,12 +79,49 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         
-        
+        /*
         if favChildArr.count > 0 {
-            
+            self.tableView.isHidden = false
+            self.lblNoDataFound.isHidden = true
         } else {
+             self.view.hideLoadingIndicator()
+            self.tableView.isHidden = true
+            self.lblNoDataFound.isHidden = false
+        }*/
+    }
+    
+    func updateFav(){
+      //  self.view.showLoadingIndicator()
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        ref.child("myFav").child(myId).observe(.childRemoved) { (snapShots) in
             self.view.hideLoadingIndicator()
-            self.filterFavData()
+            //            self.favChildArr.removeAll()
+            let snap = snapShots.value as? [String : Any]
+            print(snap)
+            if (snapShots.value is NSNull ) {
+                print("– – – Data was not found – – –")
+            } else {
+                var snap = snapShots.value as? [String : String]
+                snap?["child_key"] = snapShots.key as? String
+                if let dict = snap {
+                    print(dict)
+                    if self.favChildArr.contains(dict) {
+                        guard let idx = self.favChildArr.firstIndex(of: dict) else{
+                            print("nnn--")
+                            return
+                        }
+                        self.favChildArr.remove(at: idx)
+                    }
+                    self.arrFavGirlsList.removeAll()
+                    //                    self.favChildArr.append(dict)
+                    self.filterFavData()
+                } else {
+                    print("not a valid data")
+                }
+            }
         }
     }
     
@@ -144,9 +181,14 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "ShowDetail", sender: indexPath)
+        /*
         let vcSingleDetail = self.storyboard?.instantiateViewController(withIdentifier: "SingleDetailViewController") as! SingleDetailViewController
         vcSingleDetail.selectedSingle = arrFavGirlsList[indexPath.row]
+        vcSingleDetail.isFromFav = true
+        vcSingleDetail.delegate = self
         self.navigationController?.pushViewController(vcSingleDetail, animated: true)
+         */
     }
     
     // MARK: - Navigation
@@ -154,17 +196,29 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*
-         if segue.identifier == "ShowDetail" {
-         let detailViewController = segue.destination as! ShadchanListDetailViewController
-         let indexPath = sender as! IndexPath
-         let selectedSingle = fetchedResultsController.object(at: indexPath)
-         detailViewController.selectedSingle = selectedSingle
-         }*/
+        
+        if segue.identifier == "ShowDetail" {
+            let detailViewController = segue.destination as! ShadchanListDetailViewController
+            let indexPath = sender as! IndexPath
+            detailViewController.selectedSingle = arrFavGirlsList[indexPath.row]
+        }
+    }
+     // MARK: -Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0001
     }
     
+}
+extension FavoritesViewController : reloadDataDelegate{
+       func reloadData(isTrue: Bool) {
+          if isTrue{
+            self.navigationController?.popViewController(animated: true)
+            updateFav()
+          }
+    }
+
 }

@@ -51,9 +51,11 @@ class LoginVC: UIViewController {
             }
         }
         
+        #if DEBUG
         self.tfEmail.text = "softradix454545@gmail.com"
         //"softradix@gmail.com"
         self.tfPassword.text = "qwertyuiop"
+         #endif
         self.view.layoutIfNeeded()
     }
     

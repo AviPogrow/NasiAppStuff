@@ -20,10 +20,10 @@ class SingleTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer.masksToBounds = true
+        /*layer.masksToBounds = true
         layer.cornerRadius = 11.0
         layer.borderColor = UIColor.darkGray.cgColor
-        layer.borderWidth = 0.35
+        layer.borderWidth = 0.35*/
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

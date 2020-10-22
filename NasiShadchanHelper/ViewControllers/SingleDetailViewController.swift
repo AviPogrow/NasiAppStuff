@@ -8,7 +8,9 @@
 
 import UIKit
 import Firebase
-
+protocol reloadDataDelegate {
+    func reloadData(isTrue : Bool)
+}
 class SingleDetailViewController: UITableViewController {
     
     var selectedSingle: NasiGirlsList!
@@ -21,7 +23,6 @@ class SingleDetailViewController: UITableViewController {
     @IBOutlet weak var contactCellLabel: UILabel!
     @IBOutlet weak var contactEmailLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var addNoteButton: UIButton!
     @IBOutlet weak var saveLabel: UILabel!
     
     var lastName: String = ""
@@ -31,16 +32,12 @@ class SingleDetailViewController: UITableViewController {
     
     var isFavourite : Bool = false
     var strChildKey : String?
+    var isFromFav : Bool = false
+    var delegate : reloadDataDelegate?
     
-    @IBOutlet weak var btnVwAllNotes: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        btnVwAllNotes.underline()
-        
-
-                
         navigationItem.title = "\(selectedSingle.firstNameOfGirl ?? "")" + " " + "\(selectedSingle.lastNameOfGirl ?? "")"
         
         if (selectedSingle!.briefDescriptionOfWhatGirlIsLike != nil) && selectedSingle.briefDescriptionOfWhatGirlIsLookingFor != nil {
@@ -58,8 +55,6 @@ class SingleDetailViewController: UITableViewController {
         } else {
             detailImageView.loadImageFromUrl(strUrl: String(format: "%@",selectedSingle.imageDownloadURLString!), imgPlaceHolder: "placeholder")
         }
-        
-        
         print("here is", selectedSingle.documentDownloadURLString ?? "")
         /*
          contactCellLabel.text = selectedSingle.contactCell
@@ -75,6 +70,15 @@ class SingleDetailViewController: UITableViewController {
         self.getFav()
     }
     
+     // MARK: -Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setBackBtn()
+    }
     
     
     func fetchAfterSave() {
@@ -182,6 +186,11 @@ class SingleDetailViewController: UITableViewController {
                 self.saveLabel.textColor = Constant.AppColor.colorGrey
                 // NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: nil)
             }
+            if self.isFromFav{
+                self.delegate?.reloadData(isTrue: true)
+            }else{
+                self.delegate?.reloadData(isTrue: false)
+            }
             //elf.tableView.reloadData()
         }
     }
@@ -268,8 +277,6 @@ class SingleDetailViewController: UITableViewController {
             print("here is no fav child")
         }
     }
-    
-    
 }
 
 

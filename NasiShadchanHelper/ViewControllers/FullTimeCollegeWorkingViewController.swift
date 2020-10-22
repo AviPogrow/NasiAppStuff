@@ -29,7 +29,7 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
+        setBackBtn()
         arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
         arrGirlsList = self.arrGirlsList.filter { (girlList) -> Bool in
@@ -56,6 +56,10 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .highlighted)
     }
     
+     // MARK: -Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
     
     @IBAction func segmentControlTapped(_ sender: UISegmentedControl) {
@@ -113,15 +117,9 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         //cell.proPlanLabel.text = currentGirl.city
         
         // 6th Label - Pro Track
-        
-        
         // 6th Label Kovea Ittim
         if currentGirl.koveahIttim == "do not need koveah ittim" {
-            
             cell.koveahIttimLabel.backgroundColor = UIColor.white
-            
-            
-            
             cell.koveahIttimLabel.textColor = segmentColor
             cell.koveahIttimLabel.text = "Doesn't need kovea ittim"
         } else {

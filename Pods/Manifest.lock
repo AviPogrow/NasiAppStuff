@@ -1,4 +1,5 @@
 PODS:
+  - AAFloatingButton (1.2)
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
@@ -80,6 +81,7 @@ PODS:
   - PromisesObjC (1.2.10)
 
 DEPENDENCIES:
+  - AAFloatingButton
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
@@ -92,6 +94,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AAFloatingButton
     - AppAuth
     - Firebase
     - FirebaseAuth
@@ -114,6 +117,7 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  AAFloatingButton: a66b3c668cce50cba0ae010383c0c9d09a74e6f5
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Firebase: 658370fa0181826a74b7cfca8d68c5856ca749ae
   FirebaseAuth: 09f086fae98643f1ef235674cf3ae171ce26f5ba
@@ -135,6 +139,6 @@ SPEC CHECKSUMS:
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
 
-PODFILE CHECKSUM: 9063f22472357882b3dff9ef069b00f60589faa9
+PODFILE CHECKSUM: 2a66b86b07b74647635261ef16fb1255fb7f0f65
 
 COCOAPODS: 1.8.4

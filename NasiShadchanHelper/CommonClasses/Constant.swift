@@ -33,7 +33,7 @@ class Constant {
         public static let msgEmailEmpty = "Please enter your Email"
         public static let msgSentPassword = "Password recovery link sent on your email"
         public static let msgEmailInvalid = "Please enter a valid registered email"
-        
+        public static let msgLogout = "Are you sure you want to log out?"
         public static let msgNotesEmpty = "Please enter a note"
     }
     

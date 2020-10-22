@@ -32,7 +32,7 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
+        setBackBtn()
         arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
         self.arrGirlsList = self.arrGirlsList.filter { (singleGirl) -> Bool in
@@ -108,9 +108,7 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         
         // 4th Label
         cell.categoryLabel.textColor = .lightGray
-        cell.categoryLabel.text = currentSingle.category ?? ""
-        
-        
+        cell.categoryLabel.text = currentSingle.category ?? ""     
         
         // 5th Label is seminary
         cell.seminaryLabel.text = currentSingle.seminaryName ?? ""

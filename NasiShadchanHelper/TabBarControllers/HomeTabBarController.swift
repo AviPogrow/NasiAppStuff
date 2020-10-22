@@ -14,6 +14,7 @@ class HomeTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBar.backgroundColor  = .white
     }
     
     //MARK:Sign In

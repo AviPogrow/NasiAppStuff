@@ -111,6 +111,10 @@ class CategoriesViewController: UIViewController {
         }
         
     }
+     // MARK: -Status Bar Style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -125,6 +129,7 @@ class CategoriesViewController: UIViewController {
             }
         }
     }
+   
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -141,3 +146,18 @@ class CategoriesViewController: UIViewController {
     }
 }
 
+// MARK:- IBActions
+extension CategoriesViewController {
+    @IBAction func btnlogoutAction(_ sender: Any) {
+        
+        
+        let alertControler = UIAlertController.init(title:"Logout", message: Constant.ValidationMessages.msgLogout, preferredStyle:.alert)
+        alertControler.addAction(UIAlertAction.init(title:"Yes", style:.default, handler: { (action) in
+            UserInfo.resetCurrentUser()
+            AppDelegate.instance().makingRootFlow(Constant.AppRootFlow.kAuthVc)
+        }))
+        alertControler.addAction(UIAlertAction.init(title:"No", style:.destructive, handler: { (action) in
+        }))
+        self.present(alertControler,animated:true, completion:nil)
+    }
+}

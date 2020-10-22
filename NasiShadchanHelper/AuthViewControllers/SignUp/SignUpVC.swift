@@ -38,12 +38,12 @@ class SignUpVC: UIViewController {
         self.tfRePassword.addLeftPadding()
         self.tfRePassword.txtConfirmtext = self.tfPassword
         
-        /*
+         #if DEBUG
          self.tfEmail.text = "softradix454545@gmail.com"
          //self.tfEmail.text = "softradix12222@gmail.com"
          self.tfPassword.text = "qwertyuiop"
          self.tfRePassword.text = "qwertyuiop"
-         */
+         #endif
         
         if AppDelegate.instance().window?.frame.size.height ?? 0.0 < 600.0 {
             self.heightTopImage.constant = 220
