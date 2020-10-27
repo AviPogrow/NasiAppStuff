@@ -45,6 +45,8 @@ class NasiGirlsList : Mappable {
     var lastNameOfAContactWhoKnowsGirl :String?
     var livingInIsrael :String?
     var professionalTrack :String?
+    var girlFamilySituation :String?
+    
     
     required init?(map: Map) {
         
@@ -86,6 +88,7 @@ class NasiGirlsList : Mappable {
         lastNameOfAContactWhoKnowsGirl <- map["lastNameOfAContactWhoKnowsGirl"]
         livingInIsrael <- map["livingInIsrael"]
         professionalTrack <- map["professionalTrack"]
+        girlFamilySituation <- map["girlFamilySituation"]
     }
 }
 

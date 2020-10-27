@@ -22,6 +22,9 @@
 		185179932525FC3E0099D65E /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 185179922525FC3E0099D65E /* loading.json */; };
 		185AB885252F20190058F41D /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AB884252F20180058F41D /* Variables.swift */; };
 		185AB887252F64580058F41D /* AddNotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AB886252F64580058F41D /* AddNotesVC.swift */; };
+		1865CB3C2542AA6E00B1272A /* FavoriteDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865CB3B2542AA6E00B1272A /* FavoriteDetailVC.swift */; };
+		1865CB3F2542AC5900B1272A /* GirlsDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865CB3D2542AC5900B1272A /* GirlsDetailTableCell.swift */; };
+		1865CB402542AC5900B1272A /* GirlsDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1865CB3E2542AC5900B1272A /* GirlsDetailTableCell.xib */; };
 		18A37FA1252F8AAD009C6BEB /* NotesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A37F9F252F8AAD009C6BEB /* NotesTableCell.swift */; };
 		18A37FA2252F8AAD009C6BEB /* NotesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A37FA0252F8AAD009C6BEB /* NotesTableCell.xib */; };
 		18A37FA4252F8C7F009C6BEB /* NotesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A37FA3252F8C7F009C6BEB /* NotesListVC.swift */; };
@@ -89,6 +92,9 @@
 		185179922525FC3E0099D65E /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		185AB884252F20180058F41D /* Variables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		185AB886252F64580058F41D /* AddNotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesVC.swift; sourceTree = "<group>"; };
+		1865CB3B2542AA6E00B1272A /* FavoriteDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDetailVC.swift; sourceTree = "<group>"; };
+		1865CB3D2542AC5900B1272A /* GirlsDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlsDetailTableCell.swift; sourceTree = "<group>"; };
+		1865CB3E2542AC5900B1272A /* GirlsDetailTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GirlsDetailTableCell.xib; sourceTree = "<group>"; };
 		18A37F9F252F8AAD009C6BEB /* NotesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableCell.swift; sourceTree = "<group>"; };
 		18A37FA0252F8AAD009C6BEB /* NotesTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesTableCell.xib; sourceTree = "<group>"; };
 		18A37FA3252F8C7F009C6BEB /* NotesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListVC.swift; sourceTree = "<group>"; };
@@ -283,6 +289,8 @@
 			children = (
 				18A37F9F252F8AAD009C6BEB /* NotesTableCell.swift */,
 				18A37FA0252F8AAD009C6BEB /* NotesTableCell.xib */,
+				1865CB3D2542AC5900B1272A /* GirlsDetailTableCell.swift */,
+				1865CB3E2542AC5900B1272A /* GirlsDetailTableCell.xib */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -407,6 +415,7 @@
 				CE428D552481482B00C34EAB /* CategoryPickerViewController.swift */,
 				185AB886252F64580058F41D /* AddNotesVC.swift */,
 				18A37FA3252F8C7F009C6BEB /* NotesListVC.swift */,
+				1865CB3B2542AA6E00B1272A /* FavoriteDetailVC.swift */,
 				CEC468E3245C90840071EC85 /* Model */,
 			);
 			path = ViewControllers;
@@ -551,6 +560,7 @@
 			files = (
 				CE75EBB3246581170056A1D7 /* wbCola.pdf in Resources */,
 				1825F9A7252C5F6B00448269 /* UserAuthentication.storyboard in Resources */,
+				1865CB402542AC5900B1272A /* GirlsDetailTableCell.xib in Resources */,
 				CE3AC08024536765006B9FEA /* LaunchScreen.storyboard in Resources */,
 				185179932525FC3E0099D65E /* loading.json in Resources */,
 				18A37FA2252F8AAD009C6BEB /* NotesTableCell.xib in Resources */,
@@ -651,6 +661,7 @@
 				18AB903C252DBACA00D9FCAB /* HomeTabBarController.swift in Sources */,
 				18A37FA4252F8C7F009C6BEB /* NotesListVC.swift in Sources */,
 				CE3AC07424536729006B9FEA /* AppDelegate.swift in Sources */,
+				1865CB3F2542AC5900B1272A /* GirlsDetailTableCell.swift in Sources */,
 				1825F9AA252C5F9500448269 /* LoginParentVC.swift in Sources */,
 				184F9859252C622B00187D72 /* AlignedPlaceholderTextField.swift in Sources */,
 				184F2F55252AE16200252C97 /* Categories.swift in Sources */,
@@ -662,6 +673,7 @@
 				184F985C252C696100187D72 /* AuthNavViewController.swift in Sources */,
 				CEC468E0245C60120071EC85 /* YeshivaAndCollegeWorkingViewController.swift in Sources */,
 				1825F9A0252C400600448269 /* SignUpVC.swift in Sources */,
+				1865CB3C2542AA6E00B1272A /* FavoriteDetailVC.swift in Sources */,
 				1851798A2525FAF20099D65E /* ProgressIndicator.swift in Sources */,
 				CE3AC0AC2454650F006B9FEA /* SingleTableViewCell.swift in Sources */,
 				CE525A702461B55300CBEC41 /* UIImage+Resize.swift in Sources */,

@@ -19,6 +19,50 @@ class ShadchanListDetailViewController: UITableViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var familySituationLabel: UILabel!
     
+    // Section 0
+    @IBOutlet weak var imgVwUserDP: UIImageView!
+    @IBOutlet weak var lblFullName: UILabel!
+
+    // Section 1
+    @IBOutlet weak var lblFirstName: UILabel!
+    @IBOutlet weak var lblMiddleName: UILabel!
+    @IBOutlet weak var lblLastName: UILabel!
+    @IBOutlet weak var lblName: UILabel!
+    
+    //Section 2
+    @IBOutlet weak var lblDob: UILabel!
+    @IBOutlet weak var lblHeightft: UILabel!
+    @IBOutlet weak var lblHeightInches: UILabel!
+    @IBOutlet weak var lblFamilySituation: UILabel!
+    @IBOutlet weak var lblYearItOccurred: UILabel!
+    @IBOutlet weak var lblGirlsCellNumber: UILabel!
+    @IBOutlet weak var lblAddress: UILabel!
+    @IBOutlet weak var lblCity: UILabel!
+    @IBOutlet weak var lblState: UILabel!
+    @IBOutlet weak var lblZip: UILabel!
+    
+    //Section 3
+    @IBOutlet weak var lblSeminary: UILabel!
+    @IBOutlet weak var lblLookingForBriefDescrp: UILabel!
+    @IBOutlet weak var lblBriefDescrp: UILabel! //Brief Description of what she is like
+    @IBOutlet weak var lblPlan: UILabel!
+    @IBOutlet weak var lblLivingInIsrael: UILabel!
+    @IBOutlet weak var lblFamilyBg: UILabel!
+    
+    //Section 4
+    @IBOutlet weak var lblLastNameToRed: UILabel!
+    @IBOutlet weak var lblFirstNameToRed: UILabel!
+    @IBOutlet weak var lblCellNumberToRed: UILabel!
+    @IBOutlet weak var lblEmailToRed: UILabel!
+    
+    //Section 5
+    @IBOutlet weak var lblContactLastName: UILabel!
+    @IBOutlet weak var lblContactFirstName: UILabel!
+    @IBOutlet weak var lblContactCell: UILabel!
+    @IBOutlet weak var lblContactEmail: UILabel!
+    @IBOutlet weak var lblContactRelationshipToSingle: UILabel!
+    
+    
     var image: UIImage?
     var categoryName = "No Category"
     var selectedSingle: NasiGirlsList!
@@ -30,23 +74,97 @@ class ShadchanListDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setBackBtn()
-        // Hide keyboard
-        let gestureRecognizer = UITapGestureRecognizer(target: self,
-                                                       action: #selector(hideKeyboard))
-        gestureRecognizer.cancelsTouchesInView = false
-        tableView.addGestureRecognizer(gestureRecognizer)
         
-        if (selectedSingle!.briefDescriptionOfWhatGirlIsLike != nil) && selectedSingle.briefDescriptionOfWhatGirlIsLookingFor != nil {
-            lookingForLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLookingFor!
-            descriptionLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLike
+        // Hide keyboard
+        /*
+         let gestureRecognizer = UITapGestureRecognizer(target: self,
+         action: #selector(hideKeyboard))
+         gestureRecognizer.cancelsTouchesInView = false
+         tableView.addGestureRecognizer(gestureRecognizer)
+         */
+        
+        /*
+         if (selectedSingle!.briefDescriptionOfWhatGirlIsLike != nil) && selectedSingle.briefDescriptionOfWhatGirlIsLookingFor != nil {
+         lookingForLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLookingFor!
+         descriptionLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLike
+         } else {
+         lookingForLabel.text = "Placeholder for nil"
+         descriptionLabel.text = "Placeholder for nil"
+         }*/
+        
+        //self.setBackBtn()
+        self.setUpProfilePhoto()
+        self.setUpFirstSection()
+        self.setUpSecondSection()
+        self.setUpThirdSection()
+        self.setUpForthSection()
+        self.setUpFifthSection()
+    }
+    
+    func setUpProfilePhoto() {
+        if (selectedSingle.imageDownloadURLString ?? "").isEmpty {
+            imgVwUserDP?.image = UIImage.init(named: "placeholder")
         } else {
-            lookingForLabel.text = "Placeholder for nil"
-            descriptionLabel.text = "Placeholder for nil"
+            imgVwUserDP.loadImageFromUrl(strUrl: String(format: "%@",selectedSingle.imageDownloadURLString!), imgPlaceHolder: "placeholder")
         }
         
-        familySituationLabel.text = selectedSingle.girlFamilyBackground
-        //self.setBackBtn()
+        lblFullName?.text =  "\(selectedSingle.firstNameOfGirl ?? "")" + " "  + "\(selectedSingle.lastNameOfGirl ?? "")" //top 1 name
+
     }
+    
+    func setUpFirstSection() {
+        lblFirstName?.text = selectedSingle.firstNameOfGirl ?? ""
+        lblMiddleName.text = selectedSingle.middleNameOfGirl ?? ""
+        lblLastName.text = selectedSingle.lastNameOfGirl ?? ""
+        lblName.text = selectedSingle.nameSheIsCalledOrKnownBy ?? ""
+    }
+    
+    func setUpSecondSection() {
+        lblDob?.text = "\(selectedSingle.dateOfBirth ?? 0.0)"
+        /*
+        lblHeightft.text = selectedSingle.heightInFeet ?? ""
+        lblHeightInches.text = selectedSingle.heightInInches ?? ""
+        */
+        
+        lblFamilySituation.text = selectedSingle.girlFamilySituation ?? ""
+        lblYearItOccurred.text = selectedSingle.yearsOfLearning ?? ""
+        lblGirlsCellNumber.text = selectedSingle.girlsCellNumber ?? ""
+        lblAddress.text = "Address - Need to discuss"
+        lblCity.text = selectedSingle.cityOfResidence ?? ""
+        lblState.text = selectedSingle.stateOfResidence ?? ""
+        lblZip.text = selectedSingle.zipCode ?? ""
+        
+        let heightInFt = selectedSingle.heightInFeet ?? ""
+        let heightInInches = selectedSingle.heightInInches ?? ""
+        let height = "\(heightInFt)\'" + "\(heightInInches)\""
+        lblHeightft.text = height
+
+    }
+    
+    func setUpThirdSection() {
+        lblSeminary?.text = "\(selectedSingle.seminaryName ?? "")"
+        lblLookingForBriefDescrp?.text = "\(selectedSingle.briefDescriptionOfWhatGirlIsLookingFor ?? "")"
+        lblBriefDescrp?.text = "\(selectedSingle.briefDescriptionOfWhatGirlIsLookingFor ?? "")"
+        lblPlan?.text = "\(selectedSingle.plan ?? "")"
+        lblLivingInIsrael?.text = "\(selectedSingle.livingInIsrael ?? "")"
+        lblFamilyBg?.text = "\(selectedSingle.girlFamilyBackground ?? "")"
+    }
+    
+    func setUpForthSection() {
+        lblLastNameToRed?.text = "\(selectedSingle.lastNameOfPersonToContactToReddShidduch ?? "")"
+        lblFirstNameToRed?.text = "\(selectedSingle.firstNameOfPersonToContactToReddShidduch ?? "")"
+        lblCellNumberToRed.text = selectedSingle.cellNumberOfContactToReddShidduch ?? ""
+        lblEmailToRed.text = selectedSingle.emailOfContactToReddShidduch
+    }
+    
+    func setUpFifthSection() {
+        lblContactLastName?.text = "\(selectedSingle.lastNameOfAContactWhoKnowsGirl ?? "")"
+        lblContactFirstName?.text = "\(selectedSingle.firstNameOfAContactWhoKnowsGirl ?? "")"
+        lblContactCell.text = selectedSingle.cellNumberOfContactWhoKNowsGirl ?? ""
+        lblContactEmail.text = selectedSingle.emailOfContactWhoKnowsGirl ?? ""
+        lblContactRelationshipToSingle.text = selectedSingle.relationshipOfThisContactToGirl ?? ""
+    }
+    
     
     @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
         
@@ -62,15 +180,16 @@ class ShadchanListDetailViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) { super.viewWillAppear(animated)
         
-        if (selectedSingle.imageDownloadURLString ?? "").isEmpty {
-            profileImageView?.image = UIImage.init(named: "placeholder")
-        } else {
-            profileImageView.loadImageFromUrl(strUrl: String(format: "%@",selectedSingle.imageDownloadURLString!), imgPlaceHolder: "placeholder")
-        }
+        /*
+         if (selectedSingle.imageDownloadURLString ?? "").isEmpty {
+         profileImageView?.image = UIImage.init(named: "placeholder")
+         } else {
+         profileImageView.loadImageFromUrl(strUrl: String(format: "%@",selectedSingle.imageDownloadURLString!), imgPlaceHolder: "placeholder")
+         }*/
         
     }
     
-     // MARK: -Status Bar Style
+    // MARK: -Status Bar Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -112,21 +231,23 @@ class ShadchanListDetailViewController: UITableViewController {
         }
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 && indexPath.row == 0 {
-            notesTextView.becomeFirstResponder()
-            
-        } else if indexPath.section == 1 && indexPath.row == 0 {
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-            pickPhoto()
-            
-        } else if indexPath.section == 5 && indexPath.row == 0 {
-            
-            presentResumeViewController()
-        } else if indexPath.section == 2 {
-            print("add notes")
-            self.openNotesListScreen()
-        }
+        /*
+         if indexPath.section == 3 && indexPath.row == 0 {
+         notesTextView.becomeFirstResponder()
+         
+         } else if indexPath.section == 1 && indexPath.row == 0 {
+         
+         tableView.deselectRow(at: indexPath, animated: true)
+         pickPhoto()
+         
+         } else if indexPath.section == 5 && indexPath.row == 0 {
+         
+         presentResumeViewController()
+         } else if indexPath.section == 2 {
+         print("add notes")
+         self.openNotesListScreen()
+         }*/
+        
     }
     
     func openNotesListScreen() {
@@ -137,10 +258,21 @@ class ShadchanListDetailViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 2 {
-            return 60
+        if indexPath.section == 1 || indexPath.section == 2  || indexPath.section == 3 || indexPath.section == 4  || indexPath.section == 5 {
+            return UITableView.automaticDimension
         }
-        return 225
+        else if indexPath.section == 8 {
+            return 60
+        } else if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                 return 225
+            } else if indexPath.row == 1 {
+                return 60
+            } else if indexPath.row == 2 {
+                return 140
+            }
+        }
+       return UITableView.automaticDimension
     }
     
     @IBAction func sendResumeTapped(_ sender: Any) {

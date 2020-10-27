@@ -182,13 +182,19 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "ShowDetail", sender: indexPath)
+        
+        /*
+        let vcFavDetail = self.storyboard?.instantiateViewController(withIdentifier: "FavoriteDetailVC") as! FavoriteDetailVC
+        self.navigationController?.pushViewController(vcFavDetail, animated: true)
+        */
         /*
         let vcSingleDetail = self.storyboard?.instantiateViewController(withIdentifier: "SingleDetailViewController") as! SingleDetailViewController
         vcSingleDetail.selectedSingle = arrFavGirlsList[indexPath.row]
         vcSingleDetail.isFromFav = true
         vcSingleDetail.delegate = self
         self.navigationController?.pushViewController(vcSingleDetail, animated: true)
-         */
+ */
+         
     }
     
     // MARK: - Navigation
