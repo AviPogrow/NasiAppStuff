@@ -62,15 +62,17 @@ class SingleDetailViewController: UITableViewController {
          contactEmailLabel.text = selectedSingle.contactEmail
          */
         
-        contactCellLabel.text = selectedSingle.cellNumberOfContactToReddShidduch
-        contactNameLabel.text = selectedSingle.firstNameOfAContactWhoKnowsGirl
-        contactEmailLabel.text = selectedSingle.emailOfContactToReddShidduch
-        familySituationLabel.text = selectedSingle.girlFamilyBackground
+        /*
+         contactCellLabel.text = selectedSingle.cellNumberOfContactToReddShidduch
+         contactNameLabel.text = selectedSingle.firstNameOfAContactWhoKnowsGirl
+         contactEmailLabel.text = selectedSingle.emailOfContactToReddShidduch
+         familySituationLabel.text = selectedSingle.girlFamilyBackground
+         */
         
         self.getFav()
     }
     
-     // MARK: -Status Bar Style
+    // MARK: -Status Bar Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
