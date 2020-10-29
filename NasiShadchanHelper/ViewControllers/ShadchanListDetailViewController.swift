@@ -14,7 +14,6 @@ class ShadchanListDetailViewController: UITableViewController {
     // ----------------------------------
     // MARK: - IB-OUTLET(S)
     //
-    
     // Section 1
     @IBOutlet weak var imgVwUserDP: UIImageView!
     @IBOutlet weak var lblFullName: UILabel!
@@ -26,8 +25,6 @@ class ShadchanListDetailViewController: UITableViewController {
     @IBOutlet weak var imgPlusIcn: UIImageView!
     @IBOutlet weak var lblAddMore: UILabel!
     @IBOutlet weak var btnCamera: UIButton!
-    @IBOutlet weak var addPhotoLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
     
     // Section 2
     @IBOutlet weak var lblFirstName: UILabel!
@@ -80,7 +77,6 @@ class ShadchanListDetailViewController: UITableViewController {
         self.getFavUserNote()
         self.getPrevImages()
         // Hide keyboard
-        
         let gestureRecognizer = UITapGestureRecognizer(target: self,
                                                        action: #selector(hideKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
@@ -110,18 +106,21 @@ class ShadchanListDetailViewController: UITableViewController {
     // ----------------------------------
     // MARK: - PRIVATE METHOD(S) -
     //
-
-    func setBackBarButton() {
+    
+    //TODO: Set Back Bar Button
+    private func setBackBarButton() {
         let btn = UIBarButtonItem(image: UIImage.init(named: "imgBack"), style: .plain, target: self, action: #selector(back))
         btn.tintColor = .black
         self.navigationItem.leftBarButtonItem  = btn
     }
     
+    //TODO: Back Button Action
     @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func setUpProfilePhoto() {
+    //TODO: Initialize Data
+    private func setUpProfilePhoto() {
         if (selectedSingle.imageDownloadURLString ?? "").isEmpty {
             imgVwUserDP?.image = UIImage.init(named: "placeholder")
         } else {
@@ -145,6 +144,59 @@ class ShadchanListDetailViewController: UITableViewController {
         vwBgForAddPhoto.addGestureRecognizer(gestureRecognizer)
     }
     
+    //TODO: SetUp Data For Girls name Section
+    private func setUpFirstSection() {
+        lblFirstName?.text = selectedSingle.firstNameOfGirl ?? ""
+        lblMiddleName.text = selectedSingle.middleNameOfGirl ?? ""
+        lblLastName.text = selectedSingle.lastNameOfGirl ?? ""
+        lblName.text = selectedSingle.nameSheIsCalledOrKnownBy ?? ""
+    }
+    
+    //TODO: SetUp Data For Girls details Section
+    private func setUpSecondSection() {
+        lblDob?.text = "\(selectedSingle.dateOfBirth ?? 0.0)"
+        lblFamilySituation.text = selectedSingle.girlFamilySituation ?? ""
+        lblYearItOccurred.text = selectedSingle.yearsOfLearning ?? ""
+        lblGirlsCellNumber.text = selectedSingle.girlsCellNumber ?? ""
+        lblAddress.text = "Address - Need to discuss"
+        lblCity.text = selectedSingle.cityOfResidence ?? ""
+        lblState.text = selectedSingle.stateOfResidence ?? ""
+        lblZip.text = selectedSingle.zipCode ?? ""
+        
+        let heightInFt = selectedSingle.heightInFeet ?? ""
+        let heightInInches = selectedSingle.heightInInches ?? ""
+        let height = "\(heightInFt)\'" + "\(heightInInches)\""
+        lblHeightft.text = height
+        
+    }
+    
+    //TODO: SetUp Data For Shidduch details Section
+    private func setUpThirdSection() {
+        lblSeminary?.text = "\(selectedSingle.seminaryName ?? "")"
+        lblLookingForBriefDescrp?.text = "\(selectedSingle.briefDescriptionOfWhatGirlIsLookingFor ?? "")"
+        lblBriefDescrp?.text = "\(selectedSingle.briefDescriptionOfWhatGirlIsLookingFor ?? "")"
+        lblPlan?.text = "\(selectedSingle.plan ?? "")"
+        lblLivingInIsrael?.text = "\(selectedSingle.livingInIsrael ?? "")"
+        lblFamilyBg?.text = "\(selectedSingle.girlFamilyBackground ?? "")"
+    }
+    
+    //TODO: SetUp Data For To redd a shidduch Section
+    private func setUpForthSection() {
+        lblLastNameToRed?.text = "\(selectedSingle.lastNameOfPersonToContactToReddShidduch ?? "")"
+        lblFirstNameToRed?.text = "\(selectedSingle.firstNameOfPersonToContactToReddShidduch ?? "")"
+        lblCellNumberToRed.text = selectedSingle.cellNumberOfContactToReddShidduch ?? ""
+        lblEmailToRed.text = selectedSingle.emailOfContactToReddShidduch
+    }
+    
+    //TODO: SetUp Data For To discuss a shidduch Section
+    private func setUpFifthSection() {
+        lblContactLastName?.text = "\(selectedSingle.lastNameOfAContactWhoKnowsGirl ?? "")"
+        lblContactFirstName?.text = "\(selectedSingle.firstNameOfAContactWhoKnowsGirl ?? "")"
+        lblContactCell.text = selectedSingle.cellNumberOfContactWhoKNowsGirl ?? ""
+        lblContactEmail.text = selectedSingle.emailOfContactWhoKnowsGirl ?? ""
+        lblContactRelationshipToSingle.text = selectedSingle.relationshipOfThisContactToGirl ?? ""
+    }
+    
     @objc func openGalleryPicker(_ gestureRecognizer: UIGestureRecognizer) {
         self.showPhotoMenu()
     }
@@ -154,7 +206,6 @@ class ShadchanListDetailViewController: UITableViewController {
             self.showAlert(title: Constant.ValidationMessages.oopsTitle, msg: Constant.ValidationMessages.msgNotesEmpty) {
             }
         } else {
-            //      self.navigationController?.popViewController(animated: true)
             guard
                 let myId = UserInfo.curentUser?.id,
                 let gId = selectedSingle.currentGirlUID,
@@ -171,7 +222,6 @@ class ShadchanListDetailViewController: UITableViewController {
                 }else{
                     print("success")
                     print(dbRef.key ?? "dbKey")
-                    //          self.navigationController?.popViewController(animated: true)
                 }
             }
         }
@@ -230,6 +280,48 @@ class ShadchanListDetailViewController: UITableViewController {
         
     }
     
+    @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+        
+        let point = gestureRecognizer.location(in: tableView)
+        
+        let indexPath = tableView.indexPathForRow(at: point)
+        if indexPath != nil && indexPath!.section == 2
+            && indexPath!.row == 0 {
+            return
+        }
+        notesTextView.resignFirstResponder()
+    }
+    
+    func openNotesListScreen() {
+        let vcNotesList = self.storyboard?.instantiateViewController(withIdentifier: "NotesListVC") as! NotesListVC
+        vcNotesList.hidesBottomBarWhenPushed = true
+        vcNotesList.girlId = selectedSingle.currentGirlUID
+        self.navigationController?.pushViewController(vcNotesList, animated: true)
+    }
+    
+    func presentResumeViewController() {
+        if (selectedSingle.documentDownloadURLString?.isEmpty)! {
+            self.showAlert(title: Constant.ValidationMessages.oopsTitle, msg: Constant.ValidationMessages.msgDocumentUrlEmpty, onDismiss: {
+            })
+        } else {
+            let controller = storyboard!.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
+            controller.selectedSingle = selectedSingle
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    func show(image: UIImage) {
+        imgVwAddMore.image = image
+        imgVwAddMore.isHidden = false
+        imgPlusIcn.isHidden = true
+        lblAddMore.isHidden = true
+        tableView.reloadData()
+    }
+}
+// ----------------------------------
+// MARK: - UIActivityViewController -
+//
+extension ShadchanListDetailViewController {
     func shareResumeAndPhotos() {
         
         let url = URL(string: selectedSingle.documentDownloadURLString ?? "")!
@@ -289,86 +381,37 @@ class ShadchanListDetailViewController: UITableViewController {
         
     }
     
-    func setUpFirstSection() {
-        lblFirstName?.text = selectedSingle.firstNameOfGirl ?? ""
-        lblMiddleName.text = selectedSingle.middleNameOfGirl ?? ""
-        lblLastName.text = selectedSingle.lastNameOfGirl ?? ""
-        lblName.text = selectedSingle.nameSheIsCalledOrKnownBy ?? ""
+}
+
+// ----------------------------------
+// MARK: - Button Action() -
+//
+extension ShadchanListDetailViewController {
+    
+    @IBAction func sendResumeTapped(_ sender: Any) {
+        presentResumeViewController()
     }
-    
-    func setUpSecondSection() {
-        lblDob?.text = "\(selectedSingle.dateOfBirth ?? 0.0)"
-        lblFamilySituation.text = selectedSingle.girlFamilySituation ?? ""
-        lblYearItOccurred.text = selectedSingle.yearsOfLearning ?? ""
-        lblGirlsCellNumber.text = selectedSingle.girlsCellNumber ?? ""
-        lblAddress.text = "Address - Need to discuss"
-        lblCity.text = selectedSingle.cityOfResidence ?? ""
-        lblState.text = selectedSingle.stateOfResidence ?? ""
-        lblZip.text = selectedSingle.zipCode ?? ""
-        
-        let heightInFt = selectedSingle.heightInFeet ?? ""
-        let heightInInches = selectedSingle.heightInInches ?? ""
-        let height = "\(heightInFt)\'" + "\(heightInInches)\""
-        lblHeightft.text = height
-        
-    }
-    
-    func setUpThirdSection() {
-        lblSeminary?.text = "\(selectedSingle.seminaryName ?? "")"
-        lblLookingForBriefDescrp?.text = "\(selectedSingle.briefDescriptionOfWhatGirlIsLookingFor ?? "")"
-        lblBriefDescrp?.text = "\(selectedSingle.briefDescriptionOfWhatGirlIsLookingFor ?? "")"
-        lblPlan?.text = "\(selectedSingle.plan ?? "")"
-        lblLivingInIsrael?.text = "\(selectedSingle.livingInIsrael ?? "")"
-        lblFamilyBg?.text = "\(selectedSingle.girlFamilyBackground ?? "")"
-    }
-    
-    func setUpForthSection() {
-        lblLastNameToRed?.text = "\(selectedSingle.lastNameOfPersonToContactToReddShidduch ?? "")"
-        lblFirstNameToRed?.text = "\(selectedSingle.firstNameOfPersonToContactToReddShidduch ?? "")"
-        lblCellNumberToRed.text = selectedSingle.cellNumberOfContactToReddShidduch ?? ""
-        lblEmailToRed.text = selectedSingle.emailOfContactToReddShidduch
-    }
-    
-    func setUpFifthSection() {
-        lblContactLastName?.text = "\(selectedSingle.lastNameOfAContactWhoKnowsGirl ?? "")"
-        lblContactFirstName?.text = "\(selectedSingle.firstNameOfAContactWhoKnowsGirl ?? "")"
-        lblContactCell.text = selectedSingle.cellNumberOfContactWhoKNowsGirl ?? ""
-        lblContactEmail.text = selectedSingle.emailOfContactWhoKnowsGirl ?? ""
-        lblContactRelationshipToSingle.text = selectedSingle.relationshipOfThisContactToGirl ?? ""
-    }
-    
-    @IBAction func btnCameraTapped(_ sender: Any) {
-    }
-    
-    
-    @objc func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
-        
-        let point = gestureRecognizer.location(in: tableView)
-        
-        let indexPath = tableView.indexPathForRow(at: point)
-        if indexPath != nil && indexPath!.section == 2
-            && indexPath!.row == 0 {
-            return
-        }
-        notesTextView.resignFirstResponder()
-    }
-    
     
     @IBAction func saveTapped(_ sender: Any) {
         let vcResume = self.storyboard?.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
         vcResume.selectedSingle = selectedSingle
         self.navigationController?.pushViewController(vcResume, animated: true)
-        
-        /*
-         saveImage()
-         navigationController?.popViewController(animated: true)
-         */
     }
     
     @IBAction func cancel() {
         navigationController?.popViewController(animated: true)
-        
     }
+    
+    @IBAction func btnCameraTapped(_ sender: Any) {
+    }
+    
+}
+
+// ----------------------------------
+// MARK: - TableView Delegate(S) -
+//
+extension ShadchanListDetailViewController {
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 4 {
@@ -379,18 +422,10 @@ class ShadchanListDetailViewController: UITableViewController {
         }
     }
     
-    func openNotesListScreen() {
-        let vcNotesList = self.storyboard?.instantiateViewController(withIdentifier: "NotesListVC") as! NotesListVC
-        vcNotesList.hidesBottomBarWhenPushed = true
-        vcNotesList.girlId = selectedSingle.currentGirlUID
-        self.navigationController?.pushViewController(vcNotesList, animated: true)
-    }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 || indexPath.section == 2  || indexPath.section == 3 || indexPath.section == 4  || indexPath.section == 5 {
             return UITableView.automaticDimension
-        }
-        else if indexPath.section == 8 {
+        } else if indexPath.section == 8 {
             return 60
         } else if indexPath.section == 0 {
             if indexPath.row == 0 {
@@ -407,34 +442,29 @@ class ShadchanListDetailViewController: UITableViewController {
         }
         return UITableView.automaticDimension
     }
-    
-    @IBAction func sendResumeTapped(_ sender: Any) {
-        presentResumeViewController()
-    }
-    
-    func presentResumeViewController() {
-        if (selectedSingle.documentDownloadURLString?.isEmpty)! {
-            self.showAlert(title: Constant.ValidationMessages.oopsTitle, msg: Constant.ValidationMessages.msgDocumentUrlEmpty, onDismiss: {
-            })
-        } else {
-            let controller = storyboard!.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
-            controller.selectedSingle = selectedSingle
-            navigationController?.pushViewController(controller, animated: true)
-        }
-    }
-    
-    func show(image: UIImage) {
-        imgVwAddMore.image = image
-        imgVwAddMore.isHidden = false
-        imgPlusIcn.isHidden = true
-        lblAddMore.isHidden = true
-        tableView.reloadData()
-    }
 }
 
+// ----------------------------------
+// MARK: - UIImagePickerControllerDelegate -
+//
 extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    // MARK:- Image Helper Methods
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        
+        if let theImage = image {
+            show(image: theImage)
+            self.uploadImage(theImage)
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func takePhotoWithCamera() {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .camera
@@ -478,24 +508,6 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
         present(alert, animated: true, completion: nil)
     }
     
-    
-    // MARK:- Image Picker Delegates
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-        
-        if let theImage = image {
-            show(image: theImage)
-            self.uploadImage(theImage)
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     func uploadImage(_ img : UIImage) {
         uploadMedia(img) { (imgUrl) in
             guard
@@ -532,9 +544,9 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
         self.view.showLoadingIndicator()
         let uploadTask = riversRef.putData(uploadData, metadata: nil) { (metadata, error) in
             self.view.hideLoadingIndicator()
-            guard let metadata = metadata else {
+            guard metadata != nil else {
                 // Uh-oh, an error occurred!
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
                 return
             }
             riversRef.downloadURL { (url, error) in
@@ -543,7 +555,7 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
                 completion("\(downloadURL)")
             }
         }
-        let observer = uploadTask.observe(.progress) { snapshot in
+        _ = uploadTask.observe(.progress) { snapshot in
             // A progress event occurred
             let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
                 / Double(snapshot.progress!.totalUnitCount)
@@ -551,3 +563,9 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
         }
     }
 }
+
+/*
+ Please write a document that lists the files in the project that you have worked on and what their main purpose is
+ For the detail view controller in the private data base please add comments to your code
+ I would like to see what your designer’s work is like so let’s take this detail view controller in the private database and have them make a design
+ */

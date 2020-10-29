@@ -17,17 +17,20 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+   
     var favChildArr = [[String : String]]()
     var arrFavGirlsList = [NasiGirlsList]()
-    
+    var arrMainGirlsList = [NasiGirlsList]()
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var vwNoDataFound: UIView!
+    @IBOutlet weak var segmentCntrl: UISegmentedControl!
     
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setUpSegmentControlApperance()
         navigationItem.title = "My Saved Nasi Singles"
         
         NotificationCenter.default.addObserver(self, selector: #selector(favouriteRemovedByUser(notificationReceived:)), name: Constant.EventNotifications.notifRemoveFromFav, object: nil)
@@ -49,6 +52,53 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK:- Selectors
     @objc func favouriteRemovedByUser(notificationReceived : Notification) {
          self.getFav()
+    }
+    
+    func setUpSegmentControlApperance() {
+
+        
+        segmentCntrl.selectedSegmentTintColor = Constant.AppColor.colorAppTheme
+        let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white,
+                                    NSAttributedString.Key.font: Constant.AppFontHelper.defaultSemiboldFontWithSize(size: 16)]
+        segmentCntrl.setTitleTextAttributes(titleTextAttributesSelected, for:.selected)
+        
+        let titleTextAttributesDefault = [NSAttributedString.Key.foregroundColor: UIColor.black,
+                                    NSAttributedString.Key.font: Constant.AppFontHelper.defaultRegularFontWithSize(size: 16)]
+        segmentCntrl.setTitleTextAttributes(titleTextAttributesDefault, for:.normal)
+
+        UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 0
+    }
+    
+    @IBAction func segmentCntrlTapped(_ sender: UISegmentedControl) {
+        self.reloadSegmentCntrl(selectedIndex: sender.selectedSegmentIndex)
+    }
+    
+    func reloadSegmentCntrl(selectedIndex:Int) {
+        if selectedIndex == 0 {
+            arrFavGirlsList = self.arrMainGirlsList.filter { (girlList) -> Bool in
+                return girlList.category == Constant.CategoryTypeName.kPredicateString1  || girlList.category == Constant.CategoryTypeName.kPredicateString2 || girlList.category == Constant.CategoryTypeName.kPredicateString3
+            }
+            
+        } else if selectedIndex == 1 {
+            arrFavGirlsList = self.arrMainGirlsList.filter { (girlList) -> Bool in
+                return girlList.category == Constant.CategoryTypeName.kCategoryString0  || girlList.category == Constant.CategoryTypeName.kCategoryString1 || girlList.category == Constant.CategoryTypeName.kPredicateString2
+            }
+        } else if selectedIndex == 2 {
+            self.arrFavGirlsList = self.arrMainGirlsList.filter { (singleGirl) -> Bool in
+                return singleGirl.category == Constant.CategoryTypeName.kPredicateString2 || singleGirl.category == Constant.CategoryTypeName.kPredicateString3 || singleGirl.category == Constant.CategoryTypeName.kCategoryString1
+            }
+        }
+        
+        if arrFavGirlsList.count > 0 {
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.vwNoDataFound.isHidden = true
+            
+        } else {
+            self.tableView.isHidden = true
+            self.vwNoDataFound.isHidden = false
+        }
+
     }
 
   func getFav() {
@@ -79,15 +129,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         
-        /*
-        if favChildArr.count > 0 {
-            self.tableView.isHidden = false
-            self.lblNoDataFound.isHidden = true
-        } else {
-             self.view.hideLoadingIndicator()
-            self.tableView.isHidden = true
-            self.lblNoDataFound.isHidden = false
-        }*/
+        self.filterFavData()
     }
     
     func updateFav(){
@@ -116,6 +158,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
                         self.favChildArr.remove(at: idx)
                     }
                     self.arrFavGirlsList.removeAll()
+                    self.arrMainGirlsList.removeAll()
                     //                    self.favChildArr.append(dict)
                     self.filterFavData()
                 } else {
@@ -144,10 +187,12 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
                 }
             }
             
+            arrMainGirlsList = arrFavGirlsList
             print("here is fav",arrFavGirlsList.count)
-            self.tableView.reloadData()
-            self.tableView.isHidden = false
-            self.vwNoDataFound.isHidden = true
+           // self.tableView.reloadData()
+           // self.tableView.isHidden = false
+            //self.vwNoDataFound.isHidden = true
+            self.reloadSegmentCntrl(selectedIndex: 0)
             
         } else {
             self.tableView.isHidden = true

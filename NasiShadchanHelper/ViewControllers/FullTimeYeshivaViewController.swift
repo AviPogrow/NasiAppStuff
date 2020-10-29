@@ -17,15 +17,18 @@ class FullTimeYeshivaViewController: UITableViewController {
     
     var arrGirlsList = [NasiGirlsList]()
     
-    var arrOnetothreeSingleGirls = [NasiGirlsList]()
-    var arrThreeToFiveSingleGirls = [NasiGirlsList]()
+    var arrOneToFiveSingleGirls = [NasiGirlsList]()
     var arrFiveYearsSingleGirls = [NasiGirlsList]()
     var arrFiveToSevenSingleGirls = [NasiGirlsList]()
-    var arrSevenPlusSingleGirls = [NasiGirlsList]()
+    var arrFilterList = [NasiGirlsList]()
+
+    
+    @IBOutlet weak var segmentCntrl: UISegmentedControl!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setUpSegmentControlApperance()
         navigationItem.title = "Full Time Yeshiva"
         setBackBtn()
         arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
@@ -34,16 +37,12 @@ class FullTimeYeshivaViewController: UITableViewController {
             return girlList.category == Constant.CategoryTypeName.kPredicateString1  || girlList.category == Constant.CategoryTypeName.kPredicateString2 || girlList.category == Constant.CategoryTypeName.kPredicateString3
         }
         
-        arrOnetothreeSingleGirls = self.arrGirlsList.filter { (girlList) -> Bool in
-            return girlList.yearsOfLearning == "1-3"  || girlList.yearsOfLearning == "1-3:3-5" || girlList.yearsOfLearning == "1-3:3-5:5"
-        }
-        
-        arrThreeToFiveSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
-            return singleGirl.yearsOfLearning == "3-5" ||
-                singleGirl.yearsOfLearning == "1-3:3-5" ||
-                singleGirl.yearsOfLearning == "1-3:3-5:5" ||
-                singleGirl.yearsOfLearning == "3-5:5" ||
-                singleGirl.yearsOfLearning == "3-5:5:5-7"
+        arrOneToFiveSingleGirls = self.arrGirlsList.filter { (girlList) -> Bool in
+            return girlList.yearsOfLearning == "1-3"  || girlList.yearsOfLearning == "1-3:3-5" || girlList.yearsOfLearning == "1-3:3-5:5" || girlList.yearsOfLearning == "3-5" ||
+                girlList.yearsOfLearning == "1-3:3-5" ||
+                girlList.yearsOfLearning == "1-3:3-5:5" ||
+                girlList.yearsOfLearning == "3-5:5" ||
+                girlList.yearsOfLearning == "3-5:5:5-7"
         }
         
         arrFiveYearsSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
@@ -58,53 +57,64 @@ class FullTimeYeshivaViewController: UITableViewController {
             return singleGirl.yearsOfLearning == "5-7" ||
                 singleGirl.yearsOfLearning == "3-5:5:5-7" ||
                 singleGirl.yearsOfLearning == "5:5-7" ||
-                singleGirl.yearsOfLearning == "5-7:7+"
-        }
-        
-        arrSevenPlusSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
-            return singleGirl.yearsOfLearning == "7+" ||
+                singleGirl.yearsOfLearning == "5-7:7+" ||
+                singleGirl.yearsOfLearning == "7+" ||
                 singleGirl.yearsOfLearning == "5:5-7:7+" ||
                 singleGirl.yearsOfLearning == "5-7:7+"
         }
         
+        self.segmentCntrlTapped(segmentCntrl!)
+        
     }
-     // MARK: -Status Bar Style
+    
+    func setUpSegmentControlApperance() {
+        segmentCntrl.selectedSegmentTintColor = Constant.AppColor.colorAppTheme
+        let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white,
+                                           NSAttributedString.Key.font: Constant.AppFontHelper.defaultSemiboldFontWithSize(size: 16)]
+        segmentCntrl.setTitleTextAttributes(titleTextAttributesSelected, for:.selected)
+        
+        let titleTextAttributesDefault = [NSAttributedString.Key.foregroundColor: UIColor.black,
+                                          NSAttributedString.Key.font: Constant.AppFontHelper.defaultRegularFontWithSize(size: 16)]
+        segmentCntrl.setTitleTextAttributes(titleTextAttributesDefault, for:.normal)
+        
+        UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 0
+    }
+    
+    @IBAction func segmentCntrlTapped(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            arrFilterList = arrOneToFiveSingleGirls
+        } else if sender.selectedSegmentIndex == 1 {
+            arrFilterList = arrFiveYearsSingleGirls
+        } else {
+            arrFilterList = arrFiveToSevenSingleGirls
+        }
+        self.tableView.reloadData()
+    }
+
+    
+    // MARK: -Status Bar Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "1 - 3 Years of Learning"
+            return "1 - 5 Years of Learning"
         } else if section == 1 {
-            return "3 - 5 Years of Learning"
-        } else if section == 2 {
-            return "5  Years of Learning"
-        } else if section == 3 {
-            return "5 - 7 Years of Learning"
+            return "5 Years of Learning"
         } else {
-            return "7+ Years Of Learning"
+            return "5+ Years Of Learning"
         }
     }
     
     // MARK: - Table View Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return arrOnetothreeSingleGirls.count
-        } else if section == 1 {
-            return arrThreeToFiveSingleGirls.count
-        } else if section == 2 {
-            return arrFiveYearsSingleGirls.count
-        } else if section == 3  {
-            return arrFiveToSevenSingleGirls.count
-        } else {
-            return arrSevenPlusSingleGirls.count
-        }
+        return arrFilterList.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -116,18 +126,7 @@ class FullTimeYeshivaViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: singleCellIdentifier, for: indexPath) as! SingleTableViewCell
         
         var model: NasiGirlsList!
-        if indexPath.section == 0 {
-            model = arrOnetothreeSingleGirls[indexPath.row]
-        } else if indexPath.section == 1 {
-            model = arrThreeToFiveSingleGirls[indexPath.row]
-        } else if indexPath.section == 2 {
-            model = arrFiveYearsSingleGirls[indexPath.row]
-        } else if indexPath.section == 3 {
-            model = arrFiveToSevenSingleGirls[indexPath.row]
-        } else {
-            model = arrSevenPlusSingleGirls[indexPath.row]
-        }
-        
+        model = arrFilterList[indexPath.row]
         print("here is dob", model.dateOfBirth ?? "")
         
         cell.nameLabel?.text =  "\(model.firstNameOfGirl ?? "")" + " "  + "\(model.lastNameOfGirl ?? "")" //top 1 name
@@ -156,18 +155,19 @@ class FullTimeYeshivaViewController: UITableViewController {
         }
         
         /*
-        if let imgUrl = model.imageDownloadURLString{
-             let url = URL(string: imgUrl)
-             cell.profileImageView.kf.indicatorType = .activity
-             cell.profileImageView.kf.setImage(with: url)
-           }
-        */
-
+         if let imgUrl = model.imageDownloadURLString{
+         let url = URL(string: imgUrl)
+         cell.profileImageView.kf.indicatorType = .activity
+         cell.profileImageView.kf.setImage(with: url)
+         }
+         */
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+       // return 44
+        return 0
     }
     
     // MARK: - Navigation
@@ -182,17 +182,7 @@ class FullTimeYeshivaViewController: UITableViewController {
             }
             
             var currentSingle: NasiGirlsList!
-            if indexPath.section == 0 {
-                currentSingle = arrOnetothreeSingleGirls[indexPath.row]
-            } else if indexPath.section == 1 {
-                currentSingle = arrThreeToFiveSingleGirls[indexPath.row]
-            } else if indexPath.section == 2 {
-                currentSingle = arrFiveYearsSingleGirls[indexPath.row]
-            } else if indexPath.section == 3 {
-                currentSingle = arrFiveToSevenSingleGirls[indexPath.row]
-            } else {
-                currentSingle = arrSevenPlusSingleGirls[indexPath.row]
-            }
+            currentSingle = arrFilterList[indexPath.row]
             controller.selectedSingle = currentSingle
         }
     }
