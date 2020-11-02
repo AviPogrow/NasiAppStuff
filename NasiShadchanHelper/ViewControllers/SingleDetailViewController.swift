@@ -24,7 +24,22 @@ class SingleDetailViewController: UITableViewController {
     @IBOutlet weak var contactEmailLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var saveLabel: UILabel!
+    @IBOutlet weak var lblFullName: UILabel!
+
+    @IBOutlet weak var lblFamilySituation: UILabel!
+    @IBOutlet weak var lblCity: UILabel!
     
+    @IBOutlet weak var lblLookingForBriefDescrp: UILabel!
+    @IBOutlet weak var lblBriefDescrp: UILabel!
+    @IBOutlet weak var lblLivingInIsrael: UILabel!
+    @IBOutlet weak var lblFamilyBg: UILabel!
+
+    @IBOutlet weak var lblFirstName: UILabel!
+    @IBOutlet weak var lblMiddleName: UILabel!
+    @IBOutlet weak var lblLastName: UILabel!
+    @IBOutlet weak var lblName: UILabel!
+
+
     var lastName: String = ""
     var ref: DatabaseReference!
     var favChildArr = [[String : String]]()
@@ -40,13 +55,14 @@ class SingleDetailViewController: UITableViewController {
         super.viewDidLoad()
         navigationItem.title = "\(selectedSingle.firstNameOfGirl ?? "")" + " " + "\(selectedSingle.lastNameOfGirl ?? "")"
         
+        /*
         if (selectedSingle!.briefDescriptionOfWhatGirlIsLike != nil) && selectedSingle.briefDescriptionOfWhatGirlIsLookingFor != nil {
             lookingForLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLookingFor!
             descriptionLabel.text = selectedSingle.briefDescriptionOfWhatGirlIsLike
         } else {
             lookingForLabel.text = "Placeholder for nil"
             descriptionLabel.text = "Placeholder for nil"
-        }
+        }*/
         
         lastName = selectedSingle.lastNameOfGirl ?? ""
         
@@ -68,7 +84,7 @@ class SingleDetailViewController: UITableViewController {
          contactEmailLabel.text = selectedSingle.emailOfContactToReddShidduch
          familySituationLabel.text = selectedSingle.girlFamilyBackground
          */
-        
+        self.setupData()
         self.getFav()
     }
     
@@ -82,6 +98,27 @@ class SingleDetailViewController: UITableViewController {
         setBackBtn()
     }
     
+    func setupData() {
+        lblFullName?.text =  "\(selectedSingle.firstNameOfGirl ?? "")" + " "  + "\(selectedSingle.lastNameOfGirl ?? "")" //top 1 name
+        
+        lblFirstName?.text = selectedSingle.firstNameOfGirl ?? ""
+        lblMiddleName.text = selectedSingle.middleNameOfGirl ?? ""
+        lblLastName.text = selectedSingle.lastNameOfGirl ?? ""
+        
+        if (selectedSingle!.nameSheIsCalledOrKnownBy != nil) {
+            lblName.text = (selectedSingle.nameSheIsCalledOrKnownBy ?? "") + (selectedSingle.lastNameOfGirl ?? "")
+        } else {
+            lblName.text = (selectedSingle.firstNameOfGirl ?? "") + (selectedSingle.lastNameOfGirl ?? "")
+        }
+        
+        lblFamilySituation.text = selectedSingle.girlFamilySituation ?? ""
+        lblCity.text = selectedSingle.cityOfResidence ?? ""
+        
+        lblLookingForBriefDescrp?.text = "\(selectedSingle.briefDescriptionOfWhatGirlIsLookingFor ?? "")"
+        lblBriefDescrp?.text = "\(selectedSingle.briefDescriptionOfWhatGirlIsLookingFor ?? "")"
+        lblLivingInIsrael?.text = "\(selectedSingle.livingInIsrael ?? "")"
+        lblFamilyBg?.text = "\(selectedSingle.girlFamilyBackground ?? "")"
+    }
     
     func fetchAfterSave() {
         /*
@@ -194,6 +231,7 @@ class SingleDetailViewController: UITableViewController {
                 self.delegate?.reloadData(isTrue: false)
             }
             //elf.tableView.reloadData()
+            
         }
     }
     
@@ -209,6 +247,15 @@ class SingleDetailViewController: UITableViewController {
                 controller.selectedSingle = selectedSingle
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                return 435
+            }
+        }
+        return UITableView.automaticDimension
     }
     
     func getFav() {

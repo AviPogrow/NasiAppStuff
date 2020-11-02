@@ -21,13 +21,17 @@ class FullTimeYeshivaViewController: UITableViewController {
     var arrFiveYearsSingleGirls = [NasiGirlsList]()
     var arrFiveToSevenSingleGirls = [NasiGirlsList]()
     var arrFilterList = [NasiGirlsList]()
+    var arrTempFilterList = [NasiGirlsList]()
 
-    
     @IBOutlet weak var segmentCntrl: UISegmentedControl!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
+    var searchActive:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.layer.borderWidth = 1;
+        searchBar.layer.borderColor = UIColor.white.cgColor
+
         self.setUpSegmentControlApperance()
         navigationItem.title = "Full Time Yeshiva"
         setBackBtn()
@@ -185,5 +189,66 @@ class FullTimeYeshivaViewController: UITableViewController {
             currentSingle = arrFilterList[indexPath.row]
             controller.selectedSingle = currentSingle
         }
+    }
+}
+
+// MARK: - SEARCHBAR DELEGATE(S)
+extension FullTimeYeshivaViewController:UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if segmentCntrl.selectedSegmentIndex == 0 {
+            arrTempFilterList = arrOneToFiveSingleGirls
+        } else if segmentCntrl.selectedSegmentIndex == 1 {
+            arrTempFilterList = arrFiveYearsSingleGirls
+        } else {
+            arrTempFilterList = arrFiveToSevenSingleGirls
+        }
+
+        let searchFinalText = searchText.uppercased()
+        if searchFinalText.count != 0 {
+            arrFilterList.removeAll()
+            if arrTempFilterList.count != 0 {
+                for a in 0...arrTempFilterList.count-1{
+                    if ((arrTempFilterList[a].firstNameOfGirl?.uppercased())?.contains(searchFinalText))!{
+                        arrFilterList.append(arrTempFilterList[a])
+                    }
+                }
+                self.displayFilteredEmotionsInTable()
+            } else {
+                arrFilterList.removeAll()
+                arrFilterList = arrTempFilterList
+                self.displayFilteredEmotionsInTable()
+            }
+        } else {
+            arrFilterList.removeAll()
+            arrFilterList = arrTempFilterList
+            self.displayFilteredEmotionsInTable()
+        }
+    }
+    
+    func displayFilteredEmotionsInTable () {
+        if arrFilterList.count > 0 {
+        } else {
+            print("there is no data")
+        }
+        self.tableView.reloadData()
+
     }
 }

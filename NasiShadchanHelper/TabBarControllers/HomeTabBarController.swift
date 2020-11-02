@@ -10,10 +10,11 @@ import UIKit
 
 let corner : CGFloat = 5.0
 
-class HomeTabBarController: UITabBarController {
+class HomeTabBarController: UITabBarController,UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.delegate = self
         self.tabBar.backgroundColor  = .white
     }
     
@@ -24,6 +25,16 @@ class HomeTabBarController: UITabBarController {
         self.present(vcNav, animated: true, completion: nil)
         CFRunLoopWakeUp(CFRunLoopGetCurrent());
     }
+    
+    //MARK:- UITabBarControllerDelegate
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+         // TODO: Setup parent controller in tabbar with remove all chailed controller
+        if (viewController is UINavigationController) {
+            let navcontrollers = viewController as? UINavigationController
+            navcontrollers?.popToRootViewController(animated: false)
+        }
+    }
+
 }
 
 

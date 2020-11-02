@@ -150,13 +150,20 @@ class ShadchanListDetailViewController: UITableViewController {
         lblMiddleName.text = selectedSingle.middleNameOfGirl ?? ""
         lblLastName.text = selectedSingle.lastNameOfGirl ?? ""
         lblName.text = selectedSingle.nameSheIsCalledOrKnownBy ?? ""
+        
+        if (selectedSingle!.nameSheIsCalledOrKnownBy != nil) {
+            lblName.text = (selectedSingle.nameSheIsCalledOrKnownBy ?? "") + (selectedSingle.lastNameOfGirl ?? "")
+        } else {
+            lblName.text = (selectedSingle.firstNameOfGirl ?? "") + (selectedSingle.lastNameOfGirl ?? "")
+        }
+
     }
     
     //TODO: SetUp Data For Girls details Section
     private func setUpSecondSection() {
         lblDob?.text = "\(selectedSingle.dateOfBirth ?? 0.0)"
         lblFamilySituation.text = selectedSingle.girlFamilySituation ?? ""
-        lblYearItOccurred.text = selectedSingle.yearsOfLearning ?? ""
+        //lblYearItOccurred.text = selectedSingle.yearsOfLearning ?? ""
         lblGirlsCellNumber.text = selectedSingle.girlsCellNumber ?? ""
         lblAddress.text = "Address - Need to discuss"
         lblCity.text = selectedSingle.cityOfResidence ?? ""

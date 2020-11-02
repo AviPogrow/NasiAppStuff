@@ -242,17 +242,19 @@
 			path = AuthNavigationVC;
 			sourceTree = "<group>";
 		};
-		1850A12625309733000DBCE0 /* ConcierrCofig */ = {
+		1850A12625309733000DBCE0 /* NasiCofig */ = {
 			isa = PBXGroup;
 			children = (
 				CE3AC07324536729006B9FEA /* AppDelegate.swift */,
 			);
-			path = ConcierrCofig;
+			path = NasiCofig;
 			sourceTree = "<group>";
 		};
 		185179862525FA190099D65E /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				18D94601255039BE00AB8BE6 /* imageResizing */,
+				18D94600255039AF00AB8BE6 /* customLoader */,
 				184F9857252C61F200187D72 /* AlignedPlaceholderTextField */,
 				185179872525FAA20099D65E /* progressIndicator */,
 			);
@@ -287,6 +289,11 @@
 		18A37F9E252F8A7E009C6BEB /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				CE525A75246366ED00CBEC41 /* HTCollegeTableViewCell.swift */,
+				CEF80D212460BBBC009FE684 /* FTCollegeTableViewCell.swift */,
+				CE3AC0AB2454650F006B9FEA /* SingleTableViewCell.swift */,
+				CE75EBBE2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift */,
+				CE75EBC02465CD410056A1D7 /* SavedSingleCell.xib */,
 				18A37F9F252F8AAD009C6BEB /* NotesTableCell.swift */,
 				18A37FA0252F8AAD009C6BEB /* NotesTableCell.xib */,
 				1865CB3D2542AC5900B1272A /* GirlsDetailTableCell.swift */,
@@ -301,6 +308,22 @@
 				18AB903B252DBACA00D9FCAB /* HomeTabBarController.swift */,
 			);
 			path = TabBarControllers;
+			sourceTree = "<group>";
+		};
+		18D94600255039AF00AB8BE6 /* customLoader */ = {
+			isa = PBXGroup;
+			children = (
+				CEF80D1D245F7014009FE684 /* HudView.swift */,
+			);
+			path = customLoader;
+			sourceTree = "<group>";
+		};
+		18D94601255039BE00AB8BE6 /* imageResizing */ = {
+			isa = PBXGroup;
+			children = (
+				CE525A6F2461B55200CBEC41 /* UIImage+Resize.swift */,
+			);
+			path = imageResizing;
 			sourceTree = "<group>";
 		};
 		18E5DD122525CBAE005DD1DE /* NetworkLayer */ = {
@@ -362,16 +385,15 @@
 		CE3AC07224536729006B9FEA /* NasiShadchanHelper */ = {
 			isa = PBXGroup;
 			children = (
-				1850A12625309733000DBCE0 /* ConcierrCofig */,
+				1850A12625309733000DBCE0 /* NasiCofig */,
 				1825F998252C3BA800448269 /* AuthViewControllers */,
-				CEF80D202460BB35009FE684 /* Views */,
+				18AB903A252DBA8100D9FCAB /* TabBarControllers */,
 				CEC468DC245B1C0E0071EC85 /* ViewControllers */,
 				18E5DD122525CBAE005DD1DE /* NetworkLayer */,
 				184F2F4E252ADB8900252C97 /* CommonClasses */,
 				185179862525FA190099D65E /* CustomViews */,
 				184F2F53252AE14400252C97 /* extensions */,
 				1851798C2525FB030099D65E /* Resources */,
-				18AB903A252DBA8100D9FCAB /* TabBarControllers */,
 				CE3AC07924536729006B9FEA /* Main.storyboard */,
 				CE3AC07C24536765006B9FEA /* Assets.xcassets */,
 				CE3AC07E24536765006B9FEA /* LaunchScreen.storyboard */,
@@ -435,20 +457,6 @@
 				CE75EBB2246581170056A1D7 /* wbCola.pdf */,
 			);
 			path = RawData;
-			sourceTree = "<group>";
-		};
-		CEF80D202460BB35009FE684 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CEF80D1D245F7014009FE684 /* HudView.swift */,
-				CE3AC0AB2454650F006B9FEA /* SingleTableViewCell.swift */,
-				CEF80D212460BBBC009FE684 /* FTCollegeTableViewCell.swift */,
-				CE525A6F2461B55200CBEC41 /* UIImage+Resize.swift */,
-				CE525A75246366ED00CBEC41 /* HTCollegeTableViewCell.swift */,
-				CE75EBBE2465CBFA0056A1D7 /* SavedSingleTableViewCell.swift */,
-				CE75EBC02465CD410056A1D7 /* SavedSingleCell.xib */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

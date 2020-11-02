@@ -21,11 +21,15 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     var favChildArr = [[String : String]]()
     var arrFavGirlsList = [NasiGirlsList]()
     var arrMainGirlsList = [NasiGirlsList]()
+    var arrTempFilterList = [NasiGirlsList]()
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var vwNoDataFound: UIView!
     @IBOutlet weak var segmentCntrl: UISegmentedControl!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
+
+    var searchActive:Bool = false
+
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
@@ -89,6 +93,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
         
+        arrTempFilterList = arrFavGirlsList
         if arrFavGirlsList.count > 0 {
             self.tableView.reloadData()
             self.tableView.isHidden = false
@@ -272,4 +277,56 @@ extension FavoritesViewController : reloadDataDelegate{
           }
     }
 
+}
+// MARK: - SEARCHBAR DELEGATE(S)
+extension FavoritesViewController:UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+         self.reloadSegmentCntrl(selectedIndex: segmentCntrl.selectedSegmentIndex)
+        let searchFinalText = searchText.uppercased()
+        if searchFinalText.count != 0 {
+            arrFavGirlsList.removeAll()
+            if arrTempFilterList.count != 0 {
+                for a in 0...arrTempFilterList.count-1{
+                    if ((arrTempFilterList[a].firstNameOfGirl?.uppercased())?.contains(searchFinalText))!{
+                        arrFavGirlsList.append(arrTempFilterList[a])
+                    }
+                }
+                self.displayFilteredEmotionsInTable()
+            } else {
+                arrFavGirlsList.removeAll()
+                arrFavGirlsList = arrTempFilterList
+                self.displayFilteredEmotionsInTable()
+            }
+        } else {
+            arrFavGirlsList.removeAll()
+            arrFavGirlsList = arrTempFilterList
+            self.displayFilteredEmotionsInTable()
+        }
+    }
+    
+    func displayFilteredEmotionsInTable () {
+        if arrFavGirlsList.count > 0 {
+        } else {
+            print("there is no data")
+        }
+        self.tableView.reloadData()
+    }
 }

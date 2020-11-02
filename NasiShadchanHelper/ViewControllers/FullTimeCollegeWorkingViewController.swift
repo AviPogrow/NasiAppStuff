@@ -16,17 +16,24 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
-    
+    @IBOutlet weak var searchBar: UISearchBar!
+    var searchActive:Bool = false
+
     var arrGirlsList = [NasiGirlsList]()
     var arrNeedsKoveaSingleGirls = [NasiGirlsList]()
     var arrDoesNotNeedKoveaSingleSirls = [NasiGirlsList]()
-    
+    var arrFilterList = [NasiGirlsList]()
+    var arrTempFilterList = [NasiGirlsList]()
+
     let dontNeedString = "Donotneedkoveahittim"
     let needString = "Needkoveahittim"
     let categoryString = "FullTimeCollege/Working"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.layer.borderWidth = 1;
+        searchBar.layer.borderColor = UIColor.white.cgColor
+
         tableView.dataSource = self
         tableView.delegate = self
         setBackBtn()
@@ -44,6 +51,13 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
             return singleGirl.koveahIttim == "do not need koveah ittim"
         }
         
+        arrFilterList = arrDoesNotNeedKoveaSingleSirls
+        /*
+        if segmentControl.selectedSegmentIndex == 0 {
+                   return arrDoesNotNeedKoveaSingleSirls.count
+               } else {
+                   return arrNeedsKoveaSingleGirls.count
+               }*/
         
         tableView.reloadData()
         
@@ -65,17 +79,19 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
     @IBAction func segmentControlTapped(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
         print("the selectedIndex is \(selectedIndex) and title is \(String(describing: sender.titleForSegment(at: selectedIndex)))")
+        if segmentControl.selectedSegmentIndex == 0 {
+            arrFilterList = arrDoesNotNeedKoveaSingleSirls
+        }  else {
+            arrFilterList = arrNeedsKoveaSingleGirls
+        }
+        
         tableView.reloadData()
     }
     
     // MARK: - Table View Delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if segmentControl.selectedSegmentIndex == 0 {
-            return arrDoesNotNeedKoveaSingleSirls.count
-        } else {
-            return arrNeedsKoveaSingleGirls.count
-        }
+        return arrFilterList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,13 +104,13 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
         
         var currentGirl: NasiGirlsList!
-        
+         currentGirl = arrFilterList[indexPath.row]
+        /*
         if segmentControl.selectedSegmentIndex == 0 {
-            
             currentGirl = arrDoesNotNeedKoveaSingleSirls[indexPath.row]
         } else {
             currentGirl = arrNeedsKoveaSingleGirls[indexPath.row]
-        }
+        }*/
         
         
         cell.nameLabel.text = (currentGirl.firstNameOfGirl ?? "") + " " + (currentGirl.lastNameOfGirl ?? "")
@@ -148,15 +164,75 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
                 as! UITableViewCell) {
                 
                 var currentGirl: NasiGirlsList!
-                
+                currentGirl = arrFilterList[indexPath.row]
+                /*
                 if segmentControl.selectedSegmentIndex == 0 {
-                    
                     currentGirl = arrDoesNotNeedKoveaSingleSirls[indexPath.row]
                 } else {
                     currentGirl = arrNeedsKoveaSingleGirls[indexPath.row]
                 }
+                */
                 controller.selectedSingle = currentGirl
             }
         }
+    }
+}
+
+// MARK: - SEARCHBAR DELEGATE(S)
+extension FullTimeCollegeWorkingViewController:UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if segmentControl.selectedSegmentIndex == 0 {
+            arrTempFilterList = arrDoesNotNeedKoveaSingleSirls
+        }  else {
+            arrTempFilterList = arrNeedsKoveaSingleGirls
+        }
+        
+        let searchFinalText = searchText.uppercased()
+        if searchFinalText.count != 0 {
+            arrFilterList.removeAll()
+            if arrTempFilterList.count != 0 {
+                for a in 0...arrTempFilterList.count-1{
+                    if ((arrTempFilterList[a].firstNameOfGirl?.uppercased())?.contains(searchFinalText))!{
+                        arrFilterList.append(arrTempFilterList[a])
+                    }
+                }
+                self.displayFilteredEmotionsInTable()
+            } else {
+                arrFilterList.removeAll()
+                arrFilterList = arrTempFilterList
+                self.displayFilteredEmotionsInTable()
+            }
+        } else {
+            arrFilterList.removeAll()
+            arrFilterList = arrTempFilterList
+            self.displayFilteredEmotionsInTable()
+        }
+    }
+    
+    func displayFilteredEmotionsInTable () {
+        if arrFilterList.count > 0 {
+        } else {
+            print("there is no data")
+        }
+        self.tableView.reloadData()
+
     }
 }

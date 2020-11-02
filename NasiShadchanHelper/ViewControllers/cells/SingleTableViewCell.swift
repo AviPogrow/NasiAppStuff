@@ -20,10 +20,6 @@ class SingleTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        /*layer.masksToBounds = true
-        layer.cornerRadius = 11.0
-        layer.borderColor = UIColor.darkGray.cgColor
-        layer.borderWidth = 0.35*/
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,7 +28,6 @@ class SingleTableViewCell: UITableViewCell {
     
     
     override func prepareForReuse() {
-         
          print("prepare for reuse invoked")
          nameLabel.text = nil
          ageHeightLabel.text = nil
@@ -41,6 +36,5 @@ class SingleTableViewCell: UITableViewCell {
          SeminaryLabel.text = nil
          parnassahPlanLabel.text = nil
          profileImageView.image = nil
-         
      }
 }

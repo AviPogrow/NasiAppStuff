@@ -15,11 +15,13 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
     @IBOutlet weak var tableView: UITableView!
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var arrGirlsList = [NasiGirlsList]()
     var arrProTracKSingleGirls = [NasiGirlsList]()
     var arrNoProTrackSingleGirls = [NasiGirlsList]()
-    
+    var arrFilterList = [NasiGirlsList]()
+    var arrTempFilterList = [NasiGirlsList]()
     let cellID = "HTCollegeTableCell"
     
     var selectedCategory = "YeshivaandCollege/Working"
@@ -27,9 +29,13 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
     let str1 = "Doesnotneedprofessionaltrack"
     let str2 = "N/A"
     let str3 = "Needsprofessionaltrack"
-    
+    var searchActive:Bool = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.layer.borderWidth = 1;
+        searchBar.layer.borderColor = UIColor.white.cgColor
+
         tableView.dataSource = self
         tableView.delegate = self
         setBackBtn()
@@ -46,6 +52,8 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
             return singleGirl.professionalTrack == "Needs professional track"
         }
         
+        
+        arrFilterList = arrProTracKSingleGirls
         tableView.reloadData()
         
         let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
@@ -59,17 +67,17 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         
+        if segmentControl.selectedSegmentIndex == 0 {
+            arrFilterList = arrProTracKSingleGirls
+        } else if segmentControl.selectedSegmentIndex == 1 {
+            arrFilterList = arrNoProTrackSingleGirls
+        }
         tableView.reloadData()
-        
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if segmentControl.selectedSegmentIndex == 0 {
-            return arrProTracKSingleGirls.count
-        }
-        return arrNoProTrackSingleGirls.count
+        return arrFilterList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,13 +85,8 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as!  HTCollegeTableViewCell
         
         var currentSingle: NasiGirlsList!
-        if segmentControl.selectedSegmentIndex == 0 {
-            currentSingle = arrProTracKSingleGirls[indexPath.row]
-        } else {
-            currentSingle = arrNoProTrackSingleGirls[indexPath.row]
-        }
-        
-        
+        currentSingle = arrFilterList[indexPath.row]
+              
         if (currentSingle.imageDownloadURLString ?? "").isEmpty {
             cell.profileImageView.image = UIImage.init(named: "placeholder")
         } else {
@@ -136,16 +139,76 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
             let controller = segue.destination as! SingleDetailViewController
             
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                
                 var currentSingle: NasiGirlsList!
+                currentSingle = arrFilterList[indexPath.row]
+                /*
                 if segmentControl.selectedSegmentIndex == 0 {
                     currentSingle = arrProTracKSingleGirls[indexPath.row]
                 } else {
                     currentSingle = arrNoProTrackSingleGirls[indexPath.row]
-                }
+                }*/
                 controller.selectedSingle = currentSingle
             }
         }
     }
     
+}
+
+// MARK: - SEARCHBAR DELEGATE(S)
+extension YeshivaAndCollegeWorkingViewController:UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if segmentControl.selectedSegmentIndex == 0 {
+            arrTempFilterList = arrProTracKSingleGirls
+        }  else {
+            arrTempFilterList = arrNoProTrackSingleGirls
+        }
+        
+        let searchFinalText = searchText.uppercased()
+        if searchFinalText.count != 0 {
+            arrFilterList.removeAll()
+            if arrTempFilterList.count != 0 {
+                for a in 0...arrTempFilterList.count-1{
+                    if ((arrTempFilterList[a].firstNameOfGirl?.uppercased())?.contains(searchFinalText))!{
+                        arrFilterList.append(arrTempFilterList[a])
+                    }
+                }
+                self.displayFilteredEmotionsInTable()
+            } else {
+                arrFilterList.removeAll()
+                arrFilterList = arrTempFilterList
+                self.displayFilteredEmotionsInTable()
+            }
+        } else {
+            arrFilterList.removeAll()
+            arrFilterList = arrTempFilterList
+            self.displayFilteredEmotionsInTable()
+        }
+    }
+    
+    func displayFilteredEmotionsInTable () {
+        if arrFilterList.count > 0 {
+        } else {
+            print("there is no data")
+        }
+        self.tableView.reloadData()
+
+    }
 }

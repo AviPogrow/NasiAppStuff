@@ -37,17 +37,6 @@ class AuthNavViewController: UINavigationController {
        self.dismiss(animated: true, completion: nil)
     }
     
-    //MARK: SignUp & SignIn
-    func userSignUpSuccessful() {
-        self.dismissView()
-        authDelegate?.userDidCompleteSignUp()
-    }
-    
-    func userSignInSuccessful() {
-        self.dismissView()
-        authDelegate?.userDidCompleteSignIn()
-    }
-    
     func userCancelSignInSingUp() {
         self.dismissView()
         authDelegate?.userDidCancelSignUpSignIn()
