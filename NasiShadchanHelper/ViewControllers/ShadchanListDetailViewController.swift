@@ -9,6 +9,8 @@
 import UIKit
 import KMPlaceholderTextView
 import Firebase
+import Lightbox
+import MessageUI
 
 class ShadchanListDetailViewController: UITableViewController {
     // ----------------------------------
@@ -87,6 +89,7 @@ class ShadchanListDetailViewController: UITableViewController {
         self.setUpThirdSection()
         self.setUpForthSection()
         self.setUpFifthSection()
+        self.addTapGestureInImg()
     }
     
     // ----------------------------------
@@ -203,6 +206,18 @@ class ShadchanListDetailViewController: UITableViewController {
         lblContactEmail.text = selectedSingle.emailOfContactWhoKnowsGirl ?? ""
         lblContactRelationshipToSingle.text = selectedSingle.relationshipOfThisContactToGirl ?? ""
     }
+    
+    private func addTapGestureInImg() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self,
+                                                       action: #selector(openImageView))
+        imgVwAddMore.isUserInteractionEnabled = true
+        imgVwAddMore.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func openImageView(tapGestureRecognizer: UITapGestureRecognizer) {
+        self.openMediaViewer(selectedIndex: 0)
+    }
+
     
     @objc func openGalleryPicker(_ gestureRecognizer: UIGestureRecognizer) {
         self.showPhotoMenu()
@@ -426,6 +441,27 @@ extension ShadchanListDetailViewController {
             } else if indexPath.row == 5 {
                 self.shareResumeAndPhotos()
             }
+        } else if indexPath.section == 4 {
+            print("hrer is 4")
+            if indexPath.row == 2 {
+                if (selectedSingle!.cellNumberOfContactToReddShidduch != nil) {
+                    Utility.makeACall(selectedSingle.cellNumberOfContactToReddShidduch!)
+                }
+            } else if indexPath.row == 3 {
+                if (selectedSingle.emailOfContactToReddShidduch != nil) {
+                    sendEmail(selectedSingle.emailOfContactToReddShidduch!)
+                }
+            }
+        } else if indexPath.section == 5 {
+            if indexPath.row == 2 {
+                if (selectedSingle!.cellNumberOfContactWhoKNowsGirl != nil) {
+                    Utility.makeACall(selectedSingle.cellNumberOfContactWhoKNowsGirl!)
+                }
+            } else if indexPath.row == 3 {
+                if (selectedSingle.emailOfContactWhoKnowsGirl != nil) {
+                    sendEmail(selectedSingle.emailOfContactWhoKnowsGirl!)
+                }
+            }
         }
     }
     
@@ -571,8 +607,48 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
     }
 }
 
-/*
- Please write a document that lists the files in the project that you have worked on and what their main purpose is
- For the detail view controller in the private data base please add comments to your code
- I would like to see what your designer’s work is like so let’s take this detail view controller in the private database and have them make a design
- */
+extension ShadchanListDetailViewController {
+    func openMediaViewer(selectedIndex: Int) {
+        var imageInfo = [LightboxImage]()
+        imageInfo.removeAll()
+        if imgVwAddMore.image != nil {
+            imageInfo.append(LightboxImage(image: imgVwAddMore.image!))
+        }
+        let controller = LightboxController(images: imageInfo, startIndex: selectedIndex)
+        controller.dynamicBackground = true
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
+    }
+
+}
+
+// MARK:- MFMailCompose ViewController Delegate
+extension ShadchanListDetailViewController : MFMailComposeViewControllerDelegate {
+    
+    // MARK: Open MailComposer
+    func sendEmail(_ emailRecipients:String) {
+        let vcMailCompose = MFMailComposeViewController()
+        vcMailCompose.mailComposeDelegate = self
+        vcMailCompose.setToRecipients([emailRecipients])
+        vcMailCompose.setSubject("Nasi - iOS Mobile App")
+        
+        let strMailBody = "Please type your question here:\n\n\n"
+        vcMailCompose.setMessageBody(strMailBody, isHTML: false)
+        self.present(vcMailCompose, animated: true) {}
+    }
+    
+    // MARK: MailComposer Delegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true) {
+            switch result {
+            case .sent:
+                self.showAlert(title: Constant.ValidationMessages.successTitle, msg:Constant.ValidationMessages.mailSentSuccessfully, onDismiss: {})
+            case .saved:
+                self.showAlert(title: Constant.ValidationMessages.successTitle, msg:Constant.ValidationMessages.mailSavedSuccessfully, onDismiss: {})
+            case .failed:
+                self.showAlert(title: Constant.ValidationMessages.oopsTitle, msg:Constant.ValidationMessages.mailFailed, onDismiss: {})
+            default: break
+            }
+        }
+    }
+}

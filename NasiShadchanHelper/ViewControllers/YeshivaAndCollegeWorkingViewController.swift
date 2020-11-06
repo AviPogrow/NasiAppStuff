@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -69,8 +70,15 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         
         if segmentControl.selectedSegmentIndex == 0 {
             arrFilterList = arrProTracKSingleGirls
+            Analytics.logEvent("YeshivaAndCollegeWorking_screen_segmentControl_act", parameters: [
+                "item_name": "Need Pro Track",
+            ])
         } else if segmentControl.selectedSegmentIndex == 1 {
             arrFilterList = arrNoProTrackSingleGirls
+            Analytics.logEvent("YeshivaAndCollegeWorking_screen_segmentControl_act", parameters: [
+                "item_name": "Does Not Need Pro Track",
+            ])
+
         }
         tableView.reloadData()
     }
@@ -148,6 +156,13 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
                     currentSingle = arrNoProTrackSingleGirls[indexPath.row]
                 }*/
                 controller.selectedSingle = currentSingle
+                
+                Analytics.logEvent("view_ShowSingleDetail", parameters: [
+                    "selected_item_name": currentSingle.firstNameOfGirl ?? "",
+                    "selected_item_number": indexPath.row,
+                    "screen_name": "YeshivaAndCollege"
+                ])
+
             }
         }
     }

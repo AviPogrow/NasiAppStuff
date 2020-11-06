@@ -17,4 +17,7 @@ pod 'GoogleSignIn'
 pod 'IQKeyboardManagerSwift'
 pod 'KMPlaceholderTextView'
 pod 'AAFloatingButton'
+pod 'Lightbox'
+pod 'Firebase/Analytics'
+
 end

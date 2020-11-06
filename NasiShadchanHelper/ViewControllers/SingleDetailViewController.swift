@@ -198,7 +198,10 @@ class SingleDetailViewController: UITableViewController {
             if error != nil {
                 //print(error?.localizedDescription ?? “”)
             } else{
-                //print(ref.key)
+                
+                Analytics.logEvent("added_in_favouriteList", parameters: [
+                    "selected_item_name": self.selectedSingle.firstNameOfGirl ?? "",
+                ])
             }
         }
     }
@@ -224,6 +227,11 @@ class SingleDetailViewController: UITableViewController {
                 self.saveLabel.text = "Save to\nFavorites"
                 self.saveLabel.textColor = Constant.AppColor.colorGrey
                 // NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: nil)
+                
+                Analytics.logEvent("removed_in_favouriteList", parameters: [
+                    "selected_item_name": self.selectedSingle.firstNameOfGirl ?? "",
+                ])
+
             }
             if self.isFromFav{
                 self.delegate?.reloadData(isTrue: true)

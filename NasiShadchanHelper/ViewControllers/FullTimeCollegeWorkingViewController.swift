@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
     
@@ -81,8 +82,15 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         print("the selectedIndex is \(selectedIndex) and title is \(String(describing: sender.titleForSegment(at: selectedIndex)))")
         if segmentControl.selectedSegmentIndex == 0 {
             arrFilterList = arrDoesNotNeedKoveaSingleSirls
+            Analytics.logEvent("fullTimeCollegeWorking_screen_segmentControl_act", parameters: [
+                "item_name": "Doesn't_Need_Koveah",
+            ])
+
         }  else {
             arrFilterList = arrNeedsKoveaSingleGirls
+            Analytics.logEvent("fullTimeCollegeWorking_screen_segmentControl_act", parameters: [
+                "item_name": "Needs_Koveah_Ittim",
+            ])
         }
         
         tableView.reloadData()
@@ -173,6 +181,13 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
                 }
                 */
                 controller.selectedSingle = currentGirl
+                
+                Analytics.logEvent("view_ShowSingleDetail", parameters: [
+                    "selected_item_name": currentGirl.firstNameOfGirl ?? "",
+                    "selected_item_number": indexPath.row,
+                    "screen_name": "fulltimecollege"
+                ])
+
             }
         }
     }

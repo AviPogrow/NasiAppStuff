@@ -10,6 +10,22 @@ class Utility : NSObject {
         return false
     }
     
+    class func makeACall(_ strPhone : String) {
+        let strUrlPhone : String = String.init(format: "tel:%@", strPhone)
+        let trimmedString = strUrlPhone.removingWhitespaces()
+        if let phoneCallURL = URL.init(string: trimmedString) {
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                if #available(iOS 10.0, *) {
+                    application.open(phoneCallURL, options: [:], completionHandler: nil)
+                } else {
+                    // Fallback on earlier versions
+                    application.openURL(phoneCallURL)
+                }
+            }
+        }
+    }
+    
     class func checkNotNullParameter(checkStr: String) -> Bool{
         
         if  checkStr.isEmpty || checkStr == "<NULL>" || checkStr == "(null)" || checkStr == " " || checkStr == "<null>" || checkStr == ""{

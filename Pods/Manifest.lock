@@ -5,9 +5,15 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
+  - Cache (6.0.0)
+  - Firebase/Analytics (6.31.1):
+    - Firebase/Core
   - Firebase/Auth (6.31.1):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.9.0)
+  - Firebase/Core (6.31.1):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.8.0)
   - Firebase/CoreOnly (6.31.1):
     - FirebaseCore (= 6.10.1)
   - Firebase/Database (6.31.1):
@@ -16,6 +22,15 @@ PODS:
   - Firebase/Storage (6.31.1):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 3.9.0)
+  - FirebaseAnalytics (6.8.0):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstallations (~> 1.6)
+    - GoogleAppMeasurement (= 6.8.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30906.0)
   - FirebaseAuth (6.9.0):
     - FirebaseCore (~> 6.10)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
@@ -33,9 +48,20 @@ PODS:
   - FirebaseDatabase (6.5.0):
     - FirebaseCore (~> 6.10)
     - leveldb-library (~> 1.22)
+  - FirebaseInstallations (1.7.0):
+    - FirebaseCore (~> 6.10)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
+    - PromisesObjC (~> 1.2)
   - FirebaseStorage (3.9.0):
     - FirebaseCore (~> 6.10)
     - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleAppMeasurement (6.8.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30906.0)
   - GoogleDataTransport (7.3.0):
     - nanopb (~> 1.30906.0)
   - GoogleSignIn (5.0.2):
@@ -50,12 +76,16 @@ PODS:
     - PromisesObjC (~> 1.2)
   - GoogleUtilities/Logger (6.7.2):
     - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.7.2):
+    - GoogleUtilities/Logger
   - GoogleUtilities/Network (6.7.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
   - "GoogleUtilities/NSData+zlib (6.7.2)"
   - GoogleUtilities/Reachability (6.7.2):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
   - GTMAppAuth (1.0.0):
     - AppAuth/Core (~> 1.0)
@@ -65,12 +95,16 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
+  - Imaginary (5.0.0):
+    - Cache (~> 6.0.0)
   - IQKeyboardManagerSwift (6.5.6)
   - Kingfisher (5.15.3):
     - Kingfisher/Core (= 5.15.3)
   - Kingfisher/Core (5.15.3)
   - KMPlaceholderTextView (1.4.0)
   - leveldb-library (1.22)
+  - Lightbox (2.5.0):
+    - Imaginary (~> 5.0.0)
   - lottie-ios (3.1.8)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
@@ -82,6 +116,7 @@ PODS:
 
 DEPENDENCIES:
   - AAFloatingButton
+  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
@@ -89,6 +124,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher
   - KMPlaceholderTextView
+  - Lightbox
   - lottie-ios
   - ObjectMapper
 
@@ -96,21 +132,27 @@ SPEC REPOS:
   trunk:
     - AAFloatingButton
     - AppAuth
+    - Cache
     - Firebase
+    - FirebaseAnalytics
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseDatabase
+    - FirebaseInstallations
     - FirebaseStorage
+    - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleSignIn
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
+    - Imaginary
     - IQKeyboardManagerSwift
     - Kingfisher
     - KMPlaceholderTextView
     - leveldb-library
+    - Lightbox
     - lottie-ios
     - nanopb
     - ObjectMapper
@@ -119,26 +161,32 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AAFloatingButton: a66b3c668cce50cba0ae010383c0c9d09a74e6f5
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   Firebase: 658370fa0181826a74b7cfca8d68c5856ca749ae
+  FirebaseAnalytics: 0ca9aa2af7cc4dc92392b7a78bfc49feaa2eb60f
   FirebaseAuth: 09f086fae98643f1ef235674cf3ae171ce26f5ba
   FirebaseCore: 6fb954e350af0885803d5aa49865d15d9a6b264c
   FirebaseCoreDiagnostics: 7415bfb3883b3500c5a95c42b6ba66baae78f600
   FirebaseDatabase: d85b47213273708e48c972012b39105f76229588
+  FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FirebaseStorage: 33b92875a9b556824886cc7a65120c7d2cb3a8d8
+  GoogleAppMeasurement: ecc30d0ab5b66d7d18e85ce1b8e2b345db60626d
   GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  Imaginary: cf5e3a7dd6ab1dcbd47ba8ce5edf2307c4e99eb3
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: 2fef2f4d9e809285aff7f6195b5290520904f3fa
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  Lightbox: cc3d5124f024fa8197fd23f913160db1c61a1852
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
 
-PODFILE CHECKSUM: 2a66b86b07b74647635261ef16fb1255fb7f0f65
+PODFILE CHECKSUM: db8575e4abb8e61f23da42013bd78735cf9de70b
 
 COCOAPODS: 1.8.4

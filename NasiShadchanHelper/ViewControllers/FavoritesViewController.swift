@@ -17,19 +17,19 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-   
+    
     var favChildArr = [[String : String]]()
     var arrFavGirlsList = [NasiGirlsList]()
     var arrMainGirlsList = [NasiGirlsList]()
     var arrTempFilterList = [NasiGirlsList]()
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var vwNoDataFound: UIView!
     @IBOutlet weak var segmentCntrl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
-
+    
     var searchActive:Bool = false
-
+    
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
@@ -55,21 +55,19 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK:- Selectors
     @objc func favouriteRemovedByUser(notificationReceived : Notification) {
-         self.getFav()
+        self.getFav()
     }
     
     func setUpSegmentControlApperance() {
-
-        
         segmentCntrl.selectedSegmentTintColor = Constant.AppColor.colorAppTheme
         let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                                    NSAttributedString.Key.font: Constant.AppFontHelper.defaultSemiboldFontWithSize(size: 16)]
+                                           NSAttributedString.Key.font: Constant.AppFontHelper.defaultRegularFontWithSize(size: 14)]
         segmentCntrl.setTitleTextAttributes(titleTextAttributesSelected, for:.selected)
         
         let titleTextAttributesDefault = [NSAttributedString.Key.foregroundColor: UIColor.black,
-                                    NSAttributedString.Key.font: Constant.AppFontHelper.defaultRegularFontWithSize(size: 16)]
+                                          NSAttributedString.Key.font: Constant.AppFontHelper.defaultRegularFontWithSize(size: 14)]
         segmentCntrl.setTitleTextAttributes(titleTextAttributesDefault, for:.normal)
-
+        
         UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 0
     }
     
@@ -103,11 +101,11 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             self.tableView.isHidden = true
             self.vwNoDataFound.isHidden = false
         }
-
+        
     }
-
-  func getFav() {
-       // self.view.showLoadingIndicator()
+    
+    func getFav() {
+        // self.view.showLoadingIndicator()
         ref = Database.database().reference()
         guard let myId = UserInfo.curentUser?.id else {
             return
@@ -138,7 +136,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func updateFav(){
-      //  self.view.showLoadingIndicator()
+        //  self.view.showLoadingIndicator()
         ref = Database.database().reference()
         guard let myId = UserInfo.curentUser?.id else {
             return
@@ -194,8 +192,8 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             
             arrMainGirlsList = arrFavGirlsList
             print("here is fav",arrFavGirlsList.count)
-           // self.tableView.reloadData()
-           // self.tableView.isHidden = false
+            // self.tableView.reloadData()
+            // self.tableView.isHidden = false
             //self.vwNoDataFound.isHidden = true
             self.reloadSegmentCntrl(selectedIndex: 0)
             
@@ -234,17 +232,17 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         performSegue(withIdentifier: "ShowDetail", sender: indexPath)
         
         /*
-        let vcFavDetail = self.storyboard?.instantiateViewController(withIdentifier: "FavoriteDetailVC") as! FavoriteDetailVC
-        self.navigationController?.pushViewController(vcFavDetail, animated: true)
-        */
+         let vcFavDetail = self.storyboard?.instantiateViewController(withIdentifier: "FavoriteDetailVC") as! FavoriteDetailVC
+         self.navigationController?.pushViewController(vcFavDetail, animated: true)
+         */
         /*
-        let vcSingleDetail = self.storyboard?.instantiateViewController(withIdentifier: "SingleDetailViewController") as! SingleDetailViewController
-        vcSingleDetail.selectedSingle = arrFavGirlsList[indexPath.row]
-        vcSingleDetail.isFromFav = true
-        vcSingleDetail.delegate = self
-        self.navigationController?.pushViewController(vcSingleDetail, animated: true)
- */
-         
+         let vcSingleDetail = self.storyboard?.instantiateViewController(withIdentifier: "SingleDetailViewController") as! SingleDetailViewController
+         vcSingleDetail.selectedSingle = arrFavGirlsList[indexPath.row]
+         vcSingleDetail.isFromFav = true
+         vcSingleDetail.delegate = self
+         self.navigationController?.pushViewController(vcSingleDetail, animated: true)
+         */
+        
     }
     
     // MARK: - Navigation
@@ -259,7 +257,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             detailViewController.selectedSingle = arrFavGirlsList[indexPath.row]
         }
     }
-     // MARK: -Status Bar Style
+    // MARK: -Status Bar Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -270,13 +268,13 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     
 }
 extension FavoritesViewController : reloadDataDelegate{
-       func reloadData(isTrue: Bool) {
-          if isTrue{
+    func reloadData(isTrue: Bool) {
+        if isTrue{
             self.navigationController?.popViewController(animated: true)
             updateFav()
-          }
+        }
     }
-
+    
 }
 // MARK: - SEARCHBAR DELEGATE(S)
 extension FavoritesViewController:UISearchBarDelegate {
@@ -299,7 +297,7 @@ extension FavoritesViewController:UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-         self.reloadSegmentCntrl(selectedIndex: segmentCntrl.selectedSegmentIndex)
+        self.reloadSegmentCntrl(selectedIndex: segmentCntrl.selectedSegmentIndex)
         let searchFinalText = searchText.uppercased()
         if searchFinalText.count != 0 {
             arrFavGirlsList.removeAll()

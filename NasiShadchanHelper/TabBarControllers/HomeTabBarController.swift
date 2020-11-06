@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 let corner : CGFloat = 5.0
 
@@ -29,6 +30,15 @@ class HomeTabBarController: UITabBarController,UITabBarControllerDelegate {
     //MARK:- UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
          // TODO: Setup parent controller in tabbar with remove all chailed controller
+        if tabBarController.selectedIndex == 0 {
+            Analytics.logEvent("tabBar_action", parameters: [
+                                      "item_name": "search(First Tab)",
+                                      ])
+        } else {
+            Analytics.logEvent("tabBar_action", parameters: [
+                                      "item_name": "saved(Second Tab)",
+                                      ])
+        }
         if (viewController is UINavigationController) {
             let navcontrollers = viewController as? UINavigationController
             navcontrollers?.popToRootViewController(animated: false)

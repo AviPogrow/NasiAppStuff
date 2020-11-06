@@ -111,7 +111,7 @@ class CategoriesViewController: UIViewController {
         }
         
     }
-     // MARK: -Status Bar Style
+    // MARK: -Status Bar Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -129,17 +129,29 @@ class CategoriesViewController: UIViewController {
             }
         }
     }
-   
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowFullTimeYeshiva" {
+            Analytics.logEvent("categories_action", parameters: [
+                           "item_name": "Full Time Yeshiva",
+                           ])
+            
             let controller = segue.destination as! FullTimeYeshivaViewController
             controller.arrGirlsList = arrGirlsList
         } else if segue.identifier == "ShowFullTimeCollege/Working" {
+            Analytics.logEvent("categories_action", parameters: [
+                           "item_name": "Full Time College/Working",
+                           ])
+
             let controller = segue.destination as! FullTimeCollegeWorkingViewController
             controller.arrGirlsList = arrGirlsList
         } else if segue.identifier  == "ShowYeshivaAndCollege/Working" {
+            Analytics.logEvent("categories_action", parameters: [
+                           "item_name": "Yeshiva And College/Working",
+                           ])
+
             let controller = segue.destination as! YeshivaAndCollegeWorkingViewController
             controller.arrGirlsList = arrGirlsList
         }
@@ -150,9 +162,14 @@ class CategoriesViewController: UIViewController {
 extension CategoriesViewController {
     @IBAction func btnlogoutAction(_ sender: Any) {
         
-        
         let alertControler = UIAlertController.init(title:"Logout", message: Constant.ValidationMessages.msgLogout, preferredStyle:.alert)
         alertControler.addAction(UIAlertAction.init(title:"Yes", style:.default, handler: { (action) in
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
             UserInfo.resetCurrentUser()
             AppDelegate.instance().makingRootFlow(Constant.AppRootFlow.kAuthVc)
         }))
