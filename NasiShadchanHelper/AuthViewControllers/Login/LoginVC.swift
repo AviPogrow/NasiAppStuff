@@ -50,13 +50,6 @@ class LoginVC: UIViewController {
                 }
             }
         }
-        
-        #if DEBUG
-        self.tfEmail.text = "softradix456@gmail.com"
-        //"softradix454545@gmail.com"
-        //"softradix@gmail.com"
-        self.tfPassword.text = "qwertyuiop"
-         #endif
         self.view.layoutIfNeeded()
     }
     

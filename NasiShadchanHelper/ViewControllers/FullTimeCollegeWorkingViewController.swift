@@ -19,13 +19,13 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
     
     @IBOutlet weak var searchBar: UISearchBar!
     var searchActive:Bool = false
-
+    
     var arrGirlsList = [NasiGirlsList]()
     var arrNeedsKoveaSingleGirls = [NasiGirlsList]()
     var arrDoesNotNeedKoveaSingleSirls = [NasiGirlsList]()
     var arrFilterList = [NasiGirlsList]()
     var arrTempFilterList = [NasiGirlsList]()
-
+    
     let dontNeedString = "Donotneedkoveahittim"
     let needString = "Needkoveahittim"
     let categoryString = "FullTimeCollege/Working"
@@ -34,7 +34,7 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         super.viewDidLoad()
         searchBar.layer.borderWidth = 1;
         searchBar.layer.borderColor = UIColor.white.cgColor
-
+        
         tableView.dataSource = self
         tableView.delegate = self
         setBackBtn()
@@ -54,11 +54,11 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         
         arrFilterList = arrDoesNotNeedKoveaSingleSirls
         /*
-        if segmentControl.selectedSegmentIndex == 0 {
-                   return arrDoesNotNeedKoveaSingleSirls.count
-               } else {
-                   return arrNeedsKoveaSingleGirls.count
-               }*/
+         if segmentControl.selectedSegmentIndex == 0 {
+         return arrDoesNotNeedKoveaSingleSirls.count
+         } else {
+         return arrNeedsKoveaSingleGirls.count
+         }*/
         
         tableView.reloadData()
         
@@ -71,7 +71,7 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .highlighted)
     }
     
-     // MARK: -Status Bar Style
+    // MARK: -Status Bar Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -85,7 +85,7 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
             Analytics.logEvent("fullTimeCollegeWorking_screen_segmentControl_act", parameters: [
                 "item_name": "Doesn't_Need_Koveah",
             ])
-
+            
         }  else {
             arrFilterList = arrNeedsKoveaSingleGirls
             Analytics.logEvent("fullTimeCollegeWorking_screen_segmentControl_act", parameters: [
@@ -112,13 +112,13 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         let segmentColor = UIColor(red: 10/255, green: 80/255, blue: 80/255, alpha: 1)
         
         var currentGirl: NasiGirlsList!
-         currentGirl = arrFilterList[indexPath.row]
+        currentGirl = arrFilterList[indexPath.row]
         /*
-        if segmentControl.selectedSegmentIndex == 0 {
-            currentGirl = arrDoesNotNeedKoveaSingleSirls[indexPath.row]
-        } else {
-            currentGirl = arrNeedsKoveaSingleGirls[indexPath.row]
-        }*/
+         if segmentControl.selectedSegmentIndex == 0 {
+         currentGirl = arrDoesNotNeedKoveaSingleSirls[indexPath.row]
+         } else {
+         currentGirl = arrNeedsKoveaSingleGirls[indexPath.row]
+         }*/
         
         
         cell.nameLabel.text = (currentGirl.firstNameOfGirl ?? "") + " " + (currentGirl.lastNameOfGirl ?? "")
@@ -163,6 +163,12 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         return cell
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !tableView.isDecelerating {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSingleDetails" {
@@ -174,12 +180,12 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
                 var currentGirl: NasiGirlsList!
                 currentGirl = arrFilterList[indexPath.row]
                 /*
-                if segmentControl.selectedSegmentIndex == 0 {
-                    currentGirl = arrDoesNotNeedKoveaSingleSirls[indexPath.row]
-                } else {
-                    currentGirl = arrNeedsKoveaSingleGirls[indexPath.row]
-                }
-                */
+                 if segmentControl.selectedSegmentIndex == 0 {
+                 currentGirl = arrDoesNotNeedKoveaSingleSirls[indexPath.row]
+                 } else {
+                 currentGirl = arrNeedsKoveaSingleGirls[indexPath.row]
+                 }
+                 */
                 controller.selectedSingle = currentGirl
                 
                 Analytics.logEvent("view_ShowSingleDetail", parameters: [
@@ -187,7 +193,7 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
                     "selected_item_number": indexPath.row,
                     "screen_name": "fulltimecollege"
                 ])
-
+                
             }
         }
     }
@@ -225,7 +231,7 @@ extension FullTimeCollegeWorkingViewController:UISearchBarDelegate {
             arrFilterList.removeAll()
             if arrTempFilterList.count != 0 {
                 for a in 0...arrTempFilterList.count-1{
-                    if ((arrTempFilterList[a].firstNameOfGirl?.uppercased())?.contains(searchFinalText))!{
+                    if ((arrTempFilterList[a].lastNameOfGirl?.uppercased())?.contains(searchFinalText))!{
                         arrFilterList.append(arrTempFilterList[a])
                     }
                 }
@@ -248,6 +254,6 @@ extension FullTimeCollegeWorkingViewController:UISearchBarDelegate {
             print("there is no data")
         }
         self.tableView.reloadData()
-
+        
     }
 }

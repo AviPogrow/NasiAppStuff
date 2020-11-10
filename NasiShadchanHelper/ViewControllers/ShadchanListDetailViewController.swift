@@ -90,6 +90,7 @@ class ShadchanListDetailViewController: UITableViewController {
         self.setUpForthSection()
         self.setUpFifthSection()
         self.addTapGestureInImg()
+      //  btnCamera.bringSubviewToFront(self.imgVwAddMore)
     }
     
     // ----------------------------------
@@ -284,6 +285,7 @@ class ShadchanListDetailViewController: UITableViewController {
                 self.imgVwAddMore.isHidden = false
                 self.imgPlusIcn.isHidden = true
                 self.lblAddMore.isHidden = true
+                self.btnCamera.isHidden = false
                 self.imgVwAddMore.loadImageFromUrl(strUrl: String(format: "%@",snap), imgPlaceHolder: "placeholder")
             }else{
                 print("invalid data")
@@ -373,6 +375,17 @@ extension ShadchanListDetailViewController {
         
         present(activityVC, animated: true, completion: nil)
         
+        /*
+         let url = URL(string: selectedSingle.documentDownloadURLString ?? "")!
+         let resumeData = try! Data(contentsOf: url)
+         
+         let activityItem: [AnyObject] = [self.imgVwUserDP.image as! AnyObject]
+         
+         let avc = UIActivityViewController(activityItems: [activityItem as [AnyObject],selectedSingle.documentDownloadURLString ?? ""], applicationActivities: nil)
+         
+         self.present(avc, animated: true, completion: nil)
+         */
+        
     }
     
     func shareResumeOnly() {
@@ -425,6 +438,7 @@ extension ShadchanListDetailViewController {
     }
     
     @IBAction func btnCameraTapped(_ sender: Any) {
+        self.showPhotoMenu()
     }
     
 }
@@ -440,6 +454,12 @@ extension ShadchanListDetailViewController {
                 self.shareResumeOnly()
             } else if indexPath.row == 5 {
                 self.shareResumeAndPhotos()
+            }
+        } else if indexPath.section == 2 {
+            if indexPath.row == 3 {
+                if (selectedSingle.girlsCellNumber != nil) {
+                    Utility.makeACall(selectedSingle.girlsCellNumber!)
+                }
             }
         } else if indexPath.section == 4 {
             print("hrer is 4")
@@ -509,11 +529,24 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
     }
     
     func takePhotoWithCamera() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .camera
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        present(imagePicker, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.cameraDevice = .front
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            self.showAlert(title: "Warning", msg: "You don't have camera", onDismiss: {
+            })
+        }
+        /*
+         let imagePicker = UIImagePickerController()
+         imagePicker.sourceType = .camera
+         imagePicker.delegate = self
+         imagePicker.allowsEditing = true
+         present(imagePicker, animated: true, completion: nil)
+         */
     }
     
     func choosePhotoFromLibrary() {

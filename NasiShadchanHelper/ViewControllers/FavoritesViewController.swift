@@ -39,18 +39,21 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         
         NotificationCenter.default.addObserver(self, selector: #selector(favouriteRemovedByUser(notificationReceived:)), name: Constant.EventNotifications.notifRemoveFromFav, object: nil)
         
-        var cellNib = UINib(nibName: TableView.CellIdentifiers.savedSingleCell, bundle: nil)
+        let cellNib = UINib(nibName: TableView.CellIdentifiers.savedSingleCell, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.savedSingleCell)
         
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.layer.borderWidth = 1;
+        searchBar.layer.borderColor = UIColor.white.cgColor
+        
         self.vwNoDataFound.isHidden = true
-        self.updateFav()
-        self.getFav()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.updateFav()
+        self.getFav()
     }
     
     // MARK:- Selectors
@@ -77,15 +80,28 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     
     func reloadSegmentCntrl(selectedIndex:Int) {
         if selectedIndex == 0 {
+            Analytics.logEvent("favourite_screen_segmentControl_act", parameters: [
+                "item_name": "Full Time Yeshiva",
+            ])
+            
             arrFavGirlsList = self.arrMainGirlsList.filter { (girlList) -> Bool in
                 return girlList.category == Constant.CategoryTypeName.kPredicateString1  || girlList.category == Constant.CategoryTypeName.kPredicateString2 || girlList.category == Constant.CategoryTypeName.kPredicateString3
             }
             
         } else if selectedIndex == 1 {
+            Analytics.logEvent("favourite_screen_segmentControl_act", parameters: [
+                "item_name": "Full Time College/Working",
+            ])
+            
             arrFavGirlsList = self.arrMainGirlsList.filter { (girlList) -> Bool in
                 return girlList.category == Constant.CategoryTypeName.kCategoryString0  || girlList.category == Constant.CategoryTypeName.kCategoryString1 || girlList.category == Constant.CategoryTypeName.kPredicateString2
             }
         } else if selectedIndex == 2 {
+            
+            Analytics.logEvent("favourite_screen_segmentControl_act", parameters: [
+                "item_name": "Yeshiva and College/Working",
+            ])
+            
             self.arrFavGirlsList = self.arrMainGirlsList.filter { (singleGirl) -> Bool in
                 return singleGirl.category == Constant.CategoryTypeName.kPredicateString2 || singleGirl.category == Constant.CategoryTypeName.kPredicateString3 || singleGirl.category == Constant.CategoryTypeName.kCategoryString1
             }
@@ -245,6 +261,12 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !tableView.isDecelerating {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -255,6 +277,13 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             let detailViewController = segue.destination as! ShadchanListDetailViewController
             let indexPath = sender as! IndexPath
             detailViewController.selectedSingle = arrFavGirlsList[indexPath.row]
+            
+            Analytics.logEvent("view_favouriteDetail", parameters: [
+                "selected_item_name": arrFavGirlsList[indexPath.row].firstNameOfGirl ?? "",
+                "selected_item_number": indexPath.row,
+                "screen_name": "FavoritesViewController"
+            ])
+            
         }
     }
     // MARK: -Status Bar Style
@@ -303,7 +332,7 @@ extension FavoritesViewController:UISearchBarDelegate {
             arrFavGirlsList.removeAll()
             if arrTempFilterList.count != 0 {
                 for a in 0...arrTempFilterList.count-1{
-                    if ((arrTempFilterList[a].firstNameOfGirl?.uppercased())?.contains(searchFinalText))!{
+                    if ((arrTempFilterList[a].lastNameOfGirl?.uppercased())?.contains(searchFinalText))!{
                         arrFavGirlsList.append(arrTempFilterList[a])
                     }
                 }

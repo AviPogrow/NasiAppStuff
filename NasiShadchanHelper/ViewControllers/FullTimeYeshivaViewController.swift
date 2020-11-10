@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 import Firebase
-class FullTimeYeshivaViewController: UITableViewController {
+class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
     
     
     // MARK: - Properties
@@ -27,17 +27,20 @@ class FullTimeYeshivaViewController: UITableViewController {
     
     var fiveToSevenSingleGirls = [NasiGirlsList]()
     var sevenPlusSingleGirls = [NasiGirlsList]()
-
+    var arrSectionSearch = [NasiGirlsList]()
+    
+    var aryFirstSegmentFilter = [[NasiGirlsList]]() //discuss
     
     @IBOutlet weak var segmentCntrl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     var searchActive:Bool = false
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.layer.borderWidth = 1;
         searchBar.layer.borderColor = UIColor.white.cgColor
-
+        
         self.setUpSegmentControlApperance()
         navigationItem.title = "Full Time Yeshiva"
         setBackBtn()
@@ -58,16 +61,16 @@ class FullTimeYeshivaViewController: UITableViewController {
         /*Segment Section Filter*/
         arrOnetoThreeSingleGirls = arrGirlsList.filter { singleGirl in
             singleGirl.yearsOfLearning == "1-3" || singleGirl.yearsOfLearning == "1-3:3-5" ||
-            singleGirl.yearsOfLearning == "1-3:3-5:5"
+                singleGirl.yearsOfLearning == "1-3:3-5:5"
         }
         
         arrThreeToFiveSingleGirls = arrGirlsList.filter { singleGirl in
-                  singleGirl.yearsOfLearning == "3-5" ||
-                  singleGirl.yearsOfLearning == "1-3:3-5" ||
-                  singleGirl.yearsOfLearning == "1-3:3-5:5" ||
-                  singleGirl.yearsOfLearning == "3-5:5" ||
-                  singleGirl.yearsOfLearning == "3-5:5:5-7"
-              }
+            singleGirl.yearsOfLearning == "3-5" ||
+                singleGirl.yearsOfLearning == "1-3:3-5" ||
+                singleGirl.yearsOfLearning == "1-3:3-5:5" ||
+                singleGirl.yearsOfLearning == "3-5:5" ||
+                singleGirl.yearsOfLearning == "3-5:5:5-7"
+        }
         
         arrFiveYearsSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
             return singleGirl.yearsOfLearning == "5" ||
@@ -89,18 +92,20 @@ class FullTimeYeshivaViewController: UITableViewController {
         
         /*Third Segment Section Filter*/
         fiveToSevenSingleGirls = self.arrGirlsList.filter { singleGirl in
-                  singleGirl.yearsOfLearning == "5-7" ||
-                  singleGirl.yearsOfLearning == "3-5:5:5-7" ||
-                  singleGirl.yearsOfLearning == "5:5-7" ||
-                  singleGirl.yearsOfLearning == "5-7:7+"
-              }
-              sevenPlusSingleGirls = self.arrGirlsList.filter { singleGirl in
-                  singleGirl.yearsOfLearning == "7+" ||
-                  singleGirl.yearsOfLearning == "5:5-7:7+" ||
-                  singleGirl.yearsOfLearning == "5-7:7+"
-                  
-              }
+            singleGirl.yearsOfLearning == "5-7" ||
+                singleGirl.yearsOfLearning == "3-5:5:5-7" ||
+                singleGirl.yearsOfLearning == "5:5-7" ||
+                singleGirl.yearsOfLearning == "5-7:7+"
+        }
+        sevenPlusSingleGirls = self.arrGirlsList.filter { singleGirl in
+            singleGirl.yearsOfLearning == "7+" ||
+                singleGirl.yearsOfLearning == "5:5-7:7+" ||
+                singleGirl.yearsOfLearning == "5-7:7+"
+            
+        }
         
+        
+        //      aryFirstSegmentFilter = [fiveToSevenSingleGirls,sevenPlusSingleGirls]
         self.segmentCntrlTapped(segmentCntrl!)
         
     }
@@ -129,7 +134,7 @@ class FullTimeYeshivaViewController: UITableViewController {
         }
         self.tableView.reloadData()
     }
-
+    
     
     // MARK: -Status Bar Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -137,7 +142,7 @@ class FullTimeYeshivaViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if segmentCntrl.selectedSegmentIndex == 0 || segmentCntrl.selectedSegmentIndex == 2 {
             return 2
         } else  {
@@ -145,7 +150,7 @@ class FullTimeYeshivaViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if segmentCntrl.selectedSegmentIndex == 0 {
             if section == 0 {
                 return "1 - 3 Years of Learning"
@@ -158,40 +163,38 @@ class FullTimeYeshivaViewController: UITableViewController {
             if section == 0 {
                 return "5 - 7 Years of Learning"
             } else {
-               return "7+ Years Of Learning"
+                return "7+ Years Of Learning"
             }
         }
     }
     
     // MARK: - Table View Data Source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !searchActive {
-            if segmentCntrl.selectedSegmentIndex == 0 {
-                if section == 0 {
-                    arrFilterList = arrOnetoThreeSingleGirls
-                    return arrFilterList.count
-                } else if section == 1 {
-                    arrFilterList = arrThreeToFiveSingleGirls
-                    return arrFilterList.count
-                }
-            } else if segmentCntrl.selectedSegmentIndex == 2 {
-                if section == 0 {
-                    arrFilterList = fiveToSevenSingleGirls
-                    return arrFilterList.count
-                } else {
-                    arrFilterList = sevenPlusSingleGirls
-                    return arrFilterList.count
-                }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if segmentCntrl.selectedSegmentIndex == 0 {
+            if section == 0 {
+                arrFilterList = arrOnetoThreeSingleGirls
+                return arrFilterList.count
+            } else if section == 1 {
+                arrFilterList = arrThreeToFiveSingleGirls
+                return arrFilterList.count
+            }
+        } else if segmentCntrl.selectedSegmentIndex == 2 {
+            if section == 0 {
+                arrFilterList = fiveToSevenSingleGirls
+                return arrFilterList.count
+            } else {
+                arrFilterList = sevenPlusSingleGirls
+                return arrFilterList.count
             }
         }
         return arrFilterList.count
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: singleCellIdentifier, for: indexPath) as! SingleTableViewCell
         
@@ -235,19 +238,25 @@ class FullTimeYeshivaViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !tableView.isDecelerating {
+            searchBar.resignFirstResponder()
+        }
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         /*
-        Analytics.logEvent("view_search_results", parameters: [
-            "search_term": self.searchbar.text!,
-            "selected_result_number" : indexPath.row,
-            ])*/
-
+         Analytics.logEvent("view_search_results", parameters: [
+         "search_term": self.searchbar.text!,
+         "selected_result_number" : indexPath.row,
+         ])*/
+        
         if segue.identifier == "ShowSingleDetail" {
             guard let tableViewCell = sender as? UITableViewCell,
                 let indexPath = tableView.indexPath(for: tableViewCell),
@@ -264,7 +273,7 @@ class FullTimeYeshivaViewController: UITableViewController {
                 "selected_item_number": indexPath.row,
                 "screen_name": "fulltimeyeshiva"
             ])
-
+            
         }
     }
 }
@@ -306,13 +315,13 @@ extension FullTimeYeshivaViewController:UISearchBarDelegate {
             ])
             arrTempFilterList = arrFiveToSevenSingleGirls
         }
-
+        
         let searchFinalText = searchText.uppercased()
         if searchFinalText.count != 0 {
             arrFilterList.removeAll()
             if arrTempFilterList.count != 0 {
                 for a in 0...arrTempFilterList.count-1{
-                    if ((arrTempFilterList[a].firstNameOfGirl?.uppercased())?.contains(searchFinalText))!{
+                    if ((arrTempFilterList[a].lastNameOfGirl?.uppercased())?.contains(searchFinalText))!{
                         arrFilterList.append(arrTempFilterList[a])
                     }
                 }
@@ -335,6 +344,6 @@ extension FullTimeYeshivaViewController:UISearchBarDelegate {
             print("there is no data")
         }
         self.tableView.reloadData()
-
+        
     }
 }

@@ -139,6 +139,13 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         return cell
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+              if !tableView.isDecelerating {
+                  searchBar.resignFirstResponder()
+              }
+          }
+
+    
     
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -201,7 +208,7 @@ extension YeshivaAndCollegeWorkingViewController:UISearchBarDelegate {
             arrFilterList.removeAll()
             if arrTempFilterList.count != 0 {
                 for a in 0...arrTempFilterList.count-1{
-                    if ((arrTempFilterList[a].firstNameOfGirl?.uppercased())?.contains(searchFinalText))!{
+                    if ((arrTempFilterList[a].lastNameOfGirl?.uppercased())?.contains(searchFinalText))!{
                         arrFilterList.append(arrTempFilterList[a])
                     }
                 }

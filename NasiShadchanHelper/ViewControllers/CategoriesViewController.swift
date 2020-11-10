@@ -135,23 +135,23 @@ class CategoriesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowFullTimeYeshiva" {
             Analytics.logEvent("categories_action", parameters: [
-                           "item_name": "Full Time Yeshiva",
-                           ])
+                "item_name": "Full Time Yeshiva",
+            ])
             
             let controller = segue.destination as! FullTimeYeshivaViewController
             controller.arrGirlsList = arrGirlsList
         } else if segue.identifier == "ShowFullTimeCollege/Working" {
             Analytics.logEvent("categories_action", parameters: [
-                           "item_name": "Full Time College/Working",
-                           ])
-
+                "item_name": "Full Time College/Working",
+            ])
+            
             let controller = segue.destination as! FullTimeCollegeWorkingViewController
             controller.arrGirlsList = arrGirlsList
         } else if segue.identifier  == "ShowYeshivaAndCollege/Working" {
             Analytics.logEvent("categories_action", parameters: [
-                           "item_name": "Yeshiva And College/Working",
-                           ])
-
+                "item_name": "Yeshiva And College/Working",
+            ])
+            
             let controller = segue.destination as! YeshivaAndCollegeWorkingViewController
             controller.arrGirlsList = arrGirlsList
         }
