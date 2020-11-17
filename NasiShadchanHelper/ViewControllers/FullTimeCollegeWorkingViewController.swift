@@ -10,14 +10,14 @@ import UIKit
 import Firebase
 
 class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
-    
-    let cellIdentifier = "FullTimeCollegeCell"
-    
+    // ----------------------------------
+    // MARK: - IB-OUTLET(S)
+    //
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    
     @IBOutlet weak var searchBar: UISearchBar!
+
+    let cellIdentifier = "FullTimeCollegeCell"
     var searchActive:Bool = false
     
     var arrGirlsList = [NasiGirlsList]()

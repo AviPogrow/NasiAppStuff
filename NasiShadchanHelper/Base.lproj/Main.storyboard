@@ -1010,42 +1010,20 @@
             </objects>
             <point key="canvasLocation" x="1253.6231884057972" y="-673.66071428571422"/>
         </scene>
-        <!--ResumeViewController-->
-        <scene sceneID="ZgD-C4-Q6d">
+        <!--View Controller-->
+        <scene sceneID="0Tk-F8-VAk">
             <objects>
-                <viewController storyboardIdentifier="ResumeViewController" title="ResumeViewController" id="C68-7d-vks" userLabel="ResumeViewController" customClass="ResumeViewController" customModule="NasiShadchanHelper" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ik9-Ir-i4G">
+                <viewController id="8gy-xg-MU2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KPf-th-FFB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70v-Eu-IFw" customClass="PDFView">
-                                <rect key="frame" x="6" y="50" width="402" height="806"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="70v-Eu-IFw" firstAttribute="leading" secondItem="lnK-ym-VCR" secondAttribute="leading" constant="6" id="5EH-aS-zRe"/>
-                            <constraint firstItem="lnK-ym-VCR" firstAttribute="trailing" secondItem="70v-Eu-IFw" secondAttribute="trailing" constant="6" id="VrN-Ka-Sup"/>
-                            <constraint firstItem="70v-Eu-IFw" firstAttribute="top" secondItem="lnK-ym-VCR" secondAttribute="top" constant="6" id="fwU-Vn-dNb"/>
-                            <constraint firstItem="lnK-ym-VCR" firstAttribute="bottom" secondItem="70v-Eu-IFw" secondAttribute="bottom" constant="6" id="uyk-0U-GTt"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="lnK-ym-VCR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="eY3-Nc-gHy"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ghG-gt-3Lw">
-                        <barButtonItem key="rightBarButtonItem" title="Share" id="Gmd-FW-Rfr">
-                            <connections>
-                                <action selector="shareTapped:" destination="C68-7d-vks" id="f6s-59-uFu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="pdfView" destination="70v-Eu-IFw" id="SLw-1W-kH0"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2lt-dh-EKy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pLu-lK-6kN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1099" y="11"/>
+            <point key="canvasLocation" x="1943" y="20"/>
         </scene>
         <!--Favorite DetailVC-->
         <scene sceneID="NKS-DJ-60b">
@@ -1079,7 +1057,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JO8-tc-W5b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1099" y="690"/>
+            <point key="canvasLocation" x="1942" y="682"/>
         </scene>
         <!--Categories-->
         <scene sceneID="7GN-Jp-kDB">
@@ -1367,7 +1345,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="140" id="o7K-Qb-4GV">
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="140" id="o7K-Qb-4GV">
                                         <rect key="frame" x="20" y="613" width="374" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o7K-Qb-4GV" id="ubk-O8-nqE">
@@ -1391,7 +1369,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="140" id="ckx-HG-kQL">
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="140" id="ckx-HG-kQL">
                                         <rect key="frame" x="20" y="753" width="374" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ckx-HG-kQL" id="XcC-mp-cVq">
@@ -2302,7 +2280,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="y3F-Wn-55G">
-                        <barButtonItem key="rightBarButtonItem" title="Show Resume" id="tLE-qi-QAR">
+                        <barButtonItem key="rightBarButtonItem" title="Send Resume" id="tLE-qi-QAR">
                             <connections>
                                 <action selector="saveTapped:" destination="ad9-lp-W7g" id="sTn-kS-ucH"/>
                             </connections>
@@ -2555,6 +2533,131 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sG1-O7-fEw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-483" y="-1160"/>
+        </scene>
+        <!--Resume View Controller-->
+        <scene sceneID="KOg-9W-UVJ">
+            <objects>
+                <tableViewController storyboardIdentifier="ResumeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t92-ba-g2T" customClass="ResumeViewController" customModule="NasiShadchanHelper" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="none" rowHeight="225" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="PTr-cd-Z52">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="3000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <sections>
+                            <tableViewSection id="EXC-Mu-tsL">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="60" id="djm-6E-Kcd">
+                                        <rect key="frame" x="20" y="18" width="374" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="djm-6E-Kcd" id="D4t-2N-0l8">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VL9-UY-6mY">
+                                                    <rect key="frame" x="16" y="0.0" width="342" height="50"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUg-4e-dGu">
+                                                            <rect key="frame" x="0.0" y="0.0" width="166" height="50"/>
+                                                            <color key="backgroundColor" red="0.84188073870000002" green="0.84191685910000003" blue="0.86016118529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="14"/>
+                                                            <state key="normal" title="Share Resume only">
+                                                                <color key="titleColor" red="0.21176470589999999" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="btnShareResumeTapped:" destination="t92-ba-g2T" eventType="touchUpInside" id="Vre-bJ-Xbc"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LD-aq-2Hk">
+                                                            <rect key="frame" x="176" y="0.0" width="166" height="50"/>
+                                                            <color key="backgroundColor" red="0.21176470589999999" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="14"/>
+                                                            <state key="normal" title="Share resume and photo">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="btnShareResumePhotoTapped:" destination="t92-ba-g2T" eventType="touchUpInside" id="baP-xP-PfZ"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="VL9-UY-6mY" firstAttribute="top" secondItem="D4t-2N-0l8" secondAttribute="top" id="3w0-BJ-l2N"/>
+                                                <constraint firstItem="VL9-UY-6mY" firstAttribute="leading" secondItem="D4t-2N-0l8" secondAttribute="leading" constant="16" id="Fqg-hf-cJp"/>
+                                                <constraint firstAttribute="bottom" secondItem="VL9-UY-6mY" secondAttribute="bottom" constant="10" id="pCP-RN-HVN"/>
+                                                <constraint firstAttribute="trailing" secondItem="VL9-UY-6mY" secondAttribute="trailing" constant="16" id="yRJ-cX-5Gf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.95597893" green="0.95603567359999997" blue="0.97377878429999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="310" id="TPp-6Q-nKg">
+                                        <rect key="frame" x="20" y="78" width="374" height="310"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TPp-6Q-nKg" id="3d4-J2-i81">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="310"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4D-59-aqh" customClass="PDFView">
+                                                    <rect key="frame" x="16" y="5" width="342" height="305"/>
+                                                    <color key="backgroundColor" red="0.80784313725490198" green="0.80670195820000001" blue="0.82511579989999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.95256525280000004" green="0.95262128109999999" blue="0.97037845850000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="S4D-59-aqh" secondAttribute="bottom" id="A4J-Mb-JC1"/>
+                                                <constraint firstItem="S4D-59-aqh" firstAttribute="leading" secondItem="3d4-J2-i81" secondAttribute="leading" constant="16" id="OO3-lQ-5jM"/>
+                                                <constraint firstItem="S4D-59-aqh" firstAttribute="top" secondItem="3d4-J2-i81" secondAttribute="top" constant="5" id="TRW-uA-a7o"/>
+                                                <constraint firstAttribute="trailing" secondItem="S4D-59-aqh" secondAttribute="trailing" constant="16" id="iUT-Ab-ASH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="225" id="sxi-Ql-JL0">
+                                        <rect key="frame" x="20" y="388" width="374" height="225"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sxi-Ql-JL0" id="Xfa-zh-hO0">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="225"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cTJ-om-rbo">
+                                                    <rect key="frame" x="55.5" y="40" width="263" height="171"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="171" id="7o6-1v-rV8"/>
+                                                        <constraint firstAttribute="width" constant="263" id="DL7-a6-d98"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cTJ-om-rbo" firstAttribute="top" secondItem="Xfa-zh-hO0" secondAttribute="top" constant="40" id="e9M-A9-k0i"/>
+                                                <constraint firstAttribute="bottom" secondItem="cTJ-om-rbo" secondAttribute="bottom" id="fZq-pR-M51"/>
+                                                <constraint firstItem="cTJ-om-rbo" firstAttribute="centerX" secondItem="Xfa-zh-hO0" secondAttribute="centerX" id="mD8-O1-S1T"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="t92-ba-g2T" id="mFe-KY-6tX"/>
+                            <outlet property="delegate" destination="t92-ba-g2T" id="hEe-3F-7sI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Ecc-Qh-1Ly">
+                        <barButtonItem key="rightBarButtonItem" id="tGw-Ve-rpc">
+                            <connections>
+                                <action selector="saveTapped:" destination="t92-ba-g2T" id="aTY-PL-ZyF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <size key="freeformSize" width="414" height="3000"/>
+                    <connections>
+                        <outlet property="btnShareResumeAndPhoto" destination="8LD-aq-2Hk" id="Fxz-Xg-48t"/>
+                        <outlet property="btnShareResumeOnly" destination="fUg-4e-dGu" id="LEl-XW-rY3"/>
+                        <outlet property="imgVwUserDP" destination="cTJ-om-rbo" id="ODL-fF-8Oa"/>
+                        <outlet property="pdfView" destination="S4D-59-aqh" id="HEh-Xt-KCW"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5VQ-8w-8BZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="430" y="1075"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

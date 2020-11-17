@@ -41,7 +41,7 @@ class Constant {
         public static let mailSentSuccessfully    = "Your message has been sent. We'll get back to you as soon as possible."
         public static let mailSavedSuccessfully    = "Your message has been saved."
         public static let mailFailed = "Email failed. Please try again later."
-
+        
     }
     
     struct AppFont {
@@ -79,5 +79,25 @@ class Constant {
     struct EventNotifications {
         static let notifRemoveFromFav = Notification.Name("RemoveFromFav")
     }
+    
+    struct AppGradientColor {
+        static let aryGradientTopLightBlackLayer = [
+            UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.0).cgColor,
+            UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 0.65).cgColor,
+        ]
+    }
+    
+    enum AppStoryboard : String {
+        case Main = "Main"
+        case UserAuth = "UserAuthentication"
+        case Home = "Home"
+        case Profile = "Profile"
+        case PopOver = "PopOver"
+        case Subscription = "Subscription"
+        var instance : UIStoryboard {
+            return UIStoryboard(name: self.rawValue, bundle: Bundle.main)
+        }
+    }
+    
 }
 

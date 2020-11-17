@@ -10,6 +10,13 @@ import UIKit
 import Firebase
 
 class FavoritesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    // ----------------------------------
+    // MARK: - IB-OUTLET(S)
+    //
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var vwNoDataFound: UIView!
+    @IBOutlet weak var segmentCntrl: UISegmentedControl!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     struct TableView {
         struct CellIdentifiers {
@@ -17,19 +24,11 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    
     var favChildArr = [[String : String]]()
     var arrFavGirlsList = [NasiGirlsList]()
     var arrMainGirlsList = [NasiGirlsList]()
     var arrTempFilterList = [NasiGirlsList]()
-    
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var vwNoDataFound: UIView!
-    @IBOutlet weak var segmentCntrl: UISegmentedControl!
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     var searchActive:Bool = false
-    
     var ref: DatabaseReference!
     
     override func viewDidLoad() {

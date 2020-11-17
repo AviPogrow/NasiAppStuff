@@ -12,6 +12,8 @@
 		1825F9A0252C400600448269 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F99F252C400600448269 /* SignUpVC.swift */; };
 		1825F9A7252C5F6B00448269 /* UserAuthentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1825F9A6252C5F6B00448269 /* UserAuthentication.storyboard */; };
 		1825F9AA252C5F9500448269 /* LoginParentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F9A9252C5F9500448269 /* LoginParentVC.swift */; };
+		184B49872563E77C008B61F9 /* GetStartedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B49862563E77C008B61F9 /* GetStartedVC.swift */; };
+		184B498A2563EED4008B61F9 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B49892563EED4008B61F9 /* GradientView.swift */; };
 		184F2F50252ADCDA00252C97 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F2F4F252ADCDA00252C97 /* Constant.swift */; };
 		184F2F52252AE02500252C97 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F2F51252AE02500252C97 /* Utility.swift */; };
 		184F2F55252AE16200252C97 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F2F54252AE16100252C97 /* Categories.swift */; };
@@ -82,6 +84,8 @@
 		1825F99F252C400600448269 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		1825F9A6252C5F6B00448269 /* UserAuthentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserAuthentication.storyboard; sourceTree = "<group>"; };
 		1825F9A9252C5F9500448269 /* LoginParentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginParentVC.swift; sourceTree = "<group>"; };
+		184B49862563E77C008B61F9 /* GetStartedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStartedVC.swift; sourceTree = "<group>"; };
+		184B49892563EED4008B61F9 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		184F2F4F252ADCDA00252C97 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		184F2F51252AE02500252C97 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		184F2F54252AE16100252C97 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		1825F998252C3BA800448269 /* AuthViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				184B49852563E766008B61F9 /* getStarted */,
 				1825F9A5252C5F5700448269 /* Screen */,
 				184F985A252C694600187D72 /* AuthNavigationVC */,
 				1825F9A8252C5F7B00448269 /* LoginParentVC */,
@@ -205,6 +210,22 @@
 				1825F9A9252C5F9500448269 /* LoginParentVC.swift */,
 			);
 			path = LoginParentVC;
+			sourceTree = "<group>";
+		};
+		184B49852563E766008B61F9 /* getStarted */ = {
+			isa = PBXGroup;
+			children = (
+				184B49862563E77C008B61F9 /* GetStartedVC.swift */,
+			);
+			path = getStarted;
+			sourceTree = "<group>";
+		};
+		184B49882563EEBD008B61F9 /* GradientColor */ = {
+			isa = PBXGroup;
+			children = (
+				184B49892563EED4008B61F9 /* GradientView.swift */,
+			);
+			path = GradientColor;
 			sourceTree = "<group>";
 		};
 		184F2F4E252ADB8900252C97 /* CommonClasses */ = {
@@ -253,6 +274,7 @@
 		185179862525FA190099D65E /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				184B49882563EEBD008B61F9 /* GradientColor */,
 				18D94601255039BE00AB8BE6 /* imageResizing */,
 				18D94600255039AF00AB8BE6 /* customLoader */,
 				184F9857252C61F200187D72 /* AlignedPlaceholderTextField */,
@@ -660,6 +682,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184B498A2563EED4008B61F9 /* GradientView.swift in Sources */,
 				184F2F52252AE02500252C97 /* Utility.swift in Sources */,
 				18E5DD152525CBCE005DD1DE /* NasiGirlsList.swift in Sources */,
 				CE428D562481482B00C34EAB /* CategoryPickerViewController.swift in Sources */,
@@ -671,6 +694,7 @@
 				CE3AC07424536729006B9FEA /* AppDelegate.swift in Sources */,
 				1865CB3F2542AC5900B1272A /* GirlsDetailTableCell.swift in Sources */,
 				1825F9AA252C5F9500448269 /* LoginParentVC.swift in Sources */,
+				184B49872563E77C008B61F9 /* GetStartedVC.swift in Sources */,
 				184F9859252C622B00187D72 /* AlignedPlaceholderTextField.swift in Sources */,
 				184F2F55252AE16200252C97 /* Categories.swift in Sources */,
 				CEC468DE245B37950071EC85 /* FullTimeCollegeWorkingViewController.swift in Sources */,

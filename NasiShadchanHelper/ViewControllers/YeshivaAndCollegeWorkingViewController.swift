@@ -10,12 +10,11 @@ import UIKit
 import Firebase
 
 class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+    // ----------------------------------
+    // MARK: - IB-OUTLET(S)
+    //
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    
     @IBOutlet weak var tableView: UITableView!
-    
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
     var arrGirlsList = [NasiGirlsList]()
@@ -31,25 +30,29 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
     let str2 = "N/A"
     let str3 = "Needsprofessionaltrack"
     var searchActive:Bool = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.layer.borderWidth = 1;
         searchBar.layer.borderColor = UIColor.white.cgColor
-
+        
+        let point = CGPoint(x: 0, y:(self.navigationController?.navigationBar.frame.size.height)!)
+        self.tableView.setContentOffset(point, animated: true)
+        
         tableView.dataSource = self
         tableView.delegate = self
         setBackBtn()
-        arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
+        self.arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
         self.arrGirlsList = self.arrGirlsList.filter { (singleGirl) -> Bool in
             return singleGirl.category == Constant.CategoryTypeName.kPredicateString2 || singleGirl.category == Constant.CategoryTypeName.kPredicateString3 || singleGirl.category == Constant.CategoryTypeName.kCategoryString1
         }
         
-        arrNoProTrackSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+        self.arrNoProTrackSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
             return singleGirl.professionalTrack == "does not need professional track" || singleGirl.professionalTrack == "Does not need professional track"
         }
-        arrProTracKSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
+        
+        self.arrProTracKSingleGirls = self.arrGirlsList.filter { (singleGirl) -> Bool in
             return singleGirl.professionalTrack == "Needs professional track"
         }
         
@@ -78,7 +81,7 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
             Analytics.logEvent("YeshivaAndCollegeWorking_screen_segmentControl_act", parameters: [
                 "item_name": "Does Not Need Pro Track",
             ])
-
+            
         }
         tableView.reloadData()
     }
@@ -94,7 +97,7 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         
         var currentSingle: NasiGirlsList!
         currentSingle = arrFilterList[indexPath.row]
-              
+        
         if (currentSingle.imageDownloadURLString ?? "").isEmpty {
             cell.profileImageView.image = UIImage.init(named: "placeholder")
         } else {
@@ -140,12 +143,10 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-              if !tableView.isDecelerating {
-                  searchBar.resignFirstResponder()
-              }
-          }
-
-    
+        if !tableView.isDecelerating {
+            searchBar.resignFirstResponder()
+        }
+    }
     
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -157,11 +158,11 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
                 var currentSingle: NasiGirlsList!
                 currentSingle = arrFilterList[indexPath.row]
                 /*
-                if segmentControl.selectedSegmentIndex == 0 {
-                    currentSingle = arrProTracKSingleGirls[indexPath.row]
-                } else {
-                    currentSingle = arrNoProTrackSingleGirls[indexPath.row]
-                }*/
+                 if segmentControl.selectedSegmentIndex == 0 {
+                 currentSingle = arrProTracKSingleGirls[indexPath.row]
+                 } else {
+                 currentSingle = arrNoProTrackSingleGirls[indexPath.row]
+                 }*/
                 controller.selectedSingle = currentSingle
                 
                 Analytics.logEvent("view_ShowSingleDetail", parameters: [
@@ -169,7 +170,7 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
                     "selected_item_number": indexPath.row,
                     "screen_name": "YeshivaAndCollege"
                 ])
-
+                
             }
         }
     }
@@ -231,6 +232,6 @@ extension YeshivaAndCollegeWorkingViewController:UISearchBarDelegate {
             print("there is no data")
         }
         self.tableView.reloadData()
-
+        
     }
 }

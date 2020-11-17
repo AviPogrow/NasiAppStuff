@@ -428,9 +428,16 @@ extension ShadchanListDetailViewController {
     }
     
     @IBAction func saveTapped(_ sender: Any) {
+        /*
         let vcResume = self.storyboard?.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
         vcResume.selectedSingle = selectedSingle
         self.navigationController?.pushViewController(vcResume, animated: true)
+        */
+        
+        let controller = storyboard!.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
+        controller.selectedSingle = selectedSingle
+        navigationController?.pushViewController(controller, animated: true)
+
     }
     
     @IBAction func cancel() {
@@ -500,7 +507,8 @@ extension ShadchanListDetailViewController {
             } else if indexPath.row == 3 {
                 return 170
             } else if indexPath.row == 4 || indexPath.row == 5 {
-                return 100
+                //return 100
+                return 0
             }
         }
         return UITableView.automaticDimension
@@ -518,6 +526,7 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
         
         if let theImage = image {
             show(image: theImage)
+     
             self.uploadImage(theImage)
         }
         

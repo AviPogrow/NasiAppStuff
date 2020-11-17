@@ -11,4 +11,5 @@ class Variables {
     }
     
     var arrList : [NasiGirlsList] = []
+     var isFromSignUp:Bool = false
 }

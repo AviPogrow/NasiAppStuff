@@ -10,8 +10,13 @@ import UIKit
 import Kingfisher
 import Firebase
 class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
-    
-    
+    // ----------------------------------
+    // MARK: - IB-OUTLET(S)
+    //
+    @IBOutlet weak var segmentCntrl: UISegmentedControl!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
+
     // MARK: - Properties
     fileprivate let singleCellIdentifier = "SingleCellID"
     
@@ -30,11 +35,7 @@ class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UIT
     var arrSectionSearch = [NasiGirlsList]()
     
     var aryFirstSegmentFilter = [[NasiGirlsList]]() //discuss
-    
-    @IBOutlet weak var segmentCntrl: UISegmentedControl!
-    @IBOutlet weak var searchBar: UISearchBar!
     var searchActive:Bool = false
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -70,6 +70,10 @@ class LoginVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
+        if Variables.sharedVariables.isFromSignUp {
+            Variables.sharedVariables.isFromSignUp = false
+             self.btnSignUpTapped(self)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
