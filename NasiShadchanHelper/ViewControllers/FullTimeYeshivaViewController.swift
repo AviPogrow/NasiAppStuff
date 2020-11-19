@@ -261,7 +261,7 @@ class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UIT
         if segue.identifier == "ShowSingleDetail" {
             guard let tableViewCell = sender as? UITableViewCell,
                 let indexPath = tableView.indexPath(for: tableViewCell),
-                let controller = segue.destination as? SingleDetailViewController else {
+                let controller = segue.destination as? ShadchanListDetailViewController else {
                     return
             }
             

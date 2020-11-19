@@ -8,6 +8,7 @@
 
 import UIKit
 import PDFKit
+import Firebase
 
 class ResumeViewController: UITableViewController {
     var selectedSingle: NasiGirlsList!
@@ -16,12 +17,18 @@ class ResumeViewController: UITableViewController {
     @IBOutlet weak var btnShareResumeOnly: UIButton!
     @IBOutlet weak var btnShareResumeAndPhoto: UIButton!
     @IBOutlet weak var pdfView: PDFView!
+    var ref: DatabaseReference!
+    var sentSegmentChildArr = [[String : String]]()
+    var isAlreadyInSent:Bool = false
+    var isAddedInResearch:Bool = false
+    var strChildKey : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpProfilePhoto()
         self.setBackBarButton()
         self.setUpPDFView()
+        print("here is from researvh..",isAddedInResearch)
     }
     
     //TODO: Set Back Bar Button
@@ -158,11 +165,70 @@ class ResumeViewController: UITableViewController {
 extension ResumeViewController {
     @IBAction func btnShareResumeTapped(_ sender: Any) {
         self.shareResumeOnly()
+        if isAddedInResearch {
+            self.removeFav()
+        }
+        self.saveToSentSegment()
     }
     
     @IBAction func btnShareResumePhotoTapped(_ sender: Any) {
         self.shareResumeAndPhotos()
     }
+    
+    func saveToSentSegment() {
+        if isAlreadyInSent {
+            return
+        }
+        
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        
+        let dict = ["userId" : selectedSingle.currentGirlUID ?? "jonny"]
+        ref.child("sentsegment").child(myId).childByAutoId().setValue(dict) { (error, ref) in
+            if error != nil {
+                //print(error?.localizedDescription ?? “”)
+            } else{
+                
+                Analytics.logEvent("added_in_favouriteList", parameters: [
+                    "selected_item_name": self.selectedSingle.firstNameOfGirl ?? "",
+                ])
+            }
+        }
+    }
+    
+    func removeFav() {
+//        if strChildKey?.isEmpty {
+//
+//        }
+        ref = Database.database().reference()
+        guard
+            let keyPath = strChildKey,
+            let myId = UserInfo.curentUser?.id
+            else {
+                print("invalid myID/keypath")
+                return
+        }
+        ref.child("research").child(myId).child(keyPath).removeValue { (error, dbRef) in
+            self.view.hideLoadingIndicator()
+            if error != nil{
+                print(error?.localizedDescription)
+            }else{
+                print(dbRef.key)
+                 NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: nil)
+            }
+            
+            /*
+            if self.isFromFav{
+                self.delegate?.reloadData(isTrue: true)
+            }else{
+                self.delegate?.reloadData(isTrue: false)
+            }*/
+            
+        }
+    }
+
 }
 
 // ----------------------------------
@@ -193,4 +259,3 @@ extension ResumeViewController {
         return UITableView.automaticDimension
     }
 }
-

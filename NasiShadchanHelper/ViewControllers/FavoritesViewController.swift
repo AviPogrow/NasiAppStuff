@@ -24,7 +24,13 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    // MARK: - Properties
+    fileprivate let singleCellIdentifier = "SingleCellID"
+
     var favChildArr = [[String : String]]()
+    var sentSegmentChildArr = [[String : String]]()
+    var arrSentSegmentFavGirlsList = [NasiGirlsList]()
+
     var arrFavGirlsList = [NasiGirlsList]()
     var arrMainGirlsList = [NasiGirlsList]()
     var arrTempFilterList = [NasiGirlsList]()
@@ -47,17 +53,19 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         searchBar.layer.borderColor = UIColor.white.cgColor
         
         self.vwNoDataFound.isHidden = true
+        self.updateFav()
+        self.getResearchList()
+        self.getSentResumeList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.updateFav()
-        self.getFav()
     }
     
     // MARK:- Selectors
     @objc func favouriteRemovedByUser(notificationReceived : Notification) {
-        self.getFav()
+      //  self.getResearchList()
+          updateFav()
     }
     
     func setUpSegmentControlApperance() {
@@ -83,27 +91,14 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
                 "item_name": "Full Time Yeshiva",
             ])
             
-            arrFavGirlsList = self.arrMainGirlsList.filter { (girlList) -> Bool in
-                return girlList.category == Constant.CategoryTypeName.kPredicateString1  || girlList.category == Constant.CategoryTypeName.kPredicateString2 || girlList.category == Constant.CategoryTypeName.kPredicateString3
-            }
+            arrFavGirlsList = self.arrMainGirlsList
             
         } else if selectedIndex == 1 {
             Analytics.logEvent("favourite_screen_segmentControl_act", parameters: [
                 "item_name": "Full Time College/Working",
             ])
             
-            arrFavGirlsList = self.arrMainGirlsList.filter { (girlList) -> Bool in
-                return girlList.category == Constant.CategoryTypeName.kCategoryString0  || girlList.category == Constant.CategoryTypeName.kCategoryString1 || girlList.category == Constant.CategoryTypeName.kPredicateString2
-            }
-        } else if selectedIndex == 2 {
-            
-            Analytics.logEvent("favourite_screen_segmentControl_act", parameters: [
-                "item_name": "Yeshiva and College/Working",
-            ])
-            
-            self.arrFavGirlsList = self.arrMainGirlsList.filter { (singleGirl) -> Bool in
-                return singleGirl.category == Constant.CategoryTypeName.kPredicateString2 || singleGirl.category == Constant.CategoryTypeName.kPredicateString3 || singleGirl.category == Constant.CategoryTypeName.kCategoryString1
-            }
+            arrFavGirlsList = self.arrSentSegmentFavGirlsList
         }
         
         arrTempFilterList = arrFavGirlsList
@@ -119,14 +114,14 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
     
-    func getFav() {
+    func getResearchList() {
         // self.view.showLoadingIndicator()
         ref = Database.database().reference()
         guard let myId = UserInfo.curentUser?.id else {
             return
         }
-        print("here is id", myId)
-        ref.child("myFav").child(myId).observe(.childAdded) { (snapShots) in
+        print("here is id", myId) //"myFav"
+        ref.child("research").child(myId).observe(.childAdded) { (snapShots) in
             self.view.hideLoadingIndicator()
             self.favChildArr.removeAll()
             let snap = snapShots.value as? [String : Any]
@@ -150,13 +145,72 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         self.filterFavData()
     }
     
+    func getSentResumeList() {
+        // self.view.showLoadingIndicator()
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        print("here is id", myId) //"myFav"
+        ref.child("sentsegment").child(myId).observe(.childAdded) { (snapShots) in
+            self.view.hideLoadingIndicator()
+            self.sentSegmentChildArr.removeAll()
+            let snap = snapShots.value as? [String : Any]
+            print(snap)
+            if (snapShots.value is NSNull ) {
+                print("– – – Data was not found – – –")
+            } else {
+                var snap = snapShots.value as? [String : String]
+                snap?["child_key"] = snapShots.key as? String
+                if let dict = snap {
+                    print(dict)
+                    // arrFavGirlsList.removeAll()
+                    self.sentSegmentChildArr.append(dict)
+                    self.filterSentResumeData()
+                } else {
+                    print("not a valid data")
+                }
+            }
+        }
+        
+        self.filterSentResumeData()
+    }
+
+    func filterSentResumeData() {
+        if sentSegmentChildArr.count > 0 {
+            print("here is fav child", sentSegmentChildArr)
+            print("here is fav child count", sentSegmentChildArr.count)
+            for (index,list) in Variables.sharedVariables.arrList.enumerated() {
+                let currentId = list.currentGirlUID
+                for (innerIndex,list) in sentSegmentChildArr.enumerated() {
+                    let userId = list["userId"]
+                    let childKey = list["child_key"]
+                    print("here is user id", userId ?? "")
+                    print("here is child key", childKey ?? "")
+                    if currentId == userId {
+                        print("append")
+                        arrSentSegmentFavGirlsList.append(Variables.sharedVariables.arrList[index])
+                    }
+                }
+            }
+            
+           // self.reloadSegmentCntrl(selectedIndex: 1)
+            
+        } else {
+            self.tableView.isHidden = true
+            self.vwNoDataFound.isHidden = false
+            print("here is no fav child")
+        }
+    }
+
+    
     func updateFav(){
         //  self.view.showLoadingIndicator()
         ref = Database.database().reference()
         guard let myId = UserInfo.curentUser?.id else {
             return
         }
-        ref.child("myFav").child(myId).observe(.childRemoved) { (snapShots) in
+        ref.child("research").child(myId).observe(.childRemoved) { (snapShots) in
             self.view.hideLoadingIndicator()
             //            self.favChildArr.removeAll()
             let snap = snapShots.value as? [String : Any]
@@ -190,7 +244,6 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         if favChildArr.count > 0 {
             print("here is fav child", favChildArr)
             print("here is fav child count", favChildArr.count)
-            
             for (index,list) in Variables.sharedVariables.arrList.enumerated() {
                 let currentId = list.currentGirlUID
                 for (innerIndex,list) in favChildArr.enumerated() {
@@ -230,17 +283,45 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+        return 200
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.savedSingleCell, for: indexPath) as! SavedSingleTableViewCell
         
-        let model = arrFavGirlsList[indexPath.row]
-        cell.configure(for: model)
-        cell.selectionStyle = .none
+        let cell = tableView.dequeueReusableCell(withIdentifier: singleCellIdentifier, for: indexPath) as! SingleTableViewCell
+        
+        var model: NasiGirlsList!
+        model = arrFavGirlsList[indexPath.row]
+        print("here is dob", model.dateOfBirth ?? "")
+        
+        cell.nameLabel?.text =  "\(model.firstNameOfGirl ?? "")" + " "  + "\(model.lastNameOfGirl ?? "")" //top 1 name
+        
+        let heightInFt = model.heightInFeet ?? ""
+        let heightInInches = model.heightInInches ?? ""
+        
+        let height = "\(heightInFt)\'" + "\(heightInInches)\""
+        
+        cell.ageHeightLabel.text = "\(model.dateOfBirth ?? 0.0)" + "-" + height // 2nd Age - Height
+        
+        cell.cityLabel.text = "\(model.cityOfResidence ?? "")"  // 3rd Label - City
+        cell.categoryLabel.textColor = .lightGray
+        cell.categoryLabel.text = "\(model.category ?? "") - " + (model.yearsOfLearning ?? "") // 4th Label - Categories
+        cell.SeminaryLabel.text = model.seminaryName ?? ""  //5th Label - Seminary
+        cell.parnassahPlanLabel.text = "\(model.plan ?? "")"  // 6th Label - Plan
+        
+        
+        if (model.imageDownloadURLString ?? "").isEmpty {
+            print("this is empty....", model.imageDownloadURLString ?? "")
+            cell.profileImageView?.image = UIImage.init(named: "placeholder")
+        } else {
+            //  img.kf.indicatorType = .activity
+            cell.profileImageView.loadImageFromUrl(strUrl: String(format: "%@",model.imageDownloadURLString!), imgPlaceHolder: "placeholder")
+            print("this is not empty....", model.imageDownloadURLString ?? "")
+        }
+                
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -293,7 +374,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0001
     }
-    
+        
 }
 extension FavoritesViewController : reloadDataDelegate{
     func reloadData(isTrue: Bool) {

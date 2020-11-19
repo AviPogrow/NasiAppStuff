@@ -23,6 +23,9 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        tfEmail.text = "softradix124567@gmail.com"
+        tfPassword.text = "qwertyuiop"
+        tfRePassword.text = "qwertyuiop"
     }
     
     override func viewWillAppear(_ animated: Bool) {

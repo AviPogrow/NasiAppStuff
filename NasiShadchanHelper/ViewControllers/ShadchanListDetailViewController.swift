@@ -1,18 +1,18 @@
-//
-//  ShadchanListDetailViewController.swift
-//  NasiShadchanHelper
-//
-//  Created by user on 5/29/20.
-//  Copyright © 2020 user. All rights reserved.
-//
-
-import UIKit
-import KMPlaceholderTextView
-import Firebase
-import Lightbox
-import MessageUI
-
-class ShadchanListDetailViewController: UITableViewController {
+ //
+ //  ShadchanListDetailViewController.swift
+ //  NasiShadchanHelper
+ //
+ //  Created by user on 5/29/20.
+ //  Copyright © 2020 user. All rights reserved.
+ //
+ 
+ import UIKit
+ import KMPlaceholderTextView
+ import Firebase
+ import Lightbox
+ import MessageUI
+ 
+ class ShadchanListDetailViewController: UITableViewController {
     // ----------------------------------
     // MARK: - IB-OUTLET(S)
     //
@@ -69,12 +69,18 @@ class ShadchanListDetailViewController: UITableViewController {
     var ref: DatabaseReference!
     var image: UIImage?
     var selectedSingle: NasiGirlsList!
+    var isAlreadyAddedNotes:Bool = false
+    var favChildArr = [[String : String]]()
+     var strChildKey : String?
     
     // ----------------------------------
     // MARK: - View Loading -
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.getResearchList()
+        self.getSentResumeList()
         self.setBackBarButton()
         self.getFavUserNote()
         self.getPrevImages()
@@ -90,7 +96,7 @@ class ShadchanListDetailViewController: UITableViewController {
         self.setUpForthSection()
         self.setUpFifthSection()
         self.addTapGestureInImg()
-      //  btnCamera.bringSubviewToFront(self.imgVwAddMore)
+        self.btnCamera.isHidden = true
     }
     
     // ----------------------------------
@@ -113,14 +119,112 @@ class ShadchanListDetailViewController: UITableViewController {
     
     //TODO: Set Back Bar Button
     private func setBackBarButton() {
-        let btn = UIBarButtonItem(image: UIImage.init(named: "imgBack"), style: .plain, target: self, action: #selector(back))
+        let btn = UIBarButtonItem(image: UIImage.init(named: "imgBack"), style: .plain, target: self, action: #selector(backBtnTapped))
         btn.tintColor = .black
         self.navigationItem.leftBarButtonItem  = btn
     }
     
     //TODO: Back Button Action
     @objc func backBtnTapped() {
-        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
+        if !self.isAlreadyAddedNotes {
+            self.showActionSheet()
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func showActionSheet() {
+        let alert = UIAlertController(title: "Nasi", message: "Please Select an Option", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Save Profile", style: .default , handler:{ (UIAlertAction)in
+            print("User click Approve button")
+            self.isAlreadyAddedNotes = true
+            self.saveToResearch()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+            print("User click Dismiss button")
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
+    
+    func getResearchList() {
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        ref.child("research").child(myId).observe(.childAdded) { (snapShots) in
+            self.view.hideLoadingIndicator()
+            let snap = snapShots.value as? [String : Any]
+            if (snapShots.value is NSNull ) {
+                print("– – – Data was not found – – –")
+            } else {
+                var snap = snapShots.value as? [String : String]
+                snap?["child_key"] = snapShots.key as? String
+                if let dict = snap {
+                    print(dict)
+                     self.favChildArr.append(dict)
+                    if self.selectedSingle.currentGirlUID == dict["userId"] {
+                        self.isAlreadyAddedNotes = true
+                    }
+                    self.filterFavData()
+                } else {
+                    print("not a valid data")
+                }
+            }
+        }
+    }
+    
+    func filterFavData() {
+        if favChildArr.count > 0 {
+            print("here is fav child", favChildArr)
+            print("here is fav child count", favChildArr.count)
+            
+            let currentId = selectedSingle.currentGirlUID
+            
+            for (innerIndex,list) in favChildArr.enumerated() {
+                let userId = list["userId"]
+                let childKey = list["child_key"]
+                print("here is user id", userId ?? "")
+                print("here is child key", childKey ?? "")
+                if currentId == userId {
+                    strChildKey = childKey
+                    break
+                }
+            }
+            
+        }
+    }
+
+    
+    func getSentResumeList() {
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        print("here is id", myId) //"myFav"
+        ref.child("sentsegment").child(myId).observe(.childAdded) { (snapShots) in
+            if (snapShots.value is NSNull ) {
+                print("– – – Data was not found – – –")
+            } else {
+                var snap = snapShots.value as? [String : String]
+                snap?["child_key"] = snapShots.key as? String
+                if let dict = snap {
+                    print(dict)
+                    if self.selectedSingle.currentGirlUID == dict["userId"] {
+                        self.isAlreadyAddedNotes = true
+                    }
+                } else {
+                    print("not a valid data")
+                }
+            }
+        }
+        
     }
     
     //TODO: Initialize Data
@@ -160,7 +264,7 @@ class ShadchanListDetailViewController: UITableViewController {
         } else {
             lblName.text = (selectedSingle.firstNameOfGirl ?? "") + (selectedSingle.lastNameOfGirl ?? "")
         }
-
+        
     }
     
     //TODO: SetUp Data For Girls details Section
@@ -218,7 +322,7 @@ class ShadchanListDetailViewController: UITableViewController {
     @objc func openImageView(tapGestureRecognizer: UITapGestureRecognizer) {
         self.openMediaViewer(selectedIndex: 0)
     }
-
+    
     
     @objc func openGalleryPicker(_ gestureRecognizer: UIGestureRecognizer) {
         self.showPhotoMenu()
@@ -248,7 +352,36 @@ class ShadchanListDetailViewController: UITableViewController {
                 }
             }
         }
+        
+        if !self.isAlreadyAddedNotes {
+            self.saveToResearch()
+        }
     }
+    
+    func saveToResearch() {
+        self.view.showLoadingIndicator()
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        
+        let dict = ["userId" : selectedSingle.currentGirlUID ?? "jonny"]
+        ref.child("research").child(myId).childByAutoId().setValue(dict) { (error, ref) in
+            self.view.hideLoadingIndicator()
+            self.isAlreadyAddedNotes = true
+            self.navigationController?.popViewController(animated: true)
+            if error != nil {
+                //print(error?.localizedDescription ?? “”)
+            } else{
+                
+                Analytics.logEvent("added_in_favouriteList", parameters: [
+                    "selected_item_name": self.selectedSingle.firstNameOfGirl ?? "",
+                ])
+            }
+        }
+    }
+    
+    
     
     func getFavUserNote() {
         guard
@@ -263,6 +396,7 @@ class ShadchanListDetailViewController: UITableViewController {
             if let noteStr = snapShot.value as? String {
                 print("notes txt :- \(noteStr)")
                 self.notesTextView.text = noteStr
+                self.isAlreadyAddedNotes = true
             }else{
                 print("invalid data")
             }
@@ -341,11 +475,11 @@ class ShadchanListDetailViewController: UITableViewController {
         lblAddMore.isHidden = true
         tableView.reloadData()
     }
-}
-// ----------------------------------
-// MARK: - UIActivityViewController -
-//
-extension ShadchanListDetailViewController {
+ }
+ // ----------------------------------
+ // MARK: - UIActivityViewController -
+ //
+ extension ShadchanListDetailViewController {
     func shareResumeAndPhotos() {
         
         let url = URL(string: selectedSingle.documentDownloadURLString ?? "")!
@@ -416,12 +550,12 @@ extension ShadchanListDetailViewController {
         
     }
     
-}
-
-// ----------------------------------
-// MARK: - Button Action() -
-//
-extension ShadchanListDetailViewController {
+ }
+ 
+ // ----------------------------------
+ // MARK: - Button Action() -
+ //
+ extension ShadchanListDetailViewController {
     
     @IBAction func sendResumeTapped(_ sender: Any) {
         presentResumeViewController()
@@ -429,15 +563,17 @@ extension ShadchanListDetailViewController {
     
     @IBAction func saveTapped(_ sender: Any) {
         /*
-        let vcResume = self.storyboard?.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
-        vcResume.selectedSingle = selectedSingle
-        self.navigationController?.pushViewController(vcResume, animated: true)
-        */
+         let vcResume = self.storyboard?.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
+         vcResume.selectedSingle = selectedSingle
+         self.navigationController?.pushViewController(vcResume, animated: true)
+         */
         
         let controller = storyboard!.instantiateViewController(withIdentifier: "ResumeViewController") as! ResumeViewController
         controller.selectedSingle = selectedSingle
+        controller.strChildKey = strChildKey
+        controller.isAddedInResearch = isAlreadyAddedNotes
         navigationController?.pushViewController(controller, animated: true)
-
+        
     }
     
     @IBAction func cancel() {
@@ -448,12 +584,12 @@ extension ShadchanListDetailViewController {
         self.showPhotoMenu()
     }
     
-}
-
-// ----------------------------------
-// MARK: - TableView Delegate(S) -
-//
-extension ShadchanListDetailViewController {
+ }
+ 
+ // ----------------------------------
+ // MARK: - TableView Delegate(S) -
+ //
+ extension ShadchanListDetailViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
@@ -513,12 +649,12 @@ extension ShadchanListDetailViewController {
         }
         return UITableView.automaticDimension
     }
-}
-
-// ----------------------------------
-// MARK: - UIImagePickerControllerDelegate -
-//
-extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+ }
+ 
+ // ----------------------------------
+ // MARK: - UIImagePickerControllerDelegate -
+ //
+ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -526,7 +662,7 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
         
         if let theImage = image {
             show(image: theImage)
-     
+            
             self.uploadImage(theImage)
         }
         
@@ -647,9 +783,9 @@ extension ShadchanListDetailViewController: UIImagePickerControllerDelegate, UIN
             print("progress- \(percentComplete)")
         }
     }
-}
-
-extension ShadchanListDetailViewController {
+ }
+ 
+ extension ShadchanListDetailViewController {
     func openMediaViewer(selectedIndex: Int) {
         var imageInfo = [LightboxImage]()
         imageInfo.removeAll()
@@ -661,11 +797,11 @@ extension ShadchanListDetailViewController {
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true, completion: nil)
     }
-
-}
-
-// MARK:- MFMailCompose ViewController Delegate
-extension ShadchanListDetailViewController : MFMailComposeViewControllerDelegate {
+    
+ }
+ 
+ // MARK:- MFMailCompose ViewController Delegate
+ extension ShadchanListDetailViewController : MFMailComposeViewControllerDelegate {
     
     // MARK: Open MailComposer
     func sendEmail(_ emailRecipients:String) {
@@ -693,4 +829,4 @@ extension ShadchanListDetailViewController : MFMailComposeViewControllerDelegate
             }
         }
     }
-}
+ }

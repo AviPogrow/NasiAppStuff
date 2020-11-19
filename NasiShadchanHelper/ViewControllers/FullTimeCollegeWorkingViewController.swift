@@ -173,7 +173,7 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSingleDetails" {
             
-            let controller = segue.destination as! SingleDetailViewController
+            let controller = segue.destination as! ShadchanListDetailViewController
             if let indexPath = tableView.indexPath(for: sender
                 as! UITableViewCell) {
                 
