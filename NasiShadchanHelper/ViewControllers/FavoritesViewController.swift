@@ -30,6 +30,8 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     var favChildArr = [[String : String]]()
     var sentSegmentChildArr = [[String : String]]()
     var arrSentSegmentFavGirlsList = [NasiGirlsList]()
+    var aryChildKey = [String]()
+
 
     var arrFavGirlsList = [NasiGirlsList]()
     var arrMainGirlsList = [NasiGirlsList]()
@@ -231,7 +233,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                     self.arrFavGirlsList.removeAll()
                     self.arrMainGirlsList.removeAll()
-                    //                    self.favChildArr.append(dict)
+                    // self.favChildArr.append(dict)
                     self.filterFavData()
                 } else {
                     print("not a valid data")
@@ -254,17 +256,14 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
                     if currentId == userId {
                         print("append")
                         arrFavGirlsList.append(Variables.sharedVariables.arrList[index])
+                        aryChildKey.append(childKey!)
                     }
                 }
             }
             
             arrMainGirlsList = arrFavGirlsList
             print("here is fav",arrFavGirlsList.count)
-            // self.tableView.reloadData()
-            // self.tableView.isHidden = false
-            //self.vwNoDataFound.isHidden = true
             self.reloadSegmentCntrl(selectedIndex: 0)
-            
         } else {
             self.tableView.isHidden = true
             self.vwNoDataFound.isHidden = false
@@ -347,8 +346,6 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    // MARK: - Navigation
-    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -374,8 +371,44 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0001
     }
-        
+    
+     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+          return true
+      }
+
+    // this method handles row deletion
+      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+          if editingStyle == .delete {
+            let alertControler = UIAlertController.init(title:"", message: Constant.ValidationMessages.msgConfirmationToDelete, preferredStyle:.alert)
+            alertControler.addAction(UIAlertAction.init(title:"Yes", style:.default, handler: { (action) in
+                print("yes")
+                if self.arrFavGirlsList.count > 0 {
+                    self.arrFavGirlsList.remove(at: indexPath.row)
+                    self.swipeDeleteRemoveFromList(self.aryChildKey[indexPath.row])
+                    self.tableView.reloadData()
+                }
+            }))
+            alertControler.addAction(UIAlertAction.init(title:"No", style:.destructive, handler: { (action) in
+                 print("no")
+            }))
+            self.present(alertControler,animated:true, completion:nil)
+          }
+      }
+    
+    func swipeDeleteRemoveFromList(_ childKey:String) {
+        ref = Database.database().reference()
+        let myId = UserInfo.curentUser?.id
+        ref.child("research").child(myId!).child(childKey).removeValue { (error, dbRef) in
+            self.view.hideLoadingIndicator()
+            if error != nil{
+                print(error?.localizedDescription)
+            }else{
+                print(dbRef.key)
+            }
+        }
+    }
 }
+
 extension FavoritesViewController : reloadDataDelegate{
     func reloadData(isTrue: Bool) {
         if isTrue{

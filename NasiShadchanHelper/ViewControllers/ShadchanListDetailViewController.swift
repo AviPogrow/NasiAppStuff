@@ -78,7 +78,6 @@
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.getResearchList()
         self.getSentResumeList()
         self.setBackBarButton()
@@ -137,7 +136,7 @@
     func showActionSheet() {
         let alert = UIAlertController(title: "Nasi", message: "Please Select an Option", preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Save Profile", style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Would you like to save to my projects", style: .default , handler:{ (UIAlertAction)in //Save Profile
             print("User click Approve button")
             self.isAlreadyAddedNotes = true
             self.saveToResearch()
@@ -194,6 +193,7 @@
                 print("here is child key", childKey ?? "")
                 if currentId == userId {
                     strChildKey = childKey
+                    print("here is child key",strChildKey!)
                     break
                 }
             }
@@ -808,8 +808,8 @@
         let vcMailCompose = MFMailComposeViewController()
         vcMailCompose.mailComposeDelegate = self
         vcMailCompose.setToRecipients([emailRecipients])
-        vcMailCompose.setSubject("Nasi - iOS Mobile App")
-        
+        let subject =  "\("Resume")" + " "  + "\(selectedSingle.firstNameOfGirl ?? "")" + " "  + "\(selectedSingle.lastNameOfGirl ?? "")" //top 1 name
+        vcMailCompose.setSubject(subject)
         let strMailBody = "Please type your question here:\n\n\n"
         vcMailCompose.setMessageBody(strMailBody, isHTML: false)
         self.present(vcMailCompose, animated: true) {}

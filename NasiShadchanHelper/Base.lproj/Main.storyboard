@@ -1078,11 +1078,11 @@
             </objects>
             <point key="canvasLocation" x="-3879" y="-209"/>
         </scene>
-        <!--Search-->
+        <!--Nasi list-->
         <scene sceneID="mXr-4T-jD1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3cg-3Q-dJq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="QcG-xQ-3Pr"/>
+                    <tabBarItem key="tabBarItem" title="Nasi list" image="magnifyingglass" catalog="system" id="QcG-xQ-3Pr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vx5-WL-Iwq">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -2420,11 +2420,11 @@
             </objects>
             <point key="canvasLocation" x="2780" y="-860"/>
         </scene>
-        <!--Saved-->
+        <!--My Project-->
         <scene sceneID="Yjx-zE-YJJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dB4-nu-Ngm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Saved" image="suit.heart.fill" catalog="system" id="fG6-8s-1Vl"/>
+                    <tabBarItem key="tabBarItem" title="My Project" image="suit.heart.fill" catalog="system" id="fG6-8s-1Vl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="alW-1e-fl8">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -2750,7 +2750,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="S6H-R1-KBM"/>
+        <segue reference="f6R-bQ-W0G"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AdinaDavis" width="252" height="335"/>

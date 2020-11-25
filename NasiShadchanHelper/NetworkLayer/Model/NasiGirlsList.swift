@@ -46,8 +46,7 @@ class NasiGirlsList : Mappable {
     var livingInIsrael :String?
     var professionalTrack :String?
     var girlFamilySituation :String?
-    
-    
+        
     required init?(map: Map) {
         
     }

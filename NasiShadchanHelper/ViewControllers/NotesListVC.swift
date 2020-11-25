@@ -123,7 +123,7 @@ extension NotesListVC : UITableViewDelegate,UITableViewDataSource {
         return UITableView.automaticDimension
     }
     
-    @objc func deleteNote(_ sender : UIButton){
+    @objc func deleteNote(_ sender : UIButton) {
         guard
             let myId = UserInfo.curentUser?.id,
             let noteKey = notesArr[sender.tag]["key"]
