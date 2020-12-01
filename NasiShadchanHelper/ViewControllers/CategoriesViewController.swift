@@ -20,6 +20,16 @@ class CategoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchList()
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshResearchList(notificationReceived:)), name: Constant.EventNotifications.notifRefreshList, object: nil)
+
+        print("current user id", UserInfo.curentUser?.id ?? "")
+    }
+    
+    // MARK:- Selectors
+    @objc func refreshResearchList(notificationReceived : Notification) {
+        print("here is notification Received")
+        self.getResearchList()
+        self.getSentList()
     }
     
     func fetchList() {
@@ -119,6 +129,9 @@ class CategoriesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setBadgeCount()
+        Variables.sharedVariables.arrayForResearchList.removeAll()
+        self.getResearchList()
+        self.getSentList()
     }
     
     func setBadgeCount() {
@@ -129,10 +142,11 @@ class CategoriesViewController: UIViewController {
             }
         }
     }
-
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "ShowFullTimeYeshiva" {
             Analytics.logEvent("categories_action", parameters: [
                 "item_name": "Full Time Yeshiva",
@@ -176,5 +190,49 @@ extension CategoriesViewController {
         alertControler.addAction(UIAlertAction.init(title:"No", style:.destructive, handler: { (action) in
         }))
         self.present(alertControler,animated:true, completion:nil)
+    }
+}
+
+extension CategoriesViewController {
+    func getResearchList() {
+        // self.view.showLoadingIndicator()
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        ref.child("research").child(myId).observe(.childAdded) { (snapShots) in
+            // self.view.hideLoadingIndicator()
+            let snap = snapShots.value as? [String : Any]
+            if (snapShots.value is NSNull ) {
+            } else {
+                var snap = snapShots.value as? [String : String]
+                snap?["child_key"] = snapShots.key as? String
+                if let dict = snap {
+                    Variables.sharedVariables.arrayForResearchList.append(dict["userId"]!)
+                } else {
+                }
+            }
+        }
+    }
+    
+    func getSentList() {
+        //self.view.showLoadingIndicator()
+        ref = Database.database().reference()
+        guard let myId = UserInfo.curentUser?.id else {
+            return
+        }
+        ref.child("sentsegment").child(myId).observe(.childAdded) { (snapShots) in
+            // self.view.hideLoadingIndicator()
+            let snap = snapShots.value as? [String : Any]
+            if (snapShots.value is NSNull ) {
+            } else {
+                var snap = snapShots.value as? [String : String]
+                snap?["child_key"] = snapShots.key as? String
+                if let dict = snap {
+                    Variables.sharedVariables.arrayForResearchList.append(dict["userId"]!)
+                } else {
+                }
+            }
+        }
     }
 }

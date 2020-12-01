@@ -16,7 +16,7 @@ class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UIT
     @IBOutlet weak var segmentCntrl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-
+    
     // MARK: - Properties
     fileprivate let singleCellIdentifier = "SingleCellID"
     
@@ -30,6 +30,11 @@ class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UIT
     var arrOnetoThreeSingleGirls = [NasiGirlsList]()
     var arrThreeToFiveSingleGirls = [NasiGirlsList]()
     
+    
+    var arrFilterOnetoThreeSingleGirls = [NasiGirlsList]()
+    var arrFilterThreeToFiveSingleGirls = [NasiGirlsList]()
+    
+    
     var fiveToSevenSingleGirls = [NasiGirlsList]()
     var sevenPlusSingleGirls = [NasiGirlsList]()
     var arrSectionSearch = [NasiGirlsList]()
@@ -39,8 +44,16 @@ class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(notifRefreshNasiList(notificationReceived:)), name: Constant.EventNotifications.notifRefreshNasiList, object: nil)
+        
         searchBar.layer.borderWidth = 1;
         searchBar.layer.borderColor = UIColor.white.cgColor
+        
+        if Variables.sharedVariables.arrayForResearchList.count > 0 {
+            arrGirlsList = self.arrGirlsList.filter { (girlList) -> Bool in
+                return !Variables.sharedVariables.arrayForResearchList.contains(girlList.currentGirlUID ?? "")
+            }
+        }
         
         self.setUpSegmentControlApperance()
         navigationItem.title = "Full Time Yeshiva"
@@ -111,6 +124,36 @@ class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UIT
         
     }
     
+    // MARK:- Selectors
+    @objc func notifRefreshNasiList(notificationReceived : Notification) {
+        print("here is selected segment control", segmentCntrl.selectedSegmentIndex)
+        if let object = notificationReceived.object as? [String: Any] {
+            if let currentGirlId = object["updateCurrentGirlId"] as? String {
+                if segmentCntrl.selectedSegmentIndex == 0 {
+                    arrOnetoThreeSingleGirls = self.arrOnetoThreeSingleGirls.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                    
+                    arrThreeToFiveSingleGirls = self.arrThreeToFiveSingleGirls.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                } else if segmentCntrl.selectedSegmentIndex == 1 {
+                    arrFilterList = self.arrFilterList.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                } else {
+                    fiveToSevenSingleGirls = self.fiveToSevenSingleGirls.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                    sevenPlusSingleGirls = self.sevenPlusSingleGirls.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                }
+                self.tableView.reloadData()
+            }
+        }
+    }
+
     func setUpSegmentControlApperance() {
         segmentCntrl.selectedSegmentTintColor = Constant.AppColor.colorAppTheme
         let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -145,6 +188,9 @@ class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UIT
     // MARK: - Table view data source
     func numberOfSections(in tableView: UITableView) -> Int {
         if segmentCntrl.selectedSegmentIndex == 0 || segmentCntrl.selectedSegmentIndex == 2 {
+            if searchActive {
+                return 1
+            }
             return 2
         } else  {
             return 1
@@ -172,16 +218,41 @@ class FullTimeYeshivaViewController: UIViewController, UITableViewDataSource,UIT
     // MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentCntrl.selectedSegmentIndex == 0 {
+            
             if section == 0 {
-                arrFilterList = arrOnetoThreeSingleGirls
+                /*
+                 if searchActive {
+                 arrFilterList = arrFilterOnetoThreeSingleGirls
+                 } else {
+                 arrFilterList = arrOnetoThreeSingleGirls
+                 }*/
+                
+                if searchActive {
+                  return arrFilterList.count
+                } else {
+                    arrFilterList = arrOnetoThreeSingleGirls
+                }
+                
+               
                 return arrFilterList.count
             } else if section == 1 {
+                /*
+                 if searchActive {
+                 arrFi lterList = arrFilterThreeToFiveSingleGirls
+                 } else {
+                 arrFilterList = arrThreeToFiveSingleGirls
+                 }
+                 */
                 arrFilterList = arrThreeToFiveSingleGirls
                 return arrFilterList.count
             }
         } else if segmentCntrl.selectedSegmentIndex == 2 {
             if section == 0 {
-                arrFilterList = fiveToSevenSingleGirls
+                if searchActive {
+                    return arrFilterList.count
+                } else {
+                    arrFilterList = fiveToSevenSingleGirls
+                }
                 return arrFilterList.count
             } else {
                 arrFilterList = sevenPlusSingleGirls
@@ -284,27 +355,57 @@ extension FullTimeYeshivaViewController:UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
+       // self.displayFilteredEmotionsInTable()
+
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false;
+        if searchBar.text?.count == 0 {
+            self.displayFilteredEmotionsInTable()
+
+        }
+
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.displayFilteredEmotionsInTable()
+
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
         searchBar.resignFirstResponder()
+        self.displayFilteredEmotionsInTable()
+ 
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let searchFinalText = searchText.uppercased()
+        
         if segmentCntrl.selectedSegmentIndex == 0 {
             Analytics.logEvent("fullTimeYeshiva_screen_segmentControl_act", parameters: [
                 "item_name": "1-5 Years of Learning",
             ])
-            arrTempFilterList = arrOneToFiveSingleGirls
+            arrTempFilterList = arrOnetoThreeSingleGirls
+            
+            /*
+             if searchFinalText.count != 0 {
+             let listFirstSection = self.arrOnetoThreeSingleGirls.filter { (girlList) -> Bool in
+             return girlList.lastNameOfGirl?.uppercased() == searchFinalText
+             }
+             
+             arrFilterOnetoThreeSingleGirls = listFirstSection
+             
+             let listSecondSection = self.arrThreeToFiveSingleGirls.filter { (girlList) -> Bool in
+             return girlList.lastNameOfGirl?.uppercased() == searchFinalText
+             }
+             
+             arrFilterThreeToFiveSingleGirls = listFirstSection
+             
+             self.tableView.reloadData()
+             }*/
         } else if segmentCntrl.selectedSegmentIndex == 1 {
             Analytics.logEvent("fullTimeYeshiva_screen_segmentControl_act", parameters: [
                 "item_name": "5 Years of Learning",
@@ -317,7 +418,6 @@ extension FullTimeYeshivaViewController:UISearchBarDelegate {
             arrTempFilterList = arrFiveToSevenSingleGirls
         }
         
-        let searchFinalText = searchText.uppercased()
         if searchFinalText.count != 0 {
             arrFilterList.removeAll()
             if arrTempFilterList.count != 0 {

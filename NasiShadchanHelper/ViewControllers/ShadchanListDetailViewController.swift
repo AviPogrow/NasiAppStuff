@@ -65,13 +65,17 @@
     @IBOutlet weak var lblContactCell: UILabel!
     @IBOutlet weak var lblContactEmail: UILabel!
     @IBOutlet weak var lblContactRelationshipToSingle: UILabel!
+    @IBOutlet weak var btnRemove: UIButton!
     
     var ref: DatabaseReference!
     var image: UIImage?
     var selectedSingle: NasiGirlsList!
     var isAlreadyAddedNotes:Bool = false
     var favChildArr = [[String : String]]()
-     var strChildKey : String?
+    var strChildKey : String?
+    var fromProject = false
+    var tableName = ""
+    var childKey = ""
     
     // ----------------------------------
     // MARK: - View Loading -
@@ -96,6 +100,13 @@
         self.setUpFifthSection()
         self.addTapGestureInImg()
         self.btnCamera.isHidden = true
+        
+        if fromProject {
+            btnRemove.isHidden = false
+        }else {
+            btnRemove.isHidden = true
+
+        }
     }
     
     // ----------------------------------
@@ -139,7 +150,7 @@
         alert.addAction(UIAlertAction(title: "Would you like to save to my projects", style: .default , handler:{ (UIAlertAction)in //Save Profile
             print("User click Approve button")
             self.isAlreadyAddedNotes = true
-            self.saveToResearch()
+            self.saveToResearch(isFromBackButtonTapped: true)
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
@@ -167,7 +178,7 @@
                 snap?["child_key"] = snapShots.key as? String
                 if let dict = snap {
                     print(dict)
-                     self.favChildArr.append(dict)
+                    self.favChildArr.append(dict)
                     if self.selectedSingle.currentGirlUID == dict["userId"] {
                         self.isAlreadyAddedNotes = true
                     }
@@ -200,7 +211,7 @@
             
         }
     }
-
+    
     
     func getSentResumeList() {
         ref = Database.database().reference()
@@ -354,11 +365,13 @@
         }
         
         if !self.isAlreadyAddedNotes {
-            self.saveToResearch()
+            if !notesTextView.text.isEmpty {
+                self.saveToResearch(isFromBackButtonTapped: false)
+            }
         }
     }
     
-    func saveToResearch() {
+    func saveToResearch(isFromBackButtonTapped:Bool) {
         self.view.showLoadingIndicator()
         ref = Database.database().reference()
         guard let myId = UserInfo.curentUser?.id else {
@@ -369,10 +382,24 @@
         ref.child("research").child(myId).childByAutoId().setValue(dict) { (error, ref) in
             self.view.hideLoadingIndicator()
             self.isAlreadyAddedNotes = true
-            self.navigationController?.popViewController(animated: true)
+            if isFromBackButtonTapped {
+                self.navigationController?.popViewController(animated: true)
+            }
+            //  self.navigationController?.popViewController(animated: true)
+            /*
+            self.showAlert(title: Constant.ValidationMessages.successTitle, msg: Constant.ValidationMessages.msgProfileAdded) {
+                let vcFavourite: FavoritesViewController = self.storyboard!.instantiateViewController()
+                self.tabBarController?.selectedIndex = 1
+                self.navigationController?.pushViewController(vcFavourite, animated: true)
+
+            }*/
+            
             if error != nil {
                 //print(error?.localizedDescription ?? “”)
-            } else{
+            } else {
+                NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: ["updateStatus":"researchList"])
+                NotificationCenter.default.post(name: Constant.EventNotifications.notifRefreshList, object: nil)
+                NotificationCenter.default.post(name: Constant.EventNotifications.notifRefreshNasiList, object: ["updateCurrentGirlId":self.selectedSingle.currentGirlUID ?? "jonny"])
                 
                 Analytics.logEvent("added_in_favouriteList", parameters: [
                     "selected_item_name": self.selectedSingle.firstNameOfGirl ?? "",
@@ -380,8 +407,6 @@
             }
         }
     }
-    
-    
     
     func getFavUserNote() {
         guard
@@ -475,7 +500,63 @@
         lblAddMore.isHidden = true
         tableView.reloadData()
     }
- }
+    
+    @IBAction func remveAction(_ sender: Any) {
+        print("removed")
+        var message = ""
+
+        if tableName == "research" {
+                     message =  Constant.ValidationMessages.msgConfirmationToDelete
+                 }else {
+                     message =  Constant.ValidationMessages.msgConfirmationToDeleteSent
+
+                 }
+        
+        let alertControler = UIAlertController.init(title:"", message: message, preferredStyle:.alert)
+        alertControler.addAction(UIAlertAction.init(title:"Yes", style:.default, handler: { (action) in
+            print("yes")
+            self.removeFromProject()
+        }))
+                
+        alertControler.addAction(UIAlertAction.init(title:"No", style:.destructive, handler: { (action) in
+                     print("no")
+               
+        }))
+                
+        self.present(alertControler,animated:true, completion:nil)
+        
+    }
+    
+   // strChildKey
+    fileprivate func removeFromProject() {
+        
+       // print("here is my child key", strChildKey!)
+       // print("here is custom child key", childKey)
+
+        
+        ref = Database.database().reference()
+        let myId = UserInfo.curentUser?.id
+        ref.child(tableName).child(myId!).child(childKey).removeValue { (error, dbRef) in // childKey
+            self.view.hideLoadingIndicator()
+            if error != nil{
+                print(error?.localizedDescription)
+            } else {
+                print(dbRef.key)
+               if self.tableName == "research" {
+                    NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: ["updateStatus":"researchList"])
+                self.showAlert(title: Constant.ValidationMessages.successTitle, msg: Constant.ValidationMessages.msgSuccessToDelete) {
+                                   self.navigationController?.popViewController(animated: true)
+                               }
+                } else {
+                    NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: ["updateStatus":"sentList"])
+                self.showAlert(title: Constant.ValidationMessages.successTitle, msg: Constant.ValidationMessages.msgSuccessToDeleteFromSent) {
+                                   self.navigationController?.popViewController(animated: true)
+                               }
+                }
+            }
+        }
+    }
+  }
  // ----------------------------------
  // MARK: - UIActivityViewController -
  //
@@ -612,7 +693,12 @@
                 }
             } else if indexPath.row == 3 {
                 if (selectedSingle.emailOfContactToReddShidduch != nil) {
-                    sendEmail(selectedSingle.emailOfContactToReddShidduch!)
+                    if MFMailComposeViewController.canSendMail() {
+                        sendEmail(selectedSingle.emailOfContactToReddShidduch!)
+                    } else {
+                        self.showAlert(title: Constant.ValidationMessages.oopsTitle, msg: Constant.ValidationMessages.mailUnableToSend) {
+                        }
+                    }
                 }
             }
         } else if indexPath.section == 5 {
@@ -622,7 +708,13 @@
                 }
             } else if indexPath.row == 3 {
                 if (selectedSingle.emailOfContactWhoKnowsGirl != nil) {
-                    sendEmail(selectedSingle.emailOfContactWhoKnowsGirl!)
+                    if MFMailComposeViewController.canSendMail() {
+                        sendEmail(selectedSingle.emailOfContactWhoKnowsGirl!)
+                    } else {
+                        self.showAlert(title: Constant.ValidationMessages.oopsTitle, msg: Constant.ValidationMessages.mailUnableToSend) {
+                        }
+                    }
+                    
                 }
             }
         }
@@ -645,6 +737,12 @@
             } else if indexPath.row == 4 || indexPath.row == 5 {
                 //return 100
                 return 0
+            }
+        }else if indexPath.section == 6 {
+            if fromProject {
+                return UITableView.automaticDimension
+            }else {
+                return 0.1
             }
         }
         return UITableView.automaticDimension

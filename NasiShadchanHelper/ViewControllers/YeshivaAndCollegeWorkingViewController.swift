@@ -33,6 +33,8 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(notifRefreshNasiList(notificationReceived:)), name: Constant.EventNotifications.notifRefreshNasiList, object: nil)
+        
         searchBar.layer.borderWidth = 1;
         searchBar.layer.borderColor = UIColor.white.cgColor
         
@@ -42,6 +44,13 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         tableView.dataSource = self
         tableView.delegate = self
         setBackBtn()
+        
+        if Variables.sharedVariables.arrayForResearchList.count > 0 {
+            arrGirlsList = self.arrGirlsList.filter { (girlList) -> Bool in
+                return !Variables.sharedVariables.arrayForResearchList.contains(girlList.currentGirlUID ?? "")
+            }
+        }
+        
         self.arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
         self.arrGirlsList = self.arrGirlsList.filter { (singleGirl) -> Bool in
@@ -67,6 +76,29 @@ class YeshivaAndCollegeWorkingViewController: UIViewController, UITableViewDeleg
         segmentControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
         segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
         segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .highlighted)
+    }
+    
+    // MARK:- Selectors
+    @objc func notifRefreshNasiList(notificationReceived : Notification) {
+        print("here is selected segment control", segmentControl.selectedSegmentIndex)
+        if let object = notificationReceived.object as? [String: Any] {
+            if let currentGirlId = object["updateCurrentGirlId"] as? String {
+                if segmentControl.selectedSegmentIndex == 0 {
+                    arrProTracKSingleGirls = self.arrProTracKSingleGirls.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                    
+                    arrFilterList = arrProTracKSingleGirls
+                    
+                } else if segmentControl.selectedSegmentIndex == 1 {
+                    arrNoProTrackSingleGirls = self.arrNoProTrackSingleGirls.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                    arrFilterList = arrNoProTrackSingleGirls
+                }
+                self.tableView.reloadData()
+            }
+        }
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {

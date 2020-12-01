@@ -26,13 +26,13 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Properties
     fileprivate let singleCellIdentifier = "SingleCellID"
-
+    
     var favChildArr = [[String : String]]()
     var sentSegmentChildArr = [[String : String]]()
     var arrSentSegmentFavGirlsList = [NasiGirlsList]()
     var aryChildKey = [String]()
-
-
+    var aryChildKeyForSent = [String]()
+    
     var arrFavGirlsList = [NasiGirlsList]()
     var arrMainGirlsList = [NasiGirlsList]()
     var arrTempFilterList = [NasiGirlsList]()
@@ -66,8 +66,31 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK:- Selectors
     @objc func favouriteRemovedByUser(notificationReceived : Notification) {
-      //  self.getResearchList()
-          updateFav()
+        if let object = notificationReceived.object as? [String: Any] {
+            if let updateStatus = object["updateStatus"] as? String {
+                if updateStatus == "researchList" {
+                    print("here is research list")
+                    aryChildKey.removeAll()
+                    arrFavGirlsList.removeAll()
+                    favChildArr.removeAll()
+                    self.segmentCntrl.selectedSegmentIndex = 0
+                    self.getResearchList()
+                } else if updateStatus == "sentList" {
+                    print("here is sent list")
+                    aryChildKeyForSent.removeAll()
+                    arrSentSegmentFavGirlsList.removeAll()
+                    sentSegmentChildArr.removeAll()
+                    self.segmentCntrl.selectedSegmentIndex = 1
+                    self.getSentResumeList()
+                }
+            }
+        } else {
+            // self.updateFav()
+            arrFavGirlsList.removeAll()
+            favChildArr.removeAll()
+            self.segmentCntrl.selectedSegmentIndex = 0
+            self.getResearchList()
+        }
     }
     
     func setUpSegmentControlApperance() {
@@ -177,7 +200,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         
         self.filterSentResumeData()
     }
-
+    
     func filterSentResumeData() {
         if sentSegmentChildArr.count > 0 {
             print("here is fav child", sentSegmentChildArr)
@@ -192,19 +215,24 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
                     if currentId == userId {
                         print("append")
                         arrSentSegmentFavGirlsList.append(Variables.sharedVariables.arrList[index])
+                        aryChildKeyForSent.append(childKey!)
                     }
                 }
             }
             
-           // self.reloadSegmentCntrl(selectedIndex: 1)
+            arrSentSegmentFavGirlsList = arrSentSegmentFavGirlsList.reversed()
+            aryChildKeyForSent = aryChildKeyForSent.reversed()
             
+            if segmentCntrl.selectedSegmentIndex == 1 {
+                self.reloadSegmentCntrl(selectedIndex: 1)
+            }
         } else {
             self.tableView.isHidden = true
             self.vwNoDataFound.isHidden = false
             print("here is no fav child")
         }
     }
-
+    
     
     func updateFav(){
         //  self.view.showLoadingIndicator()
@@ -261,6 +289,9 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
                 }
             }
             
+            
+            arrFavGirlsList = arrFavGirlsList.reversed()
+            aryChildKey = aryChildKey.reversed()
             arrMainGirlsList = arrFavGirlsList
             print("here is fav",arrFavGirlsList.count)
             self.reloadSegmentCntrl(selectedIndex: 0)
@@ -282,7 +313,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -300,13 +331,13 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         
         let height = "\(heightInFt)\'" + "\(heightInInches)\""
         
-        cell.ageHeightLabel.text = "\(model.dateOfBirth ?? 0.0)" + "-" + height // 2nd Age - Height
+       // cell.ageHeightLabel.text = "\(model.dateOfBirth ?? 0.0)" + "-" + height // 2nd Age - Height
         
-        cell.cityLabel.text = "\(model.cityOfResidence ?? "")"  // 3rd Label - City
+      //  cell.cityLabel.text = "\(model.cityOfResidence ?? "")"  // 3rd Label - City
         cell.categoryLabel.textColor = .lightGray
         cell.categoryLabel.text = "\(model.category ?? "") - " + (model.yearsOfLearning ?? "") // 4th Label - Categories
-        cell.SeminaryLabel.text = model.seminaryName ?? ""  //5th Label - Seminary
-        cell.parnassahPlanLabel.text = "\(model.plan ?? "")"  // 6th Label - Plan
+       // cell.SeminaryLabel.text = model.seminaryName ?? ""  //5th Label - Seminary
+       // cell.parnassahPlanLabel.text = "\(model.plan ?? "")"  // 6th Label - Plan
         
         
         if (model.imageDownloadURLString ?? "").isEmpty {
@@ -317,10 +348,10 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             cell.profileImageView.loadImageFromUrl(strUrl: String(format: "%@",model.imageDownloadURLString!), imgPlaceHolder: "placeholder")
             print("this is not empty....", model.imageDownloadURLString ?? "")
         }
-                
+        
         return cell
     }
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -353,6 +384,15 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         if segue.identifier == "ShowDetail" {
             let detailViewController = segue.destination as! ShadchanListDetailViewController
             let indexPath = sender as! IndexPath
+            detailViewController.fromProject = true
+            if self.segmentCntrl.selectedSegmentIndex == 0 {
+                detailViewController.tableName = "research"
+               detailViewController.childKey = self.aryChildKey[indexPath.row]
+                              } else {
+                detailViewController.tableName = "sentsegment"
+                detailViewController.childKey = self.aryChildKeyForSent[indexPath.row]
+
+                              }
             detailViewController.selectedSingle = arrFavGirlsList[indexPath.row]
             
             Analytics.logEvent("view_favouriteDetail", parameters: [
@@ -372,38 +412,58 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         return 0.0001
     }
     
-     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-          return true
-      }
-
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Remove"
+    }
+    
     // this method handles row deletion
-      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-          if editingStyle == .delete {
-            let alertControler = UIAlertController.init(title:"", message: Constant.ValidationMessages.msgConfirmationToDelete, preferredStyle:.alert)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            var message = ""
+            if self.segmentCntrl.selectedSegmentIndex == 0 {
+                message =  Constant.ValidationMessages.msgConfirmationToDelete
+            }else {
+                message =  Constant.ValidationMessages.msgConfirmationToDeleteSent
+
+            }
+            let alertControler = UIAlertController.init(title:"", message:message, preferredStyle:.alert)
             alertControler.addAction(UIAlertAction.init(title:"Yes", style:.default, handler: { (action) in
                 print("yes")
                 if self.arrFavGirlsList.count > 0 {
                     self.arrFavGirlsList.remove(at: indexPath.row)
-                    self.swipeDeleteRemoveFromList(self.aryChildKey[indexPath.row])
-                    self.tableView.reloadData()
+                    if self.segmentCntrl.selectedSegmentIndex == 0 {
+                        self.swipeDeleteRemoveFromList(self.aryChildKey[indexPath.row], tableName: "research", currentIndexPath: indexPath)
+                    } else {
+                        self.swipeDeleteRemoveFromList(self.aryChildKeyForSent[indexPath.row], tableName: "sentsegment", currentIndexPath: indexPath)
+                    }
+                    // self.tableView.reloadData()
                 }
             }))
             alertControler.addAction(UIAlertAction.init(title:"No", style:.destructive, handler: { (action) in
-                 print("no")
+                print("no")
             }))
             self.present(alertControler,animated:true, completion:nil)
-          }
-      }
+        }
+    }
     
-    func swipeDeleteRemoveFromList(_ childKey:String) {
+    func swipeDeleteRemoveFromList(_ childKey:String, tableName:String, currentIndexPath: IndexPath) {
+        print("here is", tableName)
         ref = Database.database().reference()
         let myId = UserInfo.curentUser?.id
-        ref.child("research").child(myId!).child(childKey).removeValue { (error, dbRef) in
+        ref.child(tableName).child(myId!).child(childKey).removeValue { (error, dbRef) in
             self.view.hideLoadingIndicator()
             if error != nil{
                 print(error?.localizedDescription)
-            }else{
+            } else {
                 print(dbRef.key)
+                if tableName == "research" {
+                    NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: ["updateStatus":"researchList"])
+                } else {
+                    NotificationCenter.default.post(name: Constant.EventNotifications.notifRemoveFromFav, object: ["updateStatus":"sentList"])
+                }
             }
         }
     }

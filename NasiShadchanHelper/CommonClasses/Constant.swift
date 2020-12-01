@@ -27,7 +27,8 @@ class Constant {
         public static let sorryTitle = "Sorry...!"
         public static let successTitle = "Successful...!"
         
-        public static let msgDocumentUrlEmpty = "Document url is empty"
+        public static let msgDocumentUrlEmpty = "Document url is empty."
+        public static let msgImageUrlEmpty = "Image url is empty."
         
         //MARK: Alerts
         public static let msgEmailEmpty = "Please enter your Email"
@@ -35,13 +36,20 @@ class Constant {
         public static let msgEmailInvalid = "Please enter a valid registered email"
         public static let msgLogout = "Are you sure you want to log out?"
         public static let msgNotesEmpty = "Please enter a note"
-        public static let msgConfirmationToDelete = "Do you want to delete this girl?"
+        public static let msgConfirmationToDelete = "Do you want to remove this girl from research list?"
+        public static let msgConfirmationToDeleteSent = "Do you want to remove this girl from sent list?"
+        public static let msgSuccessToDelete = "Girl has been removed from research list"
+        public static let msgSuccessToDeleteFromSent = "Girl has been removed from sent list?"
+        
+        public static let msgProfileAdded = "Profile Added in My Project."
+
           
         // MARK: - Mail
         public static let mailUnableToSend    = "To Contact, Please configure an email account on your device."
         public static let mailSentSuccessfully    = "Your message has been sent. We'll get back to you as soon as possible."
         public static let mailSavedSuccessfully    = "Your message has been saved."
         public static let mailFailed = "Email failed. Please try again later."
+        
         
     }
     
@@ -79,6 +87,8 @@ class Constant {
     
     struct EventNotifications {
         static let notifRemoveFromFav = Notification.Name("RemoveFromFav")
+        static let notifRefreshList = Notification.Name("RefreshList")
+        static let notifRefreshNasiList = Notification.Name("RefreshNasiList")
     }
     
     struct AppGradientColor {

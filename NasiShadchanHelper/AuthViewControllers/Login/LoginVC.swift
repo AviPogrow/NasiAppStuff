@@ -84,13 +84,6 @@ class LoginVC: UIViewController {
         return .lightContent
     }
     
-    /* If the email exists, then
-     a. Download the customer record. Use the <EntityKey> returned from the Validate Email call previously. b. Download order history (optional)
-     c. Transition to the Service Order screen
-     4. Otherwise, if the email does not exist, then
-     a. Create the customer record. See Create Customer (Concierr Only)
-     b. Transition to the customer account screen where the user can make modifications to their account as needed. c. After customer saves the account information, transition to the Service Order Screen.
-     */
     //MARK: IBActions
     @IBAction func btnLoginTapped(_ sender: Any) {
         
@@ -168,9 +161,13 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func btnSignUpTapped(_ sender: Any) {
-        if let vcParent : LoginParentVC = self.parent as? LoginParentVC {
-            vcParent.displayPage(1, animate: true)
-        }
+        let vcLoginParent : SignUpVC = Constant.AppStoryboard.UserAuth.instance.instantiateViewController()
+             // Variables.sharedVariables.isFromSignUp = true
+              self.navigationController?.pushViewController(vcLoginParent, animated: true)
+        
+//        if let vcParent : LoginParentVC = self.parent as? LoginParentVC {
+//            vcParent.displayPage(1, animate: true)
+//        }
     }
 }
 

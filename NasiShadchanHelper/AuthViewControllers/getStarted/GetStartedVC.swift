@@ -39,13 +39,13 @@ class GetStartedVC: UIViewController {
 extension GetStartedVC {
     
     @IBAction func btnGetStartedTapped(_ sender: UIButton) {
-        let vcLoginParent : LoginParentVC = Constant.AppStoryboard.UserAuth.instance.instantiateViewController()
-        Variables.sharedVariables.isFromSignUp = true
+        let vcLoginParent : SignUpVC = Constant.AppStoryboard.UserAuth.instance.instantiateViewController()
+       // Variables.sharedVariables.isFromSignUp = true
         self.navigationController?.pushViewController(vcLoginParent, animated: true)
     }
     
     @IBAction func btnLoginTapped(_ sender: Any) {
-        let vcLoginParent : LoginParentVC = Constant.AppStoryboard.UserAuth.instance.instantiateViewController()
+        let vcLoginParent : LoginVC = Constant.AppStoryboard.UserAuth.instance.instantiateViewController()
         self.navigationController?.pushViewController(vcLoginParent, animated: true)
     }
     

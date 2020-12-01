@@ -32,12 +32,22 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(notifRefreshNasiList(notificationReceived:)), name: Constant.EventNotifications.notifRefreshNasiList, object: nil)
+
         searchBar.layer.borderWidth = 1;
         searchBar.layer.borderColor = UIColor.white.cgColor
         
         tableView.dataSource = self
         tableView.delegate = self
         setBackBtn()
+        
+        if Variables.sharedVariables.arrayForResearchList.count > 0 {
+             arrGirlsList = self.arrGirlsList.filter { (girlList) -> Bool in
+                 return !Variables.sharedVariables.arrayForResearchList.contains(girlList.currentGirlUID ?? "")
+             }
+         }
+
+        
         arrGirlsList = self.arrGirlsList.sorted(by: { Int($0.dateOfBirth ?? 0) < Int($1.dateOfBirth ?? 0) })
         
         arrGirlsList = self.arrGirlsList.filter { (girlList) -> Bool in
@@ -76,6 +86,28 @@ class FullTimeCollegeWorkingViewController: UIViewController, UITableViewDataSou
         return .default
     }
     
+    // MARK:- Selectors
+    @objc func notifRefreshNasiList(notificationReceived : Notification) {
+        print("here is selected segment control", segmentControl.selectedSegmentIndex)
+        if let object = notificationReceived.object as? [String: Any] {
+            if let currentGirlId = object["updateCurrentGirlId"] as? String {
+                if segmentControl.selectedSegmentIndex == 0 {
+                    arrDoesNotNeedKoveaSingleSirls = self.arrDoesNotNeedKoveaSingleSirls.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                    
+                    arrFilterList = arrDoesNotNeedKoveaSingleSirls
+                    
+                } else if segmentControl.selectedSegmentIndex == 1 {
+                    arrNeedsKoveaSingleGirls = self.arrNeedsKoveaSingleGirls.filter { (girlList) -> Bool in
+                        return girlList.currentGirlUID != currentGirlId
+                    }
+                    arrFilterList = arrNeedsKoveaSingleGirls
+                }
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     @IBAction func segmentControlTapped(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex

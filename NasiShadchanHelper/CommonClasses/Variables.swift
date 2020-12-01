@@ -11,5 +11,6 @@ class Variables {
     }
     
     var arrList : [NasiGirlsList] = []
-     var isFromSignUp:Bool = false
+    var isFromSignUp:Bool = false
+    var arrayForResearchList = [String]()
 }

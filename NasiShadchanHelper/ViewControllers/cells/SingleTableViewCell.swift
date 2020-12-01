@@ -30,11 +30,11 @@ class SingleTableViewCell: UITableViewCell {
     override func prepareForReuse() {
          print("prepare for reuse invoked")
          nameLabel.text = nil
-         ageHeightLabel.text = nil
-         cityLabel.text = nil
+       //  ageHeightLabel.text = nil
+        // cityLabel.text = nil
          categoryLabel.text = nil
-         SeminaryLabel.text = nil
-         parnassahPlanLabel.text = nil
+        // SeminaryLabel.text = nil
+        // parnassahPlanLabel.text = nil
          profileImageView.image = nil
      }
 }

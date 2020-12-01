@@ -23,9 +23,6 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
-        tfEmail.text = "softradix124567@gmail.com"
-        tfPassword.text = "qwertyuiop"
-        tfRePassword.text = "qwertyuiop"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,9 +104,11 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func btnLoginTapped(_ sender: Any) {
-        if let vcParent : LoginParentVC = self.parent as? LoginParentVC {
-            vcParent.displayPage(0, animate: true)
-        }
+        let vcLoginParent : LoginVC = Constant.AppStoryboard.UserAuth.instance.instantiateViewController()
+               self.navigationController?.pushViewController(vcLoginParent, animated: true)
+//        if let vcParent : LoginParentVC = self.parent as? LoginParentVC {
+//            vcParent.displayPage(0, animate: true)
+//        }
     }
     
 }
